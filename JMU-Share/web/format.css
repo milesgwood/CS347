@@ -60,7 +60,3 @@ div#footer {
     bottom: 0; /* stick to bottom */
     background: #ddd;
 }
-
-div.comment {
-    outline: #dddddd solid thin;
-}
