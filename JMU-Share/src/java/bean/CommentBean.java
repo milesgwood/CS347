@@ -3,31 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package bean;
 
-
+import java.io.Serializable;
 
 /**
  *
  * @author greatwmc
  */
-public class Comment {
-    
+public class CommentBean implements Serializable {
+
     private int id, author_id, post_id;
     private String comment;
-
-    public Comment(int author_id, int post_id, String comment) {
-        this.author_id = author_id;
-        this.post_id = post_id;
-        this.comment = comment;
-    }
-    
-    public Comment(int id, int author_id, int post_id, String comment) {
-        this.id = id;
-        this.author_id = author_id;
-        this.post_id = post_id;
-        this.comment = comment;
-    }
 
     public int getId() {
         return id;
@@ -60,10 +47,8 @@ public class Comment {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    
-    public String createCommentDiv()
-    {
-        return "<p>Hello<p>";
+
+    public CommentBean() {
     }
-    
+
 }

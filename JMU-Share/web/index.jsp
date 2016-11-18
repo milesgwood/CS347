@@ -12,19 +12,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <%@ page import="model.DBHandler" %>
-   
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <%
-            DBHandler.createTables();
-            DBHandler db = new DBHandler();
-
-            Comment c = new Comment(1,2,"Find This Comment");
-            db.insertComment(c);
-            ArrayList<Comment> comments = db.getPostComments(2);
-            comments.contains(c);
-        %>
+        <a href="viewcomments">View All Comments</a>
     </body>
 </html>

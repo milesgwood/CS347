@@ -54,10 +54,10 @@ public class NewEmptyJUnitTest {
     @Test
     public void getCommentsOutOfDatabase() {
 
-        String testStirng = "Find This Comment";
-        Comment c = new Comment(1, 2, testStirng);
+        String testStirng = "You switched the list!!!!";
+        Comment c = new Comment(5, 5, testStirng);
         db.insertComment(c);
-        ArrayList<Comment> comments = db.getPostComments(2);
+        ArrayList<Comment> comments = db.getPostComments(5);
         for (Comment current : comments) {
             if (current.getComment().equals(testStirng)) {
                 assert (true);

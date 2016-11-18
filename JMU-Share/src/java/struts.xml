@@ -5,5 +5,11 @@
 <struts>
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
+        <action name="viewcomments" class="action.FetchComments">  
+            <result name="success">post.jsp</result>  
+        </action>
+        <action name="submitComment" class="action.SubmitComment">
+            <result name="success">post.jsp</result>
+        </action>
     </package>
 </struts>

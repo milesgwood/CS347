@@ -4,8 +4,6 @@
     Author     : greatwmc
 --%>
 
-<link rel="stylesheet" type="text/css" href="menubar.css">
-
 <ul class="topbar">
   <li><a class="active" href="#home">Home</a></li>
   <li><a href="#search">Search</a></li>
