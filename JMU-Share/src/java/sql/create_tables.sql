@@ -1,0 +1,6 @@
+CREATE TABLE comments IF NOT EXISTS (
+id INTEGER PRIMARY KEY, 
+author_id INTEGER, 
+post_ID INTEGER, 
+comment VARCHAR(255)
+);
