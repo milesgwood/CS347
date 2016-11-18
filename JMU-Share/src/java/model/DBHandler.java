@@ -11,9 +11,11 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.naming.*;
 
@@ -50,26 +52,30 @@ public class DBHandler {
         // Get DB access credentials from web.xml -- HOW DO WE GET THE WEB.XML TO WORK 
         //NO INITIAL CONTEXT EXCEPTION WITH THIS CODE
         //Apparently this only works when deployed
-         try {
-         Context envCtx = (Context) (new InitialContext()).lookup("java:comp/env");
-         driverName = (String) envCtx.lookup("DriverClassName");
-         url = (String) envCtx.lookup("Url");
-         userId = (String) envCtx.lookup("UserId");
-         password = (String) envCtx.lookup("Password");
-         } catch (NamingException e) {
-         e.printStackTrace();
-         }
-         
+        try {
+            Context envCtx = (Context) (new InitialContext()).lookup("java:comp/env");
+            driverName = (String) envCtx.lookup("DriverClassName");
+            url = (String) envCtx.lookup("Url");
+            userId = (String) envCtx.lookup("UserId");
+            password = (String) envCtx.lookup("Password");
+        } catch(NoInitialContextException contextError)
+        {
+            driverName = "com.mysql.jdbc.Driver";
+            url = "jdbc:mysql://grove.cs.jmu.edu:3306/team27_db";
+            userId = "team27";
+            password = "nov#mber5";
+        }
+        catch (NamingException e) {
+            e.printStackTrace();
+        }
+
         /*
-        driverName = "./sqlStuff/connector/mysql-connector-java-5.1.40-bin.jar";
-        url = "jdbc:mysql://localhost:3306/team27_db";
-        userId = "team27";
-        password = "nov#mber5";
-        */
+         driverName = "./sqlStuff/connector/mysql-connector-java-5.1.40-bin.jar";
+         url = "jdbc:mysql://localhost:3306/team27_db";
+         userId = "team27";
+         password = "nov#mber5";
+         */
     }
-    
-    
-    
 
     /**
      * Open the DB connection
@@ -130,8 +136,79 @@ public class DBHandler {
         return rs;
     }
 
-    public static void main(String[] args) throws SQLException {
+    /**
+     * Create all of the needed tables and print out the create table
+     * statements.
+     */
+    public static void createTables() {
+        String sql = "";
         DBHandler db = new DBHandler();
-        db.doCommand("SHOW DATABASES;");
+        try {
+            db.open();
+            sql = "CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY AUTO_INCREMENT, author_id INTEGER NOT NULL, post_id  INTEGER NOT NULL, comment VARCHAR(255) NOT NULL);";
+            System.out.println(sql);
+            db.doCommand(sql);
+        } catch (SQLException e) {
+            System.err.println("The Create statement with the problem is :" + sql);
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Adds a comment to the database. Uses prepared statement.
+     *
+     * @param c - The comment with ID's and text
+     */
+    public void insertComment(Comment c) {
+        try {
+            if (!isOpen) {
+                open();
+            }
+            String sql = "INSERT INTO comments VALUES (?, ?, ?, ?);";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, c.getId());
+            ps.setInt(2, c.getAuthor_id());
+            ps.setInt(3, c.getPost_id());
+            ps.setString(4, c.getComment());
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Retrieves all of the comments from the database for post_id
+     * @param post_id
+     * @return 
+     */
+    public ArrayList<Comment> getPostComments(int post_id)
+    {
+        ArrayList<Comment> comments = new ArrayList<>();
+        try {
+            if (!isOpen) {
+                open();
+            }
+            String sql = "SELECT * FROM comments WHERE post_id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, post_id);
+            ResultSet rs = ps.executeQuery();
+            
+            int id, post, author;
+            String text;
+            Comment comment;
+            
+            while(rs.next())
+            {
+                id = rs.getInt(1);
+                author = rs.getInt(2);
+                post = rs.getInt(3);
+                text = rs.getString(4);                        
+                comment = new Comment(id, author, post, text);
+                comments.add(comment);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return comments;
     }
 }

@@ -5,6 +5,5 @@
 <struts>
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
-        
     </package>
 </struts>
