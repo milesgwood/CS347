@@ -5,11 +5,16 @@
  */
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.ValueStack;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import model.Comment;
 import model.DBHandler;
 
-public class FetchComments {
+public class FetchComments extends ActionSupport{
 
     ArrayList<Comment> list = new ArrayList<>();
 
@@ -21,10 +26,27 @@ public class FetchComments {
         this.list = list;
     }
 
+    /**
+     * In order to get access to the post_id in the parameters, the request parameters must be pushed onto the stack.
+     * Then get the stack context
+     * Then get the parameters HashMap
+     * Then get the post_id as a String[]
+     * Then get the post id from the 0 index of the String array
+     * Then parse that String as an integer and get the comments for that ID.
+     * @return 
+     */
     public String execute() {
-        DBHandler db = new DBHandler();
-        //Here you need to somehow get the post_id. Possibly from session.
-        list = db.getPostComments(2);
+        ValueStack stack = ActionContext.getContext().getValueStack();
+        Map stackContext = stack.getContext();
+        HashMap requestParameterMap = (HashMap)stackContext.get("parameters");
+        String[] post_id_param =  (String[])requestParameterMap.get("post_id");
+        String post_id = post_id_param[0];
+        System.out.println("The post id is " + post_id);
+        
+        int id = Integer.parseInt(post_id);
+        System.out.println("As an int it is " + id);
+        //DBHandler db = new DBHandler();
+        //list = db.getPostComments(id);
 
         return "success";
     }
