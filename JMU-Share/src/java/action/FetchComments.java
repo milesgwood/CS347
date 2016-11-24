@@ -45,9 +45,9 @@ public class FetchComments extends ActionSupport{
         
         int id = Integer.parseInt(post_id);
         System.out.println("As an int it is " + id);
+        
         //DBHandler db = new DBHandler();
         //list = db.getPostComments(id);
-
         return "success";
     }
 }
