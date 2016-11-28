@@ -11,5 +11,8 @@
         <action name="submitComment" class="action.SubmitComment">
             <result name="success">post.jsp</result>
         </action>
+        <action name="textresult" class="action.TextResult">
+            <result type="stream"></result>
+        </action>
     </package>
 </struts>

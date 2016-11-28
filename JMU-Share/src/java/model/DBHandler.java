@@ -155,7 +155,7 @@ public class DBHandler {
         * **/
     }
     
-    public void increaseScore(int id)
+    public int increaseScore(int id)
     {
         int score = 0;
         try {
@@ -180,6 +180,7 @@ public class DBHandler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return score;
     }
     
     public void decreaseScore(int id)

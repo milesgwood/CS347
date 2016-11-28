@@ -15,40 +15,81 @@
         <style>
 
         </style>
-        <script>
+
+        <script type="text/javascript" language="javascript">
+            window.onload = function () {
+            try {  // for Firefox, IE7, Opera
+            request = new XMLHttpRequest()
+            }
+            catch (exc) {
+            try {  // for IE6
+            request = new ActiveXObject('MSXML2.XMLHTTP.5.0')
+            }
+            catch (e) {
+            request = false
+            }
+            }
+            if (!request) {
+            alert("Error initializing XMLHttpRequest!");
+            }
+            }
+
+            function test() {
+            if (!request) return;
+            var commentId = document.getElementById("testingScore").innerHTML
+            var url = "/JMU-Share/textresult";
+            request.open("GET", url, true)
+            request.onreadystatechange = updatePage
+            request.send()
+            }
+
+            function updatePage() {
+            if (request.readyState == 4) {
+                if (request.status == 200) {
+                    var newScore = request.responseText
+                    document.getElementById("testingScore").innerHTML = newScore
+                }
+                else { alert("Error: status code " + request.status) }
+                }
+            }
+            
+            
+            
             function brightenUp(x) {
-                x.style.borderBottom = "15px solid #66ff66";
+            x.style.borderBottom = "15px solid #66ff66";
             }
 
             function darkenUp(x) {
-                x.style.borderBottom = "15px solid #008000";
+            x.style.borderBottom = "15px solid #008000";
             }
 
             function brightenDown(x) {
-                x.style.borderTop = "15px solid #ff0000";
+            x.style.borderTop = "15px solid #ff0000";
             }
 
             function darkenDown(x) {
-                x.style.borderTop = "15px solid #990000";
+            x.style.borderTop = "15px solid #990000";
             }
 
             function downVote(x) {
-                var middle = x.previousElementSibling;
-                var inner = middle.innerHTML;
-                var score = parseInt(inner, 10) - 1;
-                middle.innerHTML = score;
+            var middle = x.previousElementSibling;
+                    var inner = middle.innerHTML;
+                    var score = parseInt(inner, 10) - 1;
+                    middle.innerHTML = score;
             }
 
             function upVote(x) {
-                var middle = x.nextElementSibling;
-                var downArrow = middle.nextElementSibling;
-                var inner = middle.innerHTML;
-                var score = parseInt(inner, 10) + 1;
-                middle.innerHTML = score;
+                    test();
+                    var middle = x.nextElementSibling;
+                    var downArrow = middle.nextElementSibling;
+                    var inner = middle.innerHTML;
+                    var score = parseInt(inner, 10) + 1;
+                    middle.innerHTML = score;
             }
         </script>
     </head>
     <body>
+
         <div id="container">
             <div id="header">
                 <jsp:include page='menubar.jsp'/>
@@ -57,6 +98,8 @@
             <div id="content">
                 <div class="wrapper">
                     <div id='topContent'>
+                        <button onclick="test()"  id="testApp">Testing</button>
+                        Testing Score = <div id="testingScore">100</div>
                         <h1>Title -- Cryptography Ciphers and Their Weaknesses</h1>
                         <h2>Endorse- <s:property value="post.getEndorse()"/></h2>
                         <h2>Rating- <s:property value="post.getRating()"/></h2>
