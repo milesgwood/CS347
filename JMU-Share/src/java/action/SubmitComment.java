@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import model.Comment;
 import model.DBHandler;
+import model.Post;
 
 /**
  *
@@ -17,18 +18,53 @@ import model.DBHandler;
 public class SubmitComment extends ActionSupport {
 
     String comment;
-    Integer post_id;
-    ArrayList<Comment> list = new ArrayList<>();
+    Integer postId;
+    Integer sesPostId;
+    Post post;
+    ArrayList<Comment> commentsList = new ArrayList<>();
 
     public String execute() {
         DBHandler db = new DBHandler();
-        //Here you need to get the author_id from session.
-        int author_id = 1;
-        Comment newComment = new Comment(author_id, post_id, comment);
+        //Create the new comment and insert it into the database
+        int authorId = 1;
+        Comment newComment = new Comment(authorId, postId, comment);
         db.insertComment(newComment);
-        //Now we load the list of comments with the new comment added
-        list = db.getPostComments(post_id);
+        //Now load the post again with the updated data
+        post = db.getPost(postId);
+        commentsList = postId != null? db.getPostComments(postId) : db.getPostComments(sesPostId);
         return "success";
+    }
+
+    public Integer getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Integer postId) {
+        this.postId = postId;
+    }
+
+    public Integer getSesPostId() {
+        return sesPostId;
+    }
+
+    public void setSesPostId(Integer sesPostId) {
+        this.sesPostId = sesPostId;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public ArrayList<Comment> getCommentsList() {
+        return commentsList;
+    }
+
+    public void setCommentsList(ArrayList<Comment> commentsList) {
+        this.commentsList = commentsList;
     }
 
     public void setComment(String comment) {
@@ -37,21 +73,5 @@ public class SubmitComment extends ActionSupport {
 
     public String getComment() {
         return comment;
-    }
-
-    public Integer getPost_id() {
-        return post_id;
-    }
-
-    public void setPost_id(Integer post_id) {
-        this.post_id = post_id;
-    }
-    
-    public ArrayList<Comment> getList() {
-        return list;
-    }
-
-    public void setList(ArrayList<Comment> list) {
-        this.list = list;
     }
 }

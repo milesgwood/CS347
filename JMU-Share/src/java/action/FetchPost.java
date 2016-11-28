@@ -8,6 +8,7 @@ package action;
 import java.util.ArrayList;
 import model.Comment;
 import model.DBHandler;
+import model.Post;
 
 /**
  *
@@ -16,16 +17,37 @@ import model.DBHandler;
 public class FetchPost {
     Integer postId;
     Integer sesPostId;
-    Integer authorId;
-    Integer classId;
-    String contentBody;
-    Float rating;
-    Integer endorse;
+    Post post;
     ArrayList<Comment> commentsList = new ArrayList<>();
     
     public String execute() {
         DBHandler db = new DBHandler();
+        post = db.getPost(postId);
         commentsList = postId != null? db.getPostComments(postId) : db.getPostComments(sesPostId);
         return "success";
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public ArrayList<Comment> getCommentsList() {
+        return commentsList;
+    }
+
+    public Integer getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Integer postId) {
+        this.postId = postId;
+    }
+
+    public void setCommentsList(ArrayList<Comment> commentsList) {
+        this.commentsList = commentsList;
     }
 }

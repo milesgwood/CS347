@@ -11,22 +11,46 @@ package model;
  */
 public class Comment {
     
-    private int id, author_id, post_id;
+    private int id, authorId, postId;
     private String comment;
+    private String commentAuthorName;
+    private int score;
 
-    public Comment(int author_id, int post_id, String comment) {
-        this.author_id = author_id;
-        this.post_id = post_id;
-        this.comment = comment;
-        DBHandler db = new DBHandler();
-        this.id = db.getNextPostId();
+    public String getCommentAuthorName() {
+        return commentAuthorName;
+    }
+
+    public void setCommentAuthorName(String commentAuthorName) {
+        this.commentAuthorName = commentAuthorName;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
     
-    public Comment(int id, int author_id, int post_id, String comment) {
-        this.id = id;
-        this.author_id = author_id;
-        this.post_id = post_id;
+    public Comment(int authorId, int postId, String comment) {
+        this.authorId = authorId;
+        this.postId = postId;
         this.comment = comment;
+        
+        DBHandler db = new DBHandler();
+        this.id = db.getNextCommentId();
+        
+        commentAuthorName = db.getAuthorName(authorId);
+    }
+    
+    public Comment(int id, int authorId, int postId, String comment) {
+        this.id = id;
+        this.authorId = authorId;
+        this.postId = postId;
+        this.comment = comment;
+        
+        DBHandler db = new DBHandler();
+        commentAuthorName = db.getAuthorName(authorId);
     }
 
     public int getId() {
@@ -37,20 +61,20 @@ public class Comment {
         this.id = id;
     }
 
-    public int getAuthor_id() {
-        return author_id;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor_id(int author_id) {
-        this.author_id = author_id;
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
-    public int getPost_id() {
-        return post_id;
+    public int getPostId() {
+        return postId;
     }
 
-    public void setPost_id(int post_id) {
-        this.post_id = post_id;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public String getComment() {

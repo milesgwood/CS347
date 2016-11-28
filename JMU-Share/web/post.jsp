@@ -13,7 +13,7 @@
         <title>JSP Page</title>
         <link rel="stylesheet" type="text/css" href="format.css">
         <style>
-            
+
         </style>
         <script>
             function brightenUp(x) {
@@ -57,24 +57,12 @@
             <div id="content">
                 <div class="wrapper">
                     <div id='topContent'>
-                        <h1>Cryptography Ciphers and Their Weaknesses</h1>
-                        <h2>CS 457 Brett Tjaden - Fall 2016</h2>
-                        <p>Notes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            Symmetric key systems - both sender and receiver have the same key
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                            If in the same row shift right or shift downNotes Begin Here --- Cryptography - designing systems so only certain people can see through the disguise
-                        </p>
+                        <h1>Title -- Cryptography Ciphers and Their Weaknesses</h1>
+                        <h2>Endorse- <s:property value="post.getEndorse()"/></h2>
+                        <h2>Rating- <s:property value="post.getRating()"/></h2>
+                        <h2>Class Id- <s:property value="post.getClassId()"/></h2>
+                        <h2>Author Id- <s:property value="post.getAuthorName()"/></h2>
+                        <p><s:property value="post.getContentBody()"/></p>
                     </div>
                 </div>
                 <br>
@@ -82,39 +70,34 @@
                     <div id='bottomContent'>
                         <div id="commentsSection">
                             <%!
-                                String ses_post_id;
-                                String req_post_id;
+                                String sesPostId;
+                                String reqPostId;
                             %>
                             <%
-                                if(request.getParameter("post_id") != null)
-                                {
-                                    req_post_id = request.getParameter("post_id");
-                                    session.setAttribute( "post_id", req_post_id);
-                                }
-                                else
-                                {
-                                    ses_post_id = (String) session.getAttribute("post_id");
-                                    request.setAttribute("post_id", ses_post_id);
+                                if (request.getParameter("postId") != null) {
+                                    reqPostId = request.getParameter("postId");
+                                    session.setAttribute("postId", reqPostId);
+                                } else {
+                                    sesPostId = (String) session.getAttribute("postId");
+                                    request.setAttribute("postId", sesPostId);
                                 }
                             %>
-                            <s:bean name="bean.CommentBean">
-                                <s:iterator  value="list">
-                                    <div class="comment">
-                                        <div class="arrows">
-                                            <div class="arrow-up" onclick="upVote(this)" onmouseenter="brightenUp(this)" onmouseleave="darkenUp(this)"></div>
-                                            <div>456</div>
-                                            <div class="arrow-down" onclick="downVote(this)" onmouseenter="brightenDown(this)" onmouseleave="darkenDown(this)"></div>
-                                        </div>
-                                        <div class="floating-box"><s:property value="comment"/><br>By Author <s:property value="author_id"/></div>
+                            <s:iterator  value="commentsList">
+                                <div class="comment">
+                                    <div class="arrows">
+                                        <div class="arrow-up" onclick="upVote(this)" onmouseenter="brightenUp(this)" onmouseleave="darkenUp(this)"></div>
+                                        <div><s:property value="score"/></div>
+                                        <div class="arrow-down" onclick="downVote(this)" onmouseenter="brightenDown(this)" onmouseleave="darkenDown(this)"></div>
                                     </div>
-                                    <br>
-                                </s:iterator>
-                            </s:bean>
+                                    <div class="floating-box"><s:property value="comment"/><br>By Author <s:property value="commentAuthorName"/></div>
+                                </div>
+                                <br>
+                            </s:iterator>
                         </div>
                         <s:form id="submitComment" action="submitComment" method="post">
                             <s:textarea style="width:100%" name="comment" id="comment" placeholder="Write comment here..."/>
-                            <p>Here is the session - <s:property value="#session.post_id"/></p>
-                            <s:hidden name="post_id" value="1"/>
+                            <p>Here is the session - <s:property value="#session.postId"/></p>
+                            <s:hidden name="postId" value="1"/>
                             <s:submit type="submit" value="submitComment"/>
                         </s:form>
                     </div>

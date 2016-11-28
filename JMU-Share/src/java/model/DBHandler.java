@@ -58,14 +58,12 @@ public class DBHandler {
             url = (String) envCtx.lookup("Url");
             userId = (String) envCtx.lookup("UserId");
             password = (String) envCtx.lookup("Password");
-        } catch(NoInitialContextException contextError)
-        {
+        } catch (NoInitialContextException contextError) {
             driverName = "com.mysql.jdbc.Driver";
             url = "jdbc:mysql://grove.cs.jmu.edu:3306/team27_db";
             userId = "team27";
             password = "nov#mber5";
-        }
-        catch (NamingException e) {
+        } catch (NamingException e) {
             e.printStackTrace();
         }
 
@@ -142,6 +140,8 @@ public class DBHandler {
      */
     public static void createTables() {
         String sql = "";
+        System.out.println("Create Table Statements are gone");
+        /**
         DBHandler db = new DBHandler();
         try {
             db.open();
@@ -150,6 +150,61 @@ public class DBHandler {
             db.doCommand(sql);
         } catch (SQLException e) {
             System.err.println("The Create statement with the problem is :" + sql);
+            e.printStackTrace();
+        }
+        * **/
+    }
+    
+    public void increaseScore(int id)
+    {
+        int score = 0;
+        try {
+            if (!isOpen) {
+                open();
+            }
+            String sql = "SELECT score FROM comments WHERE id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                score = rs.getInt(1);
+            }
+            
+            score++;
+            sql = "UPDATE score SET score = ? WHERE id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, score);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void decreaseScore(int id)
+    {
+        int score = 0;
+        try {
+            if (!isOpen) {
+                open();
+            }
+            String sql = "SELECT score FROM comments WHERE id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                score = rs.getInt(1);
+            }
+            
+            score--;
+            sql = "UPDATE score SET score = ? WHERE id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, score);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -167,17 +222,16 @@ public class DBHandler {
             String sql = "INSERT INTO comments VALUES (?, ?, ?, ?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, c.getId());
-            ps.setInt(4, c.getAuthor_id());
-            ps.setInt(2, c.getPost_id());
+            ps.setInt(4, c.getAuthorId());
+            ps.setInt(2, c.getPostId());
             ps.setString(3, c.getComment());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
-    public int getNextPostId()
-    {
+
+    public int getNextCommentId() {
         int next = 0;
         try {
             if (!isOpen) {
@@ -193,14 +247,45 @@ public class DBHandler {
         }
         return next;
     }
-    
+
+    public Post getPost(int postId) {
+        Post post = null;
+        try {
+            if (!isOpen) {
+                open();
+            }
+            String sql = "SELECT * FROM posts WHERE id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, postId);
+            ResultSet rs = ps.executeQuery();
+
+            Integer authorId;
+            Integer classId;
+            String contentBody;
+            Float rating;
+            Integer endorse;
+
+            while (rs.next()) {
+                authorId = rs.getInt(2);
+                classId = rs.getInt(3);
+                contentBody = rs.getString(4);
+                rating = rs.getFloat(5);
+                endorse = rs.getInt(6);
+                post = new Post(postId, authorId, classId, contentBody, rating, endorse);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return post;
+    }
+
     /**
      * Retrieves all of the comments from the database for post_id
+     *
      * @param post_id
-     * @return 
+     * @return
      */
-    public ArrayList<Comment> getPostComments(int post_id)
-    {
+    public ArrayList<Comment> getPostComments(int post_id) {
         ArrayList<Comment> comments = new ArrayList<>();
         try {
             if (!isOpen) {
@@ -210,17 +295,16 @@ public class DBHandler {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, post_id);
             ResultSet rs = ps.executeQuery();
-            
+
             int id, post, author;
             String text;
             Comment comment;
-            
-            while(rs.next())
-            {
+
+            while (rs.next()) {
                 id = rs.getInt(1);
                 author = rs.getInt(4);
                 post = rs.getInt(2);
-                text = rs.getString(3);                        
+                text = rs.getString(3);
                 comment = new Comment(id, author, post, text);
                 comments.add(comment);
             }
@@ -228,5 +312,26 @@ public class DBHandler {
             e.printStackTrace();
         }
         return comments;
+    }
+
+    public String getAuthorName(int id) {
+        String name = "deleted";
+        try {
+            if (!isOpen) {
+                open();
+            }
+            String sql = "SELECT name FROM user WHERE id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+
+            while (rs.next()) {
+                name = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
     }
 }

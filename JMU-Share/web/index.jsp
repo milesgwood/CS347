@@ -14,6 +14,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="viewpost?post_id=1">View All Comments</a>
+        <a href="viewpost?postId=1">View All Comments</a>
     </body>
 </html>
