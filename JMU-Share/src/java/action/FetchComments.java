@@ -5,18 +5,33 @@
  */
 package action;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.util.ValueStack;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import model.Comment;
 import model.DBHandler;
 
 public class FetchComments extends ActionSupport{
-
+    
+    Integer post_id;
+    Integer ses_post_id;
     ArrayList<Comment> list = new ArrayList<>();
+
+    public Integer getSes_post_id() {
+        return ses_post_id;
+    }
+
+    public void setSes_post_id(Integer ses_post_id) {
+        this.ses_post_id = ses_post_id;
+    }
+   
+    
+    public Integer getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(Integer post_id) {
+        this.post_id = post_id;
+    }
 
     public ArrayList<Comment> getList() {
         return list;
@@ -36,18 +51,8 @@ public class FetchComments extends ActionSupport{
      * @return 
      */
     public String execute() {
-        ValueStack stack = ActionContext.getContext().getValueStack();
-        Map stackContext = stack.getContext();
-        HashMap requestParameterMap = (HashMap)stackContext.get("parameters");
-        String[] post_id_param =  (String[])requestParameterMap.get("post_id");
-        String post_id = post_id_param[0];
-        System.out.println("The post id is " + post_id);
-        
-        int id = Integer.parseInt(post_id);
-        System.out.println("As an int it is " + id);
-        
-        //DBHandler db = new DBHandler();
-        //list = db.getPostComments(id);
+        DBHandler db = new DBHandler();
+        list = post_id != null? db.getPostComments(post_id) : db.getPostComments(ses_post_id);
         return "success";
     }
 }

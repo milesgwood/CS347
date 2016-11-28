@@ -5,8 +5,6 @@
  */
 package model;
 
-
-
 /**
  *
  * @author greatwmc
@@ -20,6 +18,8 @@ public class Comment {
         this.author_id = author_id;
         this.post_id = post_id;
         this.comment = comment;
+        DBHandler db = new DBHandler();
+        this.id = db.getNextPostId();
     }
     
     public Comment(int id, int author_id, int post_id, String comment) {

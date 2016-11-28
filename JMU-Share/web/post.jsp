@@ -81,6 +81,22 @@
                 <div class="wrapper">
                     <div id='bottomContent'>
                         <div id="commentsSection">
+                            <%!
+                                String ses_post_id;
+                                String req_post_id;
+                            %>
+                            <%
+                                if(request.getParameter("post_id") != null)
+                                {
+                                    req_post_id = request.getParameter("post_id");
+                                    session.setAttribute( "post_id", req_post_id);
+                                }
+                                else
+                                {
+                                    ses_post_id = (String) session.getAttribute("post_id");
+                                    request.setAttribute("post_id", ses_post_id);
+                                }
+                            %>
                             <s:bean name="bean.CommentBean">
                                 <s:iterator  value="list">
                                     <div class="comment">
@@ -95,9 +111,10 @@
                                 </s:iterator>
                             </s:bean>
                         </div>
-
                         <s:form id="submitComment" action="submitComment" method="post">
                             <s:textarea style="width:100%" name="comment" id="comment" placeholder="Write comment here..."/>
+                            <p>Here is the session - <s:property value="#session.post_id"/></p>
+                            <s:hidden name="post_id" value="1"/>
                             <s:submit type="submit" value="submitComment"/>
                         </s:form>
                     </div>

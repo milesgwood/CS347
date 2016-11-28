@@ -6,6 +6,7 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
 import model.Comment;
 import model.DBHandler;
 
@@ -13,17 +14,20 @@ import model.DBHandler;
  *
  * @author greatwmc
  */
-public class SubmitComment extends ActionSupport{
-    
-    private String comment;
-    
+public class SubmitComment extends ActionSupport {
+
+    String comment;
+    Integer post_id;
+    ArrayList<Comment> list = new ArrayList<>();
+
     public String execute() {
         DBHandler db = new DBHandler();
-        //Here you need to somehow get the post_id, and author_id. Possibly from session.
-        int author_id = 55;
-        int post_id = 55;
-        Comment newComment = new Comment(author_id, post_id, getComment());
+        //Here you need to get the author_id from session.
+        int author_id = 1;
+        Comment newComment = new Comment(author_id, post_id, comment);
         db.insertComment(newComment);
+        //Now we load the list of comments with the new comment added
+        list = db.getPostComments(post_id);
         return "success";
     }
 
@@ -33,5 +37,21 @@ public class SubmitComment extends ActionSupport{
 
     public String getComment() {
         return comment;
+    }
+
+    public Integer getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(Integer post_id) {
+        this.post_id = post_id;
+    }
+    
+    public ArrayList<Comment> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Comment> list) {
+        this.list = list;
     }
 }

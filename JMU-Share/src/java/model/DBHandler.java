@@ -145,7 +145,7 @@ public class DBHandler {
         DBHandler db = new DBHandler();
         try {
             db.open();
-            sql = "CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY AUTO_INCREMENT, author_id INTEGER NOT NULL, post_id  INTEGER NOT NULL, comment VARCHAR(255) NOT NULL);";
+            //sql = "CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY AUTO_INCREMENT, author_id INTEGER NOT NULL, post_id  INTEGER NOT NULL, comment VARCHAR(255) NOT NULL);";
             System.out.println(sql);
             db.doCommand(sql);
         } catch (SQLException e) {
@@ -167,13 +167,31 @@ public class DBHandler {
             String sql = "INSERT INTO comments VALUES (?, ?, ?, ?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, c.getId());
-            ps.setInt(2, c.getAuthor_id());
-            ps.setInt(3, c.getPost_id());
-            ps.setString(4, c.getComment());
+            ps.setInt(4, c.getAuthor_id());
+            ps.setInt(2, c.getPost_id());
+            ps.setString(3, c.getComment());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public int getNextPostId()
+    {
+        int next = 0;
+        try {
+            if (!isOpen) {
+                open();
+            }
+            String sql = "SELECT max(id) FROM comments;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            rs.next();
+            next = rs.getInt(1) + 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return next;
     }
     
     /**
@@ -188,7 +206,7 @@ public class DBHandler {
             if (!isOpen) {
                 open();
             }
-            String sql = "SELECT * FROM comments WHERE post_id = ?;";
+            String sql = "SELECT * FROM comments WHERE postId = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, post_id);
             ResultSet rs = ps.executeQuery();
@@ -200,9 +218,9 @@ public class DBHandler {
             while(rs.next())
             {
                 id = rs.getInt(1);
-                author = rs.getInt(2);
-                post = rs.getInt(3);
-                text = rs.getString(4);                        
+                author = rs.getInt(4);
+                post = rs.getInt(2);
+                text = rs.getString(3);                        
                 comment = new Comment(id, author, post, text);
                 comments.add(comment);
             }
