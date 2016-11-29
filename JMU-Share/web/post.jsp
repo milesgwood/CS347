@@ -31,15 +31,6 @@
             }
             }
 
-            function test() {
-            if (!request) return;
-            var commentId = document.getElementById("testingScore").innerHTML
-            var url = "/JMU-Share/textresult";
-            request.open("GET", url, true)
-            request.onreadystatechange = updatePage
-            request.send()
-            }
-
             function updatePage() {
             if (request.readyState == 4) {
                 if (request.status == 200) {
@@ -85,14 +76,16 @@
             }
 
             function downVote(x) {
-            var middle = x.previousElementSibling;
+                    var middle = x.previousElementSibling;
                     var inner = middle.innerHTML;
                     var score = parseInt(inner, 10) - 1;
                     middle.innerHTML = score;
+                    var cIdArrSplit = middle.id.split('_');
+                    var commentId = cIdArrSplit[1];
+                    voteDownRequest(commentId);
             }
 
             function upVote(x) {
-                    test();
                     var middle = x.nextElementSibling;
                     var downArrow = middle.nextElementSibling;
                     var inner = middle.innerHTML;

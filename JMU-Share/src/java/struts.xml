@@ -15,7 +15,11 @@
             <result name="success" type="stream"></result>
             <result name="error">error.jsp</result>
         </action>
-        <action name="upvote" class="ajax.Voting">
+        <action name="upvote" class="ajax.UpVoting">
+            <result name="success" type="stream"></result>
+            <result name="error">error.jsp</result>
+        </action>
+        <action name="downvote" class="ajax.DownVoting">
             <result name="success" type="stream"></result>
             <result name="error">error.jsp</result>
         </action>

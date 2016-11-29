@@ -194,7 +194,7 @@ public class DBHandler {
             }
 
             score--;
-            sql = "UPDATE score SET score = ? WHERE id = ?";
+            sql = "UPDATE comments SET score = ? WHERE id = ?";
             ps = con.prepareStatement(sql);
             ps.setInt(1, score);
             ps.setInt(2, id);

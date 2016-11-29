@@ -16,7 +16,7 @@ import model.DBHandler;
  *
  * @author greatwmc
  */
-public class Voting extends ActionSupport {
+public class UpVoting extends ActionSupport {
 
     private Integer commentIdParam;
     private InputStream inputStream;
