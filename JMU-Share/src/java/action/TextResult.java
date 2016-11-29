@@ -7,7 +7,6 @@ package action;
 
 import java.io.InputStream;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.util.logging.Logger;
 import java.io.ByteArrayInputStream;
  
 /**

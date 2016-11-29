@@ -5,13 +5,16 @@
 <struts>
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
-        <action name="viewpost" class="action.FetchPost">  
+        <action name="viewpost" class="action.FetchPost">
             <result name="success">post.jsp</result>
         </action>
         <action name="submitComment" class="action.SubmitComment">
             <result name="success">post.jsp</result>
         </action>
         <action name="textresult" class="action.TextResult">
+            <result type="stream"></result>
+        </action>
+        <action name="upvote" class="ajax.Voting">
             <result type="stream"></result>
         </action>
     </package>

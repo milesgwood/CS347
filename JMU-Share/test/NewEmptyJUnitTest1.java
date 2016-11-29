@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 
+import ajax.Voting;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.DBHandler;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -39,6 +44,14 @@ public class NewEmptyJUnitTest1 {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void increaseScore() 
+    {
+        DBHandler db = new DBHandler();
+        try {
+            assertEquals(6, db.increaseScore(5));
+        } catch (SQLException ex) {
+            Logger.getLogger(NewEmptyJUnitTest1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

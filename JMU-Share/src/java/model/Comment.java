@@ -11,7 +11,7 @@ package model;
  */
 public class Comment {
     
-    private int id, authorId, postId;
+    private int commentId, authorId, postId;
     private String comment;
     private String commentAuthorName;
     private int score;
@@ -25,6 +25,8 @@ public class Comment {
     }
 
     public int getScore() {
+        DBHandler db = new DBHandler();
+        score = db.getCommentScore(commentId);    
         return score;
     }
 
@@ -38,13 +40,13 @@ public class Comment {
         this.comment = comment;
         
         DBHandler db = new DBHandler();
-        this.id = db.getNextCommentId();
+        this.commentId = db.getNextCommentId();
         
         commentAuthorName = db.getAuthorName(authorId);
     }
     
-    public Comment(int id, int authorId, int postId, String comment) {
-        this.id = id;
+    public Comment(int commentId, int authorId, int postId, String comment) {
+        this.commentId = commentId;
         this.authorId = authorId;
         this.postId = postId;
         this.comment = comment;
@@ -53,12 +55,12 @@ public class Comment {
         commentAuthorName = db.getAuthorName(authorId);
     }
 
-    public int getId() {
-        return id;
+    public int getCommentId() {
+        return commentId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
     }
 
     public int getAuthorId() {

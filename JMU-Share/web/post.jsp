@@ -53,7 +53,23 @@
                 }
             }
             
+            function voteUpRequest(commentId)
+            {
+            if (!request) return;
+            var url = "/JMU-Share/upvote?commentIdParam=" + commentId;
+            request.open("GET", url, true)
+            request.onreadystatechange = updatePage
+            request.send()
+            }
             
+            function voteDownRequest(commentId)
+            {
+            if (!request) return;
+            var url = "/JMU-Share/downvote?commentIdParam=" + commentId;
+            request.open("GET", url, true)
+            request.onreadystatechange = updatePage
+            request.send()
+            }
             
             function brightenUp(x) {
             x.style.borderBottom = "15px solid #66ff66";
@@ -85,6 +101,10 @@
                     var inner = middle.innerHTML;
                     var score = parseInt(inner, 10) + 1;
                     middle.innerHTML = score;
+                    var cIdArrSplit = middle.id.split('_');
+                    var commentId = cIdArrSplit[1];
+                    alert(commentId);
+                    voteUpRequest(commentId);
             }
         </script>
     </head>
@@ -126,10 +146,10 @@
                                 }
                             %>
                             <s:iterator  value="commentsList">
-                                <div class="comment">
+                                <div class="comment" id="comment<s:property value='commentId'/>">
                                     <div class="arrows">
                                         <div class="arrow-up" onclick="upVote(this)" onmouseenter="brightenUp(this)" onmouseleave="darkenUp(this)"></div>
-                                        <div><s:property value="score"/></div>
+                                        <div id="scoreOnCommentId_<s:property value='commentId'/>"><s:property value="score"/></div>
                                         <div class="arrow-down" onclick="downVote(this)" onmouseenter="brightenDown(this)" onmouseleave="darkenDown(this)"></div>
                                     </div>
                                     <div class="floating-box"><s:property value="comment"/><br>By Author <s:property value="commentAuthorName"/></div>

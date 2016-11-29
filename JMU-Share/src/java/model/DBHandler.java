@@ -142,21 +142,18 @@ public class DBHandler {
         String sql = "";
         System.out.println("Create Table Statements are gone");
         /**
-        DBHandler db = new DBHandler();
-        try {
-            db.open();
-            //sql = "CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY AUTO_INCREMENT, author_id INTEGER NOT NULL, post_id  INTEGER NOT NULL, comment VARCHAR(255) NOT NULL);";
-            System.out.println(sql);
-            db.doCommand(sql);
-        } catch (SQLException e) {
-            System.err.println("The Create statement with the problem is :" + sql);
-            e.printStackTrace();
-        }
-        * **/
+         * DBHandler db = new DBHandler(); try { db.open(); //sql = "CREATE
+         * TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY AUTO_INCREMENT,
+         * author_id INTEGER NOT NULL, post_id INTEGER NOT NULL, comment
+         * VARCHAR(255) NOT NULL);"; System.out.println(sql); db.doCommand(sql);
+         * } catch (SQLException e) { System.err.println("The Create statement
+         * with the problem is :" + sql); e.printStackTrace(); }
+        * *
+         */
     }
-    
-    public int increaseScore(int id)
-    {
+
+    public int increaseScore(int id) {
+
         int score = 0;
         try {
             if (!isOpen) {
@@ -166,13 +163,12 @@ public class DBHandler {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 score = rs.getInt(1);
             }
-            
+
             score++;
-            sql = "UPDATE score SET score = ? WHERE id = ?";
+            sql = "UPDATE comments SET score = ? WHERE id = ?";
             ps = con.prepareStatement(sql);
             ps.setInt(1, score);
             ps.setInt(2, id);
@@ -182,9 +178,8 @@ public class DBHandler {
         }
         return score;
     }
-    
-    public void decreaseScore(int id)
-    {
+
+    public void decreaseScore(int id) {
         int score = 0;
         try {
             if (!isOpen) {
@@ -194,11 +189,10 @@ public class DBHandler {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 score = rs.getInt(1);
             }
-            
+
             score--;
             sql = "UPDATE score SET score = ? WHERE id = ?";
             ps = con.prepareStatement(sql);
@@ -222,7 +216,7 @@ public class DBHandler {
             }
             String sql = "INSERT INTO comments VALUES (?, ?, ?, ?);";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, c.getId());
+            ps.setInt(1, c.getCommentId());
             ps.setInt(4, c.getAuthorId());
             ps.setInt(2, c.getPostId());
             ps.setString(3, c.getComment());
@@ -325,7 +319,6 @@ public class DBHandler {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            
 
             while (rs.next()) {
                 name = rs.getString(1);
@@ -334,5 +327,25 @@ public class DBHandler {
             e.printStackTrace();
         }
         return name;
+    }
+
+    int getCommentScore(int commentId) {
+        int score = 0;
+        try {
+            if (!isOpen) {
+                open();
+            }
+            String sql = "SELECT score FROM comments WHERE id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, commentId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                score = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return score;
     }
 }
