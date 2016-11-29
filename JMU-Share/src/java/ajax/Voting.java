@@ -5,17 +5,29 @@
  */
 package ajax;
 
-import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import model.DBHandler;
 
 /**
+ * This class handles an upvote on a comment. It returns the new score in the
+ * result stream. It doesn't need to though.
  *
  * @author greatwmc
  */
 public class Voting extends ActionSupport {
 
     private Integer commentIdParam;
+    private InputStream inputStream;
+
+    public InputStream getInputStream() {
+        return inputStream;
+    }
+
+    public void setInputStream(InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
 
     public Integer getCommentIdParam() {
         return commentIdParam;
@@ -27,14 +39,9 @@ public class Voting extends ActionSupport {
 
     public String execute() throws Exception {
         DBHandler db = new DBHandler();
-        System.out.println("We're voting now");
-        int upOne = commentIdParam + 1;
-        if (upOne == db.increaseScore(commentIdParam)) {
-            return SUCCESS;
-            /**
-             * } else { return ERROR; } *
-             */
-        }
-    return SUCCESS;
+        System.out.println("Upvote" + commentIdParam);
+        db.increaseScore(commentIdParam);
+        inputStream = new ByteArrayInputStream(commentIdParam.toString().getBytes("UTF-8"));
+        return SUCCESS;
     }
 }

@@ -100,7 +100,6 @@
                     middle.innerHTML = score;
                     var cIdArrSplit = middle.id.split('_');
                     var commentId = cIdArrSplit[1];
-                    alert(commentId);
                     voteUpRequest(commentId);
             }
         </script>
