@@ -17,6 +17,7 @@ public class Post {
     String contentBody;
     Float rating;
     Integer endorse;
+    String notes_desc;
     
     //Here are the derived values
     String authorName;
@@ -29,17 +30,26 @@ public class Post {
         this.authorName = authorName;
     }
 
-    public Post(Integer id, Integer authorId, Integer classId, String contentBody, Float rating, Integer endorse) {
+    public Post(Integer id, Integer authorId, Integer classId, String contentBody, Float rating, Integer endorse, String notes_desc) {
         this.id = id;
         this.authorId = authorId;
         this.classId = classId;
         this.contentBody = contentBody;
         this.rating = rating;
         this.endorse = endorse;
+        this.notes_desc = notes_desc;
         
         //Get the more useful values
         DBHandler db = new DBHandler();
         this.authorName = db.getAuthorName(authorId);
+    }
+
+    public String getNotes_desc() {
+        return notes_desc;
+    }
+
+    public void setNotes_desc(String notes_desc) {
+        this.notes_desc = notes_desc;
     }
 
     public Integer getId() {

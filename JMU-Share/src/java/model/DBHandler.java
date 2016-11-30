@@ -134,24 +134,6 @@ public class DBHandler {
         return rs;
     }
 
-    /**
-     * Create all of the needed tables and print out the create table
-     * statements.
-     */
-    public static void createTables() {
-        String sql = "";
-        System.out.println("Create Table Statements are gone");
-        /**
-         * DBHandler db = new DBHandler(); try { db.open(); //sql = "CREATE
-         * TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY AUTO_INCREMENT,
-         * author_id INTEGER NOT NULL, post_id INTEGER NOT NULL, comment
-         * VARCHAR(255) NOT NULL);"; System.out.println(sql); db.doCommand(sql);
-         * } catch (SQLException e) { System.err.println("The Create statement
-         * with the problem is :" + sql); e.printStackTrace(); }
-        * *
-         */
-    }
-
     public int increaseScore(int id) {
 
         int score = 0;
@@ -214,36 +196,18 @@ public class DBHandler {
             if (!isOpen) {
                 open();
             }
-            String sql = "INSERT INTO comments VALUES (?, ?, ?, ?);";
+            String sql = "INSERT INTO comments (post_id, comment, author_id) VALUES (?, ?, ?);";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, c.getCommentId());
-            ps.setInt(4, c.getAuthorId());
-            ps.setInt(2, c.getPostId());
-            ps.setString(3, c.getComment());
+            ps.setInt(3, c.getAuthorId());
+            ps.setInt(1, c.getPostId());
+            ps.setString(2, c.getComment());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public int getNextCommentId() {
-        int next = 0;
-        try {
-            if (!isOpen) {
-                open();
-            }
-            String sql = "SELECT max(id) FROM comments;";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery(sql);
-            rs.next();
-            next = rs.getInt(1) + 1;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return next;
-    }
-
-    public Post getPost(int postId) {
+    public Post getPost(int post_id) {
         Post post = null;
         try {
             if (!isOpen) {
@@ -251,22 +215,24 @@ public class DBHandler {
             }
             String sql = "SELECT * FROM posts WHERE id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, postId);
+            ps.setInt(1, post_id);
             ResultSet rs = ps.executeQuery();
 
-            Integer authorId;
-            Integer classId;
+            Integer author_id;
+            Integer class_id;
             String contentBody;
+            String notes_desc;
             Float rating;
             Integer endorse;
 
             while (rs.next()) {
-                authorId = rs.getInt(2);
-                classId = rs.getInt(3);
+                author_id = rs.getInt(2);
+                class_id = rs.getInt(3);
                 contentBody = rs.getString(4);
                 rating = rs.getFloat(5);
                 endorse = rs.getInt(6);
-                post = new Post(postId, authorId, classId, contentBody, rating, endorse);
+                notes_desc = rs.getString(7);
+                post = new Post(post_id, author_id, class_id, contentBody, rating, endorse, notes_desc);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -286,7 +252,7 @@ public class DBHandler {
             if (!isOpen) {
                 open();
             }
-            String sql = "SELECT * FROM comments WHERE postId = ?;";
+            String sql = "SELECT * FROM comments WHERE post_id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, post_id);
             ResultSet rs = ps.executeQuery();
