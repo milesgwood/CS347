@@ -19,13 +19,6 @@ import java.util.ArrayList;
 
 import javax.naming.*;
 
-/**
- * An abstract parent class for database handlers. This class loads database
- * access parameters from web.xml and loads the database driver class.
- *
- * @author R.Grove
- * @version 2014-10-25
- */
 public class DBHandler {
 
     /**
@@ -313,5 +306,44 @@ public class DBHandler {
             e.printStackTrace();
         }
         return score;
+    }
+
+    public ArrayList<Post> getPostsWritenByUser(Integer userId) {
+        ArrayList<Post> userPosts = new ArrayList();
+        try {
+            if (!isOpen) {
+                open();
+            }
+            String sql = "SELECT * FROM posts WHERE author_id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            //Create each of the post objects
+            while (rs.next()) {
+                userPosts.add(new Post(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userPosts;
+    }
+
+    String getClassName(Integer classId) {
+        String className = "NO CLASS NAME";
+        try {
+            if (!isOpen) {
+                open();
+            }
+            String sql = "SELECT class_name FROM class WHERE class_num = 2;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, classId);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            className = rs.getString(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return className;
     }
 }
