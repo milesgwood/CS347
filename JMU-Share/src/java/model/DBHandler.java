@@ -35,7 +35,7 @@ public class DBHandler {
     /**
      * Database connection
      */
-    private Connection con;
+    protected Connection con;
     /**
      * SQL Statement
      */
