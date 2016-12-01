@@ -20,6 +20,22 @@ public class User_DB {
     private Connection con;
     
     public boolean addUser(User user) {
+        boolean userAdded = false;
+        
+        //try {
+            if(!checkIfUserExists(user)) {
+                
+                String name, username, password, email;
+                boolean isProfessor;
+                int postId, schoolId; 
+                
+                String sql = "INSERT INTO user VALUES(null, ?, ?, ?, ?, ?, ?, ?)"; 
+                
+                //TODO
+            }
+        /*} catch (SQLException e) {
+            
+        }*/
         return true;
     }
     

@@ -9,6 +9,7 @@ package model;
 public class User {
     private String email, name, username, password;
     private boolean isProfessor;
+    private int postId, schoolId;
     
     /*
      * Initialize a User object
@@ -20,12 +21,14 @@ public class User {
      * @param isProfessor - whether or not the user is a professor
      */
     public User(String password, String email, String name, String username,
-            boolean isProfessor) {
+            int postId, boolean isProfessor, int schoolId) {
         this.password = password;
         this.email = email;
         this.name = name;
         this.username = username;
         this.isProfessor = isProfessor;
+        this.postId = postId;
+        this.schoolId = schoolId;
     }
     
     public String getPassword() {
@@ -66,5 +69,13 @@ public class User {
     
     public void setIsProfessor(boolean isProfessor) {
         this.isProfessor = isProfessor;
+    }
+    
+    public int getPostId() {
+        return postId;
+    }
+    
+    public int getSchoolId() {
+        return schoolId;
     }
 }
