@@ -78,4 +78,14 @@ public class User {
     public int getSchoolId() {
         return schoolId;
     }
+    
+    public String toString() {
+        return "Name: " + this.name + "\n" +
+                "Email: " + this.email + "\n" +
+                "Username: " + this.username + "\n" +
+                "Password: " + this.password + "\n" +
+                "Professor: " + this.isProfessor + "\n" +
+                "Role Id: " + this.roleId + "\n" +
+                "School Id: " + this.schoolId + "\n";
+    }
 }
