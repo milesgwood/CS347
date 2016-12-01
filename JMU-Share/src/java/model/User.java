@@ -9,7 +9,7 @@ package model;
 public class User {
     private String email, name, username, password;
     private boolean isProfessor;
-    private int postId, schoolId;
+    private int roleId, schoolId;
     
     /*
      * Initialize a User object
@@ -21,13 +21,13 @@ public class User {
      * @param isProfessor - whether or not the user is a professor
      */
     public User(String password, String email, String name, String username,
-            int postId, boolean isProfessor, int schoolId) {
+            int roleId, boolean isProfessor, int schoolId) {
         this.password = password;
         this.email = email;
         this.name = name;
         this.username = username;
         this.isProfessor = isProfessor;
-        this.postId = postId;
+        this.roleId = roleId;
         this.schoolId = schoolId;
     }
     
@@ -71,8 +71,8 @@ public class User {
         this.isProfessor = isProfessor;
     }
     
-    public int getPostId() {
-        return postId;
+    public int getRoleId() {
+        return roleId;
     }
     
     public int getSchoolId() {

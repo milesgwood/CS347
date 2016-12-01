@@ -22,21 +22,41 @@ public class User_DB {
     public boolean addUser(User user) {
         boolean userAdded = false;
         
-        //try {
+        try {
             if(!checkIfUserExists(user)) {
                 
                 String name, username, password, email;
                 boolean isProfessor;
-                int postId, schoolId; 
+                int roleId, schoolId; 
                 
-                String sql = "INSERT INTO user VALUES(null, ?, ?, ?, ?, ?, ?, ?)"; 
+                String insert_sql = "INSERT INTO user VALUES(null, ?, ?, ?, ?, ?, ?, ?)"; 
                 
-                //TODO
+                PreparedStatement ps = con.prepareStatement(insert_sql);
+		
+		name = user.getName();
+		username = user.getUsername();
+		password = user.getPassword();
+		email = user.getEmail();
+		isProfessor = user.isProfessor();
+		roleId = user.getRoleId();
+		schoolId = user.getSchoolId();
+
+		ps.setString(1, password);
+		ps.setString(2, email);
+		ps.setString(3, name);
+		ps.setString(4, username);
+		ps.setInt(5, roleId);
+		ps.setBoolean(6, isProfessor);
+		ps.setInt(7, schoolId);
+
+		ResultSet rs = ps.executeQuery();
+
+		userAdded = true;
             }
-        /*} catch (SQLException e) {
-            
-        }*/
-        return true;
+        } catch (SQLException e) {
+            e.printStackTrace();    
+        }
+        return userAdded;
     }
     
     public boolean checkIfUserExists(User user) {
@@ -67,7 +87,7 @@ public class User_DB {
     }
     
     public static void main(String[] args) {
-        User user = new User("123456", "chrisrecinos38@gmail.com", "Christopher Recinos", "recinocs", false);
-        System.out.println(new User_DB().checkIfUserExists(user));
+        User user = new User("654321", "kesterSON@gmail.com", "Dumbledore", "dbubbs", 2, false, 11);
+        System.out.println(new User_DB().addUser(user));
     }
 }
