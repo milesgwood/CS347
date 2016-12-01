@@ -147,8 +147,7 @@ public class DBHandler {
          * author_id INTEGER NOT NULL, post_id INTEGER NOT NULL, comment
          * VARCHAR(255) NOT NULL);"; System.out.println(sql); db.doCommand(sql);
          * } catch (SQLException e) { System.err.println("The Create statement
-         * with the problem is :" + sql); e.printStackTrace(); }
-        * *
+         * with the problem is :" + sql); e.printStackTrace(); } *
          */
     }
 

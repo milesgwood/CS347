@@ -10,14 +10,14 @@ package model;
  * @author greatwmc
  */
 public class Post {
-    
+
     Integer id;
     Integer authorId;
     Integer classId;
     String contentBody;
     Float rating;
     Integer endorse;
-    
+
     //Here are the derived values
     String authorName;
 
@@ -36,7 +36,7 @@ public class Post {
         this.contentBody = contentBody;
         this.rating = rating;
         this.endorse = endorse;
-        
+
         //Get the more useful values
         DBHandler db = new DBHandler();
         this.authorName = db.getAuthorName(authorId);

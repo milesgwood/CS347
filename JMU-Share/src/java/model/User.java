@@ -7,10 +7,11 @@ package model;
  * @version 2016-11-28
  */
 public class User {
+
     private String email, name, username, password;
     private boolean isProfessor;
     private int roleId, schoolId;
-    
+
     /*
      * Initialize a User object
      * 
@@ -30,62 +31,62 @@ public class User {
         this.roleId = roleId;
         this.schoolId = schoolId;
     }
-    
+
     public String getPassword() {
         return password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getUsername() {
         return username;
     }
-    
+
     public void setUsername(String username) {
         this.username = username;
     }
-    
+
     public boolean isProfessor() {
         return isProfessor;
     }
-    
+
     public void setIsProfessor(boolean isProfessor) {
         this.isProfessor = isProfessor;
     }
-    
+
     public int getRoleId() {
         return roleId;
     }
-    
+
     public int getSchoolId() {
         return schoolId;
     }
-    
+
     public String toString() {
-        return "Name: " + this.name + "\n" +
-                "Email: " + this.email + "\n" +
-                "Username: " + this.username + "\n" +
-                "Password: " + this.password + "\n" +
-                "Professor: " + this.isProfessor + "\n" +
-                "Role Id: " + this.roleId + "\n" +
-                "School Id: " + this.schoolId + "\n";
+        return "Name: " + this.name + "\n"
+                + "Email: " + this.email + "\n"
+                + "Username: " + this.username + "\n"
+                + "Password: " + this.password + "\n"
+                + "Professor: " + this.isProfessor + "\n"
+                + "Role Id: " + this.roleId + "\n"
+                + "School Id: " + this.schoolId + "\n";
     }
 }
