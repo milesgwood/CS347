@@ -66,6 +66,9 @@ public class User_DB {
         return userAdded;
     }
 
+    public boolean deleteUser(User user) {
+        return false;
+    }
     /**
      * This method checks to see whether or not the User parameter is present in
      * the database. A User is defined as present if the username and/or email
@@ -105,10 +108,11 @@ public class User_DB {
      * This method will return the User that corresponds to id, or null if no
      * user corresponds to the id
      *
-     * @param id, the id for the User to be returned
+     * @param username, the username of the User being searched for
+     * @param email, the email of the User being searched for
      * @return found User or null
      */
-    public User getUser(int id) {
+    public User getUser(String username, String email) {
         User retUser = null;
         try {
             if (!(handler.isOpen)) {
@@ -116,21 +120,20 @@ public class User_DB {
                 con = handler.con;
             }
 
-            String getUser = "SELECT * FROM user WHERE id = ?;";
+            String getUser = "SELECT * FROM user WHERE username = ? AND email = ?;";
             PreparedStatement ps = con.prepareStatement(getUser);
-            ps.setInt(1, id);
+            ps.setString(1, username);
+            ps.setString(2, email);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                String password, email, name, username;
+                String password, name;
                 boolean isProfessor;
                 int roleId, schoolId;
 
                 password = rs.getString(2);
-                email = rs.getString(3);
                 name = rs.getString(4);
-                username = rs.getString(5);
                 roleId = rs.getInt(6);
                 isProfessor = rs.getBoolean(7);
                 schoolId = rs.getInt(8);
@@ -190,6 +193,6 @@ public class User_DB {
     public static void main(String[] args) {
         User user = new User("654321", "kesterSON@gmail.com", "Dumbledore", "dbubbs", 2, false, 11);
         System.out.println(new User_DB().addUser(user));
-        System.out.println(new User_DB().getAllUsers());
+        System.out.println(new User_DB().getUser("dbubbs", "kesterSON@gmail.com"));
     }
 }
