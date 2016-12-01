@@ -103,10 +103,7 @@ public class User_DB {
         }
         return delUser;
     }
-    
-    public boolean updateUser(User user) {
-        return false;
-    }
+
     /**
      * This method checks to see whether or not the User parameter is present in
      * the database. A User is defined as present if the username and/or email
