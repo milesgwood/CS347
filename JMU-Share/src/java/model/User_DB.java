@@ -66,7 +66,45 @@ public class User_DB {
         return userAdded;
     }
 
+    /**
+     * This method will search the database for the user and delete them if they're
+     * found
+     * @param user, the User being deleted
+     * @return true if the user is successfully deleted, false otherwise.
+     */
     public boolean deleteUser(User user) {
+        boolean delUser = false;
+        
+        try {
+            if (!(handler.isOpen)) {
+                handler.open();
+                con = handler.con;
+            }
+            
+            User temp = getUser(user.getUsername(), user.getEmail());
+            
+            if(temp != null) {
+                String delUserCommand = "DELETE FROM user WHERE username = ? AND email = ?;";
+                
+                String username, email;
+                username = user.getUsername();
+                email = user.getEmail();
+                
+                PreparedStatement ps = con.prepareStatement(delUserCommand);
+                ps.setString(1, username);
+                ps.setString(2, email);
+                
+                ps.executeUpdate();
+                
+                delUser = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return delUser;
+    }
+    
+    public boolean updateUser(User user) {
         return false;
     }
     /**
@@ -191,8 +229,12 @@ public class User_DB {
     }
 
     public static void main(String[] args) {
-        User user = new User("654321", "kesterSON@gmail.com", "Dumbledore", "dbubbs", 2, false, 11);
-        System.out.println(new User_DB().addUser(user));
-        System.out.println(new User_DB().getUser("dbubbs", "kesterSON@gmail.com"));
+        User user = new User("654321", "kester$ON@gmail.com", "Dumbledore", "dbubbs", 2, false, 11);
+        User otherUser = new User("8973941", "the@briankendrick.com", "Brian Kendrick", "bk", 2, true, 12);
+        System.out.println(new User_DB().addUser(otherUser));
+        System.out.println(new User_DB().getUser("bk", "the@briankendrick.com"));
+        System.out.println(new User_DB().deleteUser(otherUser));
+        System.out.println(new User_DB().deleteUser(user));
+        System.out.println(new User_DB().getUser("bk", "the@briankendrick.com"));
     }
 }
