@@ -49,7 +49,7 @@ public class User_DB {
 		ps.setBoolean(6, isProfessor);
 		ps.setInt(7, schoolId);
 
-		ResultSet rs = ps.executeQuery();
+		ps.executeUpdate();
 
 		userAdded = true;
             }
