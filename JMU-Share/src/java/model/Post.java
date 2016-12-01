@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author greatwmc
  */
 public class Post {
-    
+
     Integer id;
     Integer authorId;
     Integer classId;

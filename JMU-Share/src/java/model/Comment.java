@@ -10,7 +10,7 @@ package model;
  * @author greatwmc
  */
 public class Comment {
-    
+
     private int commentId, authorId, postId;
     private String comment;
     private String commentAuthorName;
@@ -26,14 +26,14 @@ public class Comment {
 
     public int getScore() {
         DBHandler db = new DBHandler();
-        score = db.getCommentScore(commentId);    
+        score = db.getCommentScore(commentId);
         return score;
     }
 
     public void setScore(int score) {
         this.score = score;
     }
-    
+
     public Comment(int authorId, int postId, String comment) {
         this.authorId = authorId;
         this.postId = postId;
@@ -42,13 +42,13 @@ public class Comment {
         DBHandler db = new DBHandler();        
         commentAuthorName = db.getAuthorName(authorId);
     }
-    
+
     public Comment(int commentId, int authorId, int postId, String comment) {
         this.commentId = commentId;
         this.authorId = authorId;
         this.postId = postId;
         this.comment = comment;
-        
+
         DBHandler db = new DBHandler();
         commentAuthorName = db.getAuthorName(authorId);
     }
@@ -84,10 +84,9 @@ public class Comment {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    
-    public String createCommentDiv()
-    {
+
+    public String createCommentDiv() {
         return "<p>Hello<p>";
     }
-    
+
 }
