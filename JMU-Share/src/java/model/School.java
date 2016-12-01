@@ -4,7 +4,7 @@ package model;
  * This class is a data representation of the school table
  * 
  * @author recinocs
- * @version 2016-11-30
+ * @version 2016-11-29
  */
 public class School {
     private String schoolName;
