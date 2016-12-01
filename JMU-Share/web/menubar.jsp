@@ -5,7 +5,7 @@
 --%>
 
 <ul class="topbar">
-  <li><a class="active" href="#home">Home</a></li>
+  <li><a class="active" href="home">Home</a></li>
   <li><a href="#search">Search</a></li>
   <li><a href="#post">Post New Notes</a></li>
   <li style="float:right"><a href="#profile">Profile</a></li>

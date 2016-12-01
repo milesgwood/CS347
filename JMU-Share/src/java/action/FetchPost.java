@@ -16,14 +16,13 @@ import model.Post;
  */
 public class FetchPost {
     Integer postId;
-    Integer sesPostId;
     Post post;
     ArrayList<Comment> commentsList = new ArrayList<>();
     
     public String execute() {
         DBHandler db = new DBHandler();
         post = db.getPost(postId);
-        commentsList = postId != null? db.getPostComments(postId) : db.getPostComments(sesPostId);
+        commentsList = db.getPostComments(postId);
         return "success";
     }
 

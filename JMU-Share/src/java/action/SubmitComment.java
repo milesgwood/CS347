@@ -27,11 +27,13 @@ public class SubmitComment extends ActionSupport {
         DBHandler db = new DBHandler();
         //Create the new comment and insert it into the database
         int authorId = 1;
+        //If we don't have a postId from the URL params, go to the session
+        if (postId == null) {postId = sesPostId;}
         Comment newComment = new Comment(authorId, postId, comment);
         db.insertComment(newComment);
         //Now load the post again with the updated data
         post = db.getPost(postId);
-        commentsList = postId != null? db.getPostComments(postId) : db.getPostComments(sesPostId);
+        commentsList = postId != null ? db.getPostComments(postId) : db.getPostComments(sesPostId);
         return "success";
     }
 

@@ -38,10 +38,8 @@ public class Comment {
         this.authorId = authorId;
         this.postId = postId;
         this.comment = comment;
-
-        DBHandler db = new DBHandler();
-        this.commentId = db.getNextCommentId();
-
+        
+        DBHandler db = new DBHandler();        
         commentAuthorName = db.getAuthorName(authorId);
     }
 

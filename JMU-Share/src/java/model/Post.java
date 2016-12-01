@@ -5,6 +5,9 @@
  */
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author greatwmc
@@ -17,10 +20,13 @@ public class Post {
     String contentBody;
     Float rating;
     Integer endorse;
-
+    String notes_desc;
+    String title = "def";
+    
     //Here are the derived values
     String authorName;
-
+    String className;
+    
     public String getAuthorName() {
         return authorName;
     }
@@ -29,17 +35,76 @@ public class Post {
         this.authorName = authorName;
     }
 
-    public Post(Integer id, Integer authorId, Integer classId, String contentBody, Float rating, Integer endorse) {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public Post(Integer authorId, Integer classId, String contentBody, Float rating, Integer endorse, String notes_desc, String title) {
+        this.authorId = authorId;
+        this.classId = classId;
+        this.contentBody = contentBody;
+        this.rating = rating;
+        this.endorse = endorse;
+        this.notes_desc = notes_desc;
+        this.title = title;
+    }
+
+    public Post(Integer id, Integer authorId, Integer classId, String contentBody, Float rating, Integer endorse, String notes_desc) {
         this.id = id;
         this.authorId = authorId;
         this.classId = classId;
         this.contentBody = contentBody;
         this.rating = rating;
         this.endorse = endorse;
-
-        //Get the more useful values
+        this.notes_desc = notes_desc;
+        this.title = "DEFAULT";
+        getDerivedValues(); 
+    }
+    
+    public void getDerivedValues()
+    {
         DBHandler db = new DBHandler();
         this.authorName = db.getAuthorName(authorId);
+        this.className = db.getClassName(classId);
+    }
+    
+    /**
+     * This constructor takes a row of the SELECT * result set in the posts table and creates a Post object from it
+     * This could be optimized to be faster and avoid the two extra database accesses. Make it one access and traverse the whole result set.
+     * @param rs
+     * @throws SQLException 
+     */
+    public Post(ResultSet rs) throws SQLException
+    {
+        this.id = rs.getInt(1);
+        this.authorId = rs.getInt(2);
+        this.classId = rs.getInt(3);
+        this.contentBody = rs.getString(4);
+        this.rating = rs.getFloat(5);
+        this.endorse = rs.getInt(6);
+        this.notes_desc = rs.getString(7);
+        this.title = rs.getString(8);
+        getDerivedValues();
+    }
+
+    public String getNotes_desc() {
+        return notes_desc;
+    }
+
+    public void setNotes_desc(String notes_desc) {
+        this.notes_desc = notes_desc;
     }
 
     public Integer getId() {
