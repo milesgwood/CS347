@@ -182,13 +182,4 @@ public class Role_DB {
         
         return id;
     }
-    
-    public static void main(String[] args) throws SQLException {
-        Role role = new Role("ADMIN");
-        
-        System.out.println(new Role_DB().getAllRoles());
-        System.out.println(new Role_DB().addRole(role));
-        System.out.println(new Role_DB().getIdForRole(role));
-        System.out.println(new Role_DB().getAllRoles());
-    }
 }

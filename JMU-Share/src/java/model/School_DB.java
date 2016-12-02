@@ -195,10 +195,4 @@ public class School_DB {
 
         return id;
     }
-
-    public static void main(String[] args) throws SQLException {
-        School school = new School("Virginia Tech");
-        System.out.println(new School_DB().addSchool(school));
-        System.out.println(new School_DB().getIdForSchool(school));
-    }
 }
