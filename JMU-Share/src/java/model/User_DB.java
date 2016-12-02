@@ -26,81 +26,76 @@ public class User_DB {
      * @param user, the User being added to the database
      * @return whether or not the add was successful
      */
-    public boolean addUser(User user) {
+    public boolean addUser(User user) throws SQLException {
         boolean userAdded = false;
 
-        try {
-            if (!checkIfUserExists(user)) {
+        if (!checkIfUserExists(user)) {
 
-                String name, username, password, email;
-                boolean isProfessor;
-                int roleId, schoolId;
+            String name, username, password, email;
+            boolean isProfessor;
+            int roleId, schoolId;
 
-                String insertSql = "INSERT INTO user VALUES(null, ?, ?, ?, ?, ?, ?, ?)";
+            String insertSql = "INSERT INTO user VALUES(null, ?, ?, ?, ?, ?, ?, ?)";
 
-                PreparedStatement ps = con.prepareStatement(insertSql);
+            PreparedStatement ps = con.prepareStatement(insertSql);
 
-                name = user.getName();
-                username = user.getUsername();
-                password = user.getPassword();
-                email = user.getEmail();
-                isProfessor = user.isProfessor();
-                roleId = user.getRoleId();
-                schoolId = user.getSchoolId();
+            name = user.getName();
+            username = user.getUsername();
+            password = user.getPassword();
+            email = user.getEmail();
+            isProfessor = user.isProfessor();
+            roleId = user.getRoleId();
+            schoolId = user.getSchoolId();
 
-                ps.setString(1, password);
-                ps.setString(2, email);
-                ps.setString(3, name);
-                ps.setString(4, username);
-                ps.setInt(5, roleId);
-                ps.setBoolean(6, isProfessor);
-                ps.setInt(7, schoolId);
+            ps.setString(1, password);
+            ps.setString(2, email);
+            ps.setString(3, name);
+            ps.setString(4, username);
+            ps.setInt(5, roleId);
+            ps.setBoolean(6, isProfessor);
+            ps.setInt(7, schoolId);
 
-                ps.executeUpdate();
+            ps.executeUpdate();
 
-                userAdded = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            userAdded = true;
         }
+
         return userAdded;
     }
 
     /**
-     * This method will search the database for the user and delete them if they're
-     * found
+     * This method will search the database for the user and delete them if
+     * they're found
+     *
      * @param user, the User being deleted
      * @return true if the user is successfully deleted, false otherwise.
      */
-    public boolean deleteUser(User user) {
+    public boolean deleteUser(User user) throws SQLException {
         boolean delUser = false;
-        
-        try {
-            if (!(handler.isOpen)) {
-                handler.open();
-                con = handler.con;
-            }
-            
-            User temp = getUser(user.getUsername(), user.getEmail());
-            
-            if(temp != null) {
-                String delUserCommand = "DELETE FROM user WHERE username = ? AND email = ?;";
-                
-                String username, email;
-                username = user.getUsername();
-                email = user.getEmail();
-                
-                PreparedStatement ps = con.prepareStatement(delUserCommand);
-                ps.setString(1, username);
-                ps.setString(2, email);
-                
-                ps.executeUpdate();
-                
-                delUser = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        if (!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
         }
+
+        User temp = getUser(user.getUsername(), user.getEmail());
+
+        if (temp != null) {
+            String delUserCommand = "DELETE FROM user WHERE username = ? AND email = ?;";
+
+            String username, email;
+            username = user.getUsername();
+            email = user.getEmail();
+
+            PreparedStatement ps = con.prepareStatement(delUserCommand);
+            ps.setString(1, username);
+            ps.setString(2, email);
+
+            ps.executeUpdate();
+
+            delUser = true;
+        }
+
         return delUser;
     }
 
@@ -112,29 +107,26 @@ public class User_DB {
      * @param user, the User being checked
      * @return true if the user is in the database, false otherwise
      */
-    public boolean checkIfUserExists(User user) {
+    public boolean checkIfUserExists(User user) throws SQLException {
         boolean userFound = false;
         String username, email;
-        try {
-            if (!(handler.isOpen)) {
-                handler.open();
-                con = handler.con;
-            }
 
-            username = user.getUsername();
-            email = user.getEmail();
+        if (!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
+        }
 
-            String command = "SELECT * FROM user WHERE username=? OR email=?;";
-            PreparedStatement ps = con.prepareStatement(command);
-            ps.setString(1, username);
-            ps.setString(2, email);
-            ResultSet rs = ps.executeQuery();
+        username = user.getUsername();
+        email = user.getEmail();
 
-            if (rs.next()) {
-                userFound = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String command = "SELECT * FROM user WHERE username=? OR email=?;";
+        PreparedStatement ps = con.prepareStatement(command);
+        ps.setString(1, username);
+        ps.setString(2, email);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            userFound = true;
         }
         return userFound;
     }
@@ -147,36 +139,33 @@ public class User_DB {
      * @param email, the email of the User being searched for
      * @return found User or null
      */
-    public User getUser(String username, String email) {
+    public User getUser(String username, String email) throws SQLException {
         User retUser = null;
-        try {
-            if (!(handler.isOpen)) {
-                handler.open();
-                con = handler.con;
-            }
 
-            String getUser = "SELECT * FROM user WHERE username = ? AND email = ?;";
-            PreparedStatement ps = con.prepareStatement(getUser);
-            ps.setString(1, username);
-            ps.setString(2, email);
+        if (!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
+        }
 
-            ResultSet rs = ps.executeQuery();
+        String getUser = "SELECT * FROM user WHERE username = ? AND email = ?;";
+        PreparedStatement ps = con.prepareStatement(getUser);
+        ps.setString(1, username);
+        ps.setString(2, email);
 
-            if (rs.next()) {
-                String password, name;
-                boolean isProfessor;
-                int roleId, schoolId;
+        ResultSet rs = ps.executeQuery();
 
-                password = rs.getString(2);
-                name = rs.getString(4);
-                roleId = rs.getInt(6);
-                isProfessor = rs.getBoolean(7);
-                schoolId = rs.getInt(8);
+        if (rs.next()) {
+            String password, name;
+            boolean isProfessor;
+            int roleId, schoolId;
 
-                retUser = new User(password, email, name, username, roleId, isProfessor, schoolId);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            password = rs.getString(2);
+            name = rs.getString(4);
+            roleId = rs.getInt(6);
+            isProfessor = rs.getBoolean(7);
+            schoolId = rs.getInt(8);
+
+            retUser = new User(password, email, name, username, roleId, isProfessor, schoolId);
         }
         return retUser;
     }
@@ -187,36 +176,32 @@ public class User_DB {
      * @return An arraylist of user objects corresponding to all users in the
      * database. Returns null if there are no users in the database
      */
-    public ArrayList<User> getAllUsers() {
+    public ArrayList<User> getAllUsers() throws SQLException {
         ArrayList<User> retUsers = new ArrayList<User>();
 
         String password, email, name, username;
         boolean isProfessor;
         int roleId, schoolId;
 
-        try {
-            if (!(handler.isOpen)) {
-                handler.open();
-                con = handler.con;
-            }
-            String getAllUsers = "SELECT * FROM user;";
-            PreparedStatement ps = con.prepareStatement(getAllUsers);
+        if (!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
+        }
+        String getAllUsers = "SELECT * FROM user;";
+        PreparedStatement ps = con.prepareStatement(getAllUsers);
 
-            ResultSet rs = ps.executeQuery();
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                password = rs.getString(2);
-                email = rs.getString(3);
-                name = rs.getString(4);
-                username = rs.getString(5);
-                roleId = rs.getInt(6);
-                isProfessor = rs.getBoolean(7);
-                schoolId = rs.getInt(8);
+        while (rs.next()) {
+            password = rs.getString(2);
+            email = rs.getString(3);
+            name = rs.getString(4);
+            username = rs.getString(5);
+            roleId = rs.getInt(6);
+            isProfessor = rs.getBoolean(7);
+            schoolId = rs.getInt(8);
 
-                retUsers.add(new User(password, email, name, username, roleId, isProfessor, schoolId));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            retUsers.add(new User(password, email, name, username, roleId, isProfessor, schoolId));
         }
 
         if (retUsers.isEmpty()) {
@@ -225,13 +210,48 @@ public class User_DB {
         return retUsers;
     }
 
-    public static void main(String[] args) {
-        User user = new User("654321", "kester$ON@gmail.com", "Dumbledore", "dbubbs", 2, false, 11);
+    /**
+     * This method gets the id for a user and returns it, or -1 if no user is
+     * found
+     *
+     * @param user, the user who's id is being searched for
+     * @return the id, or -1 if no id is found
+     */
+    public int getIdForUser(User user) throws SQLException {
+        int id = -1;
+        String username, email;
+        
+        if (!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
+        }
+        
+        username = user.getUsername();
+        email = user.getEmail();
+        
+        String sql = "SELECT id FROM user WHERE username = ? AND email = ?;";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, username);
+        ps.setString(2, email);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if(rs.next()) {
+            id = rs.getInt(1);
+        }
+        
+        return id;
+    }
+
+    public static void main(String[] args) throws SQLException {
+        User user = new User("654321", "kesterSON@gmail.com", "Dumbledore", "dbubbs", 2, false, 11);
         User otherUser = new User("8973941", "the@briankendrick.com", "Brian Kendrick", "bk", 2, true, 12);
-        System.out.println(new User_DB().addUser(otherUser));
+        /*System.out.println(new User_DB().addUser(otherUser));
         System.out.println(new User_DB().getUser("bk", "the@briankendrick.com"));
         System.out.println(new User_DB().deleteUser(otherUser));
         System.out.println(new User_DB().deleteUser(user));
-        System.out.println(new User_DB().getUser("bk", "the@briankendrick.com"));
+        System.out.println(new User_DB().getUser("bk", "the@briankendrick.com"));*/
+        System.out.println(new User_DB().getIdForUser(user));
+        System.out.println(new User_DB().getIdForUser(otherUser));
     }
 }
