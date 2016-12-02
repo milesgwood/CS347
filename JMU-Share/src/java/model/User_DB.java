@@ -11,11 +11,6 @@ import java.sql.*;
  */
 public class User_DB {
 
-    /**
-     *
-     * @param user The user being added
-     * @return whether or not the operation succeeded
-     */
     private final DBHandler handler = new DBHandler();
     private Connection con;
 
@@ -25,11 +20,12 @@ public class User_DB {
      *
      * @param user, the User being added to the database
      * @return whether or not the add was successful
+     * @throws java.sql.SQLException
      */
     public boolean addUser(User user) throws SQLException {
         boolean userAdded = false;
 
-        if (!checkIfUserExists(user)) {
+        if (!checkIfFieldsArePresent(user)) {
 
             String name, username, password, email;
             boolean isProfessor;
@@ -69,6 +65,7 @@ public class User_DB {
      *
      * @param user, the User being deleted
      * @return true if the user is successfully deleted, false otherwise.
+     * @throws java.sql.SQLException
      */
     public boolean deleteUser(User user) throws SQLException {
         boolean delUser = false;
@@ -106,8 +103,9 @@ public class User_DB {
      *
      * @param user, the User being checked
      * @return true if the user is in the database, false otherwise
+     * @throws java.sql.SQLException
      */
-    public boolean checkIfUserExists(User user) throws SQLException {
+    public boolean checkIfFieldsArePresent(User user) throws SQLException {
         boolean userFound = false;
         String username, email;
 
@@ -138,6 +136,7 @@ public class User_DB {
      * @param username, the username of the User being searched for
      * @param email, the email of the User being searched for
      * @return found User or null
+     * @throws java.sql.SQLException
      */
     public User getUser(String username, String email) throws SQLException {
         User retUser = null;
@@ -175,9 +174,10 @@ public class User_DB {
      *
      * @return An arraylist of user objects corresponding to all users in the
      * database. Returns null if there are no users in the database
+     * @throws java.sql.SQLException
      */
     public ArrayList<User> getAllUsers() throws SQLException {
-        ArrayList<User> retUsers = new ArrayList<User>();
+        ArrayList<User> retUsers = new ArrayList<>();
 
         String password, email, name, username;
         boolean isProfessor;
@@ -216,6 +216,7 @@ public class User_DB {
      *
      * @param user, the user who's id is being searched for
      * @return the id, or -1 if no id is found
+     * @throws java.sql.SQLException
      */
     public int getIdForUser(User user) throws SQLException {
         int id = -1;
