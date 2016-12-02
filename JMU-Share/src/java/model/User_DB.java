@@ -31,7 +31,7 @@ public class User_DB {
             boolean isProfessor;
             int roleId, schoolId;
 
-            String insertSql = "INSERT INTO user VALUES(null, ?, ?, ?, ?, ?, ?, ?)";
+            String insertSql = "INSERT INTO user VALUES(null, ?, ?, ?, ?, ?, ?, ?);";
 
             PreparedStatement ps = con.prepareStatement(insertSql);
 
@@ -242,17 +242,5 @@ public class User_DB {
         }
         
         return id;
-    }
-
-    public static void main(String[] args) throws SQLException {
-        User user = new User("654321", "kesterSON@gmail.com", "Dumbledore", "dbubbs", 2, false, 11);
-        User otherUser = new User("8973941", "the@briankendrick.com", "Brian Kendrick", "bk", 2, true, 12);
-        /*System.out.println(new User_DB().addUser(otherUser));
-        System.out.println(new User_DB().getUser("bk", "the@briankendrick.com"));
-        System.out.println(new User_DB().deleteUser(otherUser));
-        System.out.println(new User_DB().deleteUser(user));
-        System.out.println(new User_DB().getUser("bk", "the@briankendrick.com"));*/
-        System.out.println(new User_DB().getIdForUser(user));
-        System.out.println(new User_DB().getIdForUser(otherUser));
     }
 }
