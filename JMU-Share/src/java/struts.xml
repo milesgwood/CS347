@@ -39,5 +39,8 @@
             <result name="success">home.jsp</result>
             <result name="error">error.jsp</result>
         </action>
+        <action name="register_user" class="com.opensymphony.xwork2.ActionSupport">
+            <result>/register.jsp</result>
+        </action>
     </package>
 </struts>
