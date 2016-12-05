@@ -26,7 +26,7 @@
                             <h4>
                                 Please login to JMU-Share
                             </h4>
-                            <s:form id="login" action="login" method="get">
+                            <s:form action="LoginAction" method="get">
                                 <p><s:textfield name="username" placeholder="Username"/></p>
                                 <p><s:textfield name="password" placeholder="Password"/></p>
                                 <p><s:submit name="submit" value="Login"/></p>

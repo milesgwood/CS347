@@ -159,3 +159,7 @@ li a:hover:not(.active) {
 li:last-child {
     border-right: none;
 }
+
+.usernameField {
+    margin-bottom: 10px;
+}

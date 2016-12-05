@@ -42,5 +42,9 @@
         <action name="register_user" class="com.opensymphony.xwork2.ActionSupport">
             <result>/register.jsp</result>
         </action>
+        <action name="LoginAction" class="action.LoginAction">
+            <result name="success">home.jsp</result>
+            <result name="input">login.jsp</result>
+        </action>
     </package>
 </struts>
