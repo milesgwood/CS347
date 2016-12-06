@@ -5,7 +5,7 @@
 <struts>
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
-       <!-- This interceptor stops a user from hacking the session object --> 
+        <!-- This interceptor stops a user from hacking the session object --> 
         <interceptors>
             <interceptor-stack name="appDefault">
                 <interceptor-ref name="defaultStack">
@@ -38,6 +38,12 @@
         <action name="home" class="action.FetchHomePage">
             <result name="success">home.jsp</result>
             <result name="error">error.jsp</result>
+        </action>
+        <action name="addNewNotes" class="com.opensymphony.xwork2.ActionSupport">
+            <result name="success">upload.jsp</result>
+        </action>
+        <action name="uploadToServer" class="action.Upload">
+            <result name="success">uploadComplete.jsp</result>
         </action>
     </package>
 </struts>
