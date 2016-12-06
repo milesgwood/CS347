@@ -2,6 +2,7 @@ package action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
+import java.util.Map;
 import model.User_DB;
 import model.User;
 
@@ -10,6 +11,8 @@ public class LoginAction extends ActionSupport {
 
     public User_DB db = new User_DB();
     public User user = null;
+    
+    private Map<String, Object> userSession;
 
     public void setUsername(String username) {
         this.username = username;
