@@ -40,4 +40,11 @@
         <env-entry-value>nov#mber5</env-entry-value>
         <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
+    <context-param> 
+        <description>Location to store uploaded file</description> 
+        <param-name>file-upload</param-name> 
+        <param-value>
+            /Users/greatwmc/NetBeansProjects/CS347/JMU-Share/uploads
+        </param-value> 
+    </context-param>
 </web-app>

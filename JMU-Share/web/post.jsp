@@ -49,7 +49,7 @@
                             </s:iterator>
                         </div>
                         <% //Set Default session attribute userId for testing
-                            if(session.getAttribute("userId") == null) session.setAttribute("userId", 1); 
+                            if(session.getAttribute("userId") == null) session.setAttribute("userId", 1);
                         %>
                             
                         <p>Parameter: <s:property value="%{#parameters.postId}"/></p>

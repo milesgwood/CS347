@@ -15,12 +15,20 @@ import java.sql.SQLException;
 public class Post {
 
     Integer id;
+
+    public String getNotesDesc() {
+        return notesDesc;
+    }
+
+    public void setNotesDesc(String notesDesc) {
+        this.notesDesc = notesDesc;
+    }
     Integer authorId;
     Integer classId;
     String contentBody;
     Float rating;
     Integer endorse;
-    String notes_desc;
+    String notesDesc;
     String title = "def";
     
     //Here are the derived values
@@ -57,7 +65,7 @@ public class Post {
         this.contentBody = contentBody;
         this.rating = rating;
         this.endorse = endorse;
-        this.notes_desc = notes_desc;
+        this.notesDesc = notes_desc;
         this.title = title;
     }
 
@@ -68,7 +76,7 @@ public class Post {
         this.contentBody = contentBody;
         this.rating = rating;
         this.endorse = endorse;
-        this.notes_desc = notes_desc;
+        this.notesDesc = notes_desc;
         this.title = "DEFAULT";
         getDerivedValues(); 
     }
@@ -94,17 +102,9 @@ public class Post {
         this.contentBody = rs.getString(4);
         this.rating = rs.getFloat(5);
         this.endorse = rs.getInt(6);
-        this.notes_desc = rs.getString(7);
+        this.notesDesc = rs.getString(7);
         this.title = rs.getString(8);
         getDerivedValues();
-    }
-
-    public String getNotes_desc() {
-        return notes_desc;
-    }
-
-    public void setNotes_desc(String notes_desc) {
-        this.notes_desc = notes_desc;
     }
 
     public Integer getId() {
