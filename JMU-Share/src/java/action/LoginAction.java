@@ -1,18 +1,24 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import java.sql.SQLException;
 import java.util.Map;
+
 import model.User_DB;
 import model.User;
 
-public class LoginAction extends ActionSupport {
-    private String username, password;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
-    public User_DB db = new User_DB();
-    public User user = null;
+public class LoginAction extends ActionSupport implements SessionAware {
+    private String username, password;
     
-    private Map<String, Object> userSession;
+
+    private User_DB db = new User_DB();
+    private User user = null;
+    
+    private SessionMap<String, Object> userSession;
 
     public void setUsername(String username) {
         this.username = username;
@@ -48,6 +54,11 @@ public class LoginAction extends ActionSupport {
     }
     
     public String execute() {
+        userSession.put("logged_in", true);
         return SUCCESS;
+    }
+    
+    public void setSession(Map<String, Object> map) {
+        userSession = (SessionMap)map;
     }
 }

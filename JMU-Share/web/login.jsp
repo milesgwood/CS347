@@ -14,6 +14,9 @@
         <link rel="stylesheet" type="text/css" href="format.css">
     </head>
     <body>
+        <%
+          session.setAttribute("logged_in", false);  
+        %>
         <div id="container">
             <div id="header">
                 <jsp:include page='menubar.jsp'/>
@@ -32,6 +35,14 @@
                                 <p><s:submit name="submit" value="Login"/></p>
                             </s:form>
                             <p><a href="register_user">Not registered? Sign up here!</a>
+                            <br/><br/><br/><br/><br/><br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div id='bottomContent'>
+                        <div class="logo">
+                            <img src="image/James_MadisonU_seal.png" alt="James Madison University seal"/>
                         </div>
                     </div>
                 </div>
