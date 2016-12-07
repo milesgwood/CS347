@@ -31,13 +31,13 @@
                         <p class="register">Please make sure you fill out every field.</p>
                         <div class="register_info">
                             <s:bean name="bean.SchoolList">
-                                <s:form action="register">
+                                <s:form action="RegisterAction">
                                     <p><s:textfield name="name" placeholder="Name"/></p>
                                     <p><s:textfield name="email" placeholder="Email"/></p>
                                     <p><s:textfield name="username" placeholder="Username"/></p>
                                     <p><s:password name="password" placeholder="Password"/></p>
                                     <p><s:password name="confirm" placeholder="Confirm Password"/></p>
-                                    <p><s:select name="schoolList" list="schoolList"/></p>
+                                    <p><s:select name="school" list="schoolList"/></p>
                                     <p><s:checkbox name="isProfessor" label="I am a professor"/></p>
                                     <p><s:submit name="submit" value="Sign me up!"/></p>
                                 </s:form>
