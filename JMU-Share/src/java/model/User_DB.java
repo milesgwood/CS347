@@ -243,4 +243,24 @@ public class User_DB {
         
         return id;
     }
+    
+    public String getRole(User user) throws SQLException {
+        String role = "";
+        
+        if(!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
+        }
+        
+        String sql = "SELECT * FROM role WHERE id = ?;";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, user.getRoleId());
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if(rs.next())
+            role = rs.getString(2);
+        
+        return role;
+    }
 }

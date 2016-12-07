@@ -48,6 +48,8 @@
                                 }
                             %>
                             <p>Session User <s:property value="%{#session.userId}"/></p>
+                            <p>Name <s:property value="%{#session.user.getName()}"/></p>
+                            <p>Role <s:property value="%{#session.role}"/></p>
                             <s:iterator value="userPosts">
                                 <s:url var="url" action="viewpost">
                                     <s:param name="postId" value="%{id}"/>

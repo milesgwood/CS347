@@ -18,6 +18,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
     private User_DB db = new User_DB();
     private User user = null;
     
+    private String role;
+    
     private SessionMap<String, Object> userSession;
 
     public void setUsername(String username) {
@@ -53,8 +55,11 @@ public class LoginAction extends ActionSupport implements SessionAware {
         }
     }
     
-    public String execute() {
+    public String execute() throws SQLException {
+        role = db.getRole(user);
         userSession.put("logged_in", true);
+        userSession.put("user", user);
+        userSession.put("role", role);
         return SUCCESS;
     }
     

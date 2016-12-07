@@ -141,28 +141,32 @@ public class School_DB {
      * schools exist in the database
      * @throws SQLException
      */
-    public ArrayList<School> getAllSchools() throws SQLException {
+    public ArrayList<School> getAllSchools() {
         ArrayList<School> retSchools = new ArrayList<>();
 
         String schoolName;
 
-        if (!(handler.isOpen)) {
-            handler.open();
-            con = handler.con;
-        }
-        String getAllSchools = "SELECT * FROM school;";
-        PreparedStatement ps = con.prepareStatement(getAllSchools);
+        try {
+            if (!(handler.isOpen)) {
+                handler.open();
+                con = handler.con;
+            }
+            String getAllSchools = "SELECT * FROM school;";
+            PreparedStatement ps = con.prepareStatement(getAllSchools);
 
-        ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
-            schoolName = rs.getString(2);
+            while (rs.next()) {
+                schoolName = rs.getString(2);
 
-            retSchools.add(new School(schoolName));
-        }
+                retSchools.add(new School(schoolName));
+            }
 
-        if (retSchools.isEmpty()) {
-            retSchools = null;
+            if (retSchools.isEmpty()) {
+                retSchools = null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return retSchools;
     }

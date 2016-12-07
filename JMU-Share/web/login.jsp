@@ -15,7 +15,9 @@
     </head>
     <body>
         <%
-          session.setAttribute("logged_in", false);  
+          session.setAttribute("logged_in", false);
+          session.setAttribute("user", null);
+          session.setAttribute("role", null);
         %>
         <div id="container">
             <div id="header">
@@ -31,7 +33,7 @@
                             </h4>
                             <s:form action="LoginAction" method="get">
                                 <p><s:textfield name="username" placeholder="Username"/></p>
-                                <p><s:textfield name="password" placeholder="Password"/></p>
+                                <p><s:password name="password" placeholder="Password"/></p>
                                 <p><s:submit name="submit" value="Login"/></p>
                             </s:form>
                             <p><a href="register_user">Not registered? Sign up here!</a>
