@@ -1,6 +1,9 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -12,7 +15,7 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 public class LoginAction extends ActionSupport implements SessionAware {
-    private String username, password;
+    private String username, password, hashPassword;
     
 
     private User_DB db = new User_DB();
@@ -45,7 +48,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
             else if(password == null || password.equals(""))
                 addFieldError("password", "The password field cannot be blank.");
             else {
-                user = db.getUser(username, password);
+                hashPassword = hashPassword(password);
+                user = db.getUser(username, hashPassword);
             
                 if(user == null)
                     addFieldError("username", "Invalid username/password combination.");
@@ -53,6 +57,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
     }
     
     public String execute() throws SQLException {
@@ -61,6 +66,22 @@ public class LoginAction extends ActionSupport implements SessionAware {
         userSession.put("user", user);
         userSession.put("role", role);
         return SUCCESS;
+    }
+    
+    private String hashPassword(String password) {
+        String hashedPassword = null;
+        
+        try {
+            MessageDigest md = MessageDigest.getInstance("md5");
+            md.reset();
+            byte[] bytes = md.digest(password.getBytes());
+            hashedPassword = new BigInteger(1, bytes).toString(16);
+            
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        
+        return hashedPassword;
     }
     
     public void setSession(Map<String, Object> map) {
