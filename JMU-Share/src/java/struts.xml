@@ -39,6 +39,20 @@
             <result name="success">home.jsp</result>
             <result name="error">error.jsp</result>
         </action>
+        <action name="register_user" class="com.opensymphony.xwork2.ActionSupport">
+            <result>/register.jsp</result>
+        </action>
+        <action name="LoginAction" class="action.LoginAction">
+            <result name="success">home.jsp</result>
+            <result name="input">login.jsp</result>
+        </action>
+        <action name="RegisterAction" class="action.RegisterAction">
+            <result name="success">home.jsp</result>
+            <result name="input">register.jsp</result>
+            <result name="failure">error.jsp</result>
+        </action>
+        <action name="sign_in" class="com.opensymphony.xwork2.ActionSupport">
+            <result>/login.jsp</result>
         <action name="addNewNotes" class="com.opensymphony.xwork2.ActionSupport">
             <result name="success">upload.jsp</result>
         </action>
