@@ -138,7 +138,7 @@ public class User_DB {
      * @return found User or null
      * @throws java.sql.SQLException
      */
-    public User getUser(String username, String email) throws SQLException {
+    public User getUser(String username, String password) throws SQLException {
         User retUser = null;
 
         if (!(handler.isOpen)) {
@@ -146,19 +146,19 @@ public class User_DB {
             con = handler.con;
         }
 
-        String getUser = "SELECT * FROM user WHERE username = ? AND email = ?;";
+        String getUser = "SELECT * FROM user WHERE username = ? AND password = ?;";
         PreparedStatement ps = con.prepareStatement(getUser);
         ps.setString(1, username);
-        ps.setString(2, email);
+        ps.setString(2, password);
 
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
-            String password, name;
+            String email, name;
             boolean isProfessor;
             int roleId, schoolId;
 
-            password = rs.getString(2);
+            email = rs.getString(3);
             name = rs.getString(4);
             roleId = rs.getInt(6);
             isProfessor = rs.getBoolean(7);
@@ -242,5 +242,67 @@ public class User_DB {
         }
         
         return id;
+    }
+    
+    public String getRole(User user) throws SQLException {
+        String role = "";
+        
+        if(!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
+        }
+        
+        String sql = "SELECT * FROM role WHERE id = ?;";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, user.getRoleId());
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if(rs.next())
+            role = rs.getString(2);
+        
+        return role;
+    }
+    
+    public boolean checkUsername(String username) throws SQLException {
+        boolean usernameFound = false;
+        
+        if(!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
+        }
+        
+        String sql = "SELECT username FROM user WHERE username = ?;";
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, username);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if(rs.next())
+            usernameFound = true;
+        
+        return usernameFound;
+    }
+    
+    public boolean checkEmail(String email) throws SQLException {
+        boolean emailFound = false;
+        
+        if(!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
+        }
+        
+        String sql = "SELECT email FROM user WHERE email = ?;";
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, email);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if(rs.next())
+            emailFound = true;
+        
+        return emailFound;
     }
 }

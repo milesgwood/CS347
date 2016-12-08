@@ -47,6 +47,10 @@ div#topContent {
     padding-bottom: 1em;
 }
 
+div#loginContent {
+    margin-right: 50%;
+}
+
 div#bottomContent {
     margin-right: 4em;
     margin-left: 4em;
@@ -59,6 +63,26 @@ div#footer {
     width: 100%;
     bottom: 0; /* stick to bottom */
     background: #ddd;
+}
+
+.login {
+    padding-left: 36%;
+}
+
+.logo {
+    padding-left: 35%;
+}
+
+.welcome {
+    padding-left: 35%;
+}
+
+.register {
+    padding-left: 30%;
+}
+
+.register_info {
+    padding-left: 37%;
 }
 
 .arrow-up {
@@ -154,4 +178,14 @@ li a:hover:not(.active) {
 
 li:last-child {
     border-right: none;
+}
+
+.usernameField {
+    margin-bottom: 10px;
+}
+
+h5 {
+    padding-left: 25%;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
 }
