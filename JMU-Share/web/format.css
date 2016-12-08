@@ -47,6 +47,10 @@ div#topContent {
     padding-bottom: 1em;
 }
 
+div#loginContent {
+    margin-right: 50%;
+}
+
 div#bottomContent {
     margin-right: 4em;
     margin-left: 4em;
@@ -62,11 +66,11 @@ div#footer {
 }
 
 .login {
-    padding-left: 40%;
+    padding-left: 36%;
 }
 
 .logo {
-    padding-left: 32%;
+    padding-left: 35%;
 }
 
 .welcome {
@@ -178,4 +182,10 @@ li:last-child {
 
 .usernameField {
     margin-bottom: 10px;
+}
+
+h5 {
+    padding-left: 25%;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
 }

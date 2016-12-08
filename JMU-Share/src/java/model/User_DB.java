@@ -263,4 +263,46 @@ public class User_DB {
         
         return role;
     }
+    
+    public boolean checkUsername(String username) throws SQLException {
+        boolean usernameFound = false;
+        
+        if(!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
+        }
+        
+        String sql = "SELECT username FROM user WHERE username = ?;";
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, username);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if(rs.next())
+            usernameFound = true;
+        
+        return usernameFound;
+    }
+    
+    public boolean checkEmail(String email) throws SQLException {
+        boolean emailFound = false;
+        
+        if(!(handler.isOpen)) {
+            handler.open();
+            con = handler.con;
+        }
+        
+        String sql = "SELECT email FROM user WHERE email = ?;";
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, email);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if(rs.next())
+            emailFound = true;
+        
+        return emailFound;
+    }
 }

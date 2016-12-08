@@ -31,11 +31,12 @@
                             <h4>
                                 Please login to JMU-Share
                             </h4>
+                            <div id="loginContent">
                             <s:form action="LoginAction" method="get">
                                 <p><s:textfield name="username" placeholder="Username"/></p>
                                 <p><s:password name="password" placeholder="Password"/></p>
                                 <p><s:submit name="submit" value="Login"/></p>
-                            </s:form>
+                            </s:form></div>
                             <p><a href="register_user">Not registered? Sign up here!</a>
                             <br/><br/><br/><br/><br/><br/>
                         </div>
