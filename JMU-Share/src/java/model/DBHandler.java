@@ -330,17 +330,21 @@ public class DBHandler {
     }
 
     String getClassName(Integer classId) {
+        String sql;
+        PreparedStatement ps;
         String className = "NO CLASS NAME";
         try {
             if (!isOpen) {
                 open();
             }
-            String sql = "SELECT class_name FROM class WHERE class_num = 2;";
-            PreparedStatement ps = con.prepareStatement(sql);
+            sql = "SELECT class_name FROM class WHERE class_num = ?;";
+            ps = con.prepareStatement(sql);
             ps.setInt(1, classId);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            className = rs.getString(1);
+            while(rs.next())
+            {
+                className = rs.getString(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -22,7 +22,7 @@ public class FetchHomePage implements SessionAware, ParameterNameAware {
     ArrayList<Class> classes;
     ArrayList<Post> favoriteNotes;
 
-    private Map<String, Object> userSession;
+    private Map<String, Object> session;
 
     public ArrayList<Post> getUserPosts() {
         return userPosts;
@@ -50,7 +50,7 @@ public class FetchHomePage implements SessionAware, ParameterNameAware {
 
     public String execute() {
         DBHandler db = new DBHandler();
-        Object ses = userSession.get("userId");
+        Object ses = session.get("userId");
         Integer is = (Integer) ses;
         userPosts = db.getPostsWritenByUser(is);
         //classes = db.getClassesForUser(userId);
@@ -64,8 +64,7 @@ public class FetchHomePage implements SessionAware, ParameterNameAware {
      */
     public void setSession(Map<String, Object> session) {
 
-        userSession = session;
-
+        this.session = session;
     }
 
     /**
