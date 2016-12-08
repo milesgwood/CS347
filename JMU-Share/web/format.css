@@ -48,7 +48,7 @@ div#topContent {
 }
 
 div#loginContent {
-    margin-right: 50%;
+    margin-right: 70%;
 }
 
 div#bottomContent {
@@ -83,6 +83,7 @@ div#footer {
 
 .register_info {
     padding-left: 37%;
+    margin-right: 40%;
 }
 
 .arrow-up {
