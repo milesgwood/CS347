@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.Map;
 import javax.servlet.ServletContext;
-import model.ImageUpload_DB;
+import model.NotesImageFile_DB;
 import model.NotesImageFile;
 import model.Post;
 import model.Post_DB;
@@ -70,7 +70,7 @@ public class Upload extends ActionSupport implements SessionAware, ParameterName
             img.setPostId(newPost.getId());
 
             //must upload the post before the image
-            ImageUpload_DB db = new ImageUpload_DB();
+            NotesImageFile_DB db = new NotesImageFile_DB();
             db.insertImage(img);
         }
         return SUCCESS;

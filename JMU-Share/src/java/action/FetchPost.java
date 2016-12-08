@@ -21,7 +21,7 @@ public class FetchPost {
     
     public String execute() {
         DBHandler db = new DBHandler();
-        post = db.getPost(postId);
+        post = db.getPostFromId(postId);
         commentsList = db.getPostComments(postId);
         return "success";
     }

@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author greatwmc
  */
-public class ImageUpload_DB extends DBHandler {
+public class NotesImageFile_DB extends DBHandler {
 
     /**
      * Adds an image file location to the database

@@ -7,26 +7,24 @@ package action;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
 import model.DBHandler;
 import model.Post;
 import model.Role;
 import model.School;
 import model.User;
-import model.User_DB;
 
 /**
  *
  * @author greatwmc
  */
-public class FetchProfile {
+public class FetchProfile extends FetchSessionAware{
 
     private ArrayList<Post> userPosts;
     private User user;
     private School school;
     private Role role;
-    private Map<String, Object> session;
-    private Integer userIdParam;
+    private Integer userId;
+    
     private ArrayList<Class> classes;
 
     /**
@@ -36,27 +34,32 @@ public class FetchProfile {
      * @return 
      */
     public String execute() throws SQLException {
-        DBHandler db = new DBHandler();
-        //Use the userIdParam first.
-        if (userIdParam == null)
+        
+        //Use the userId Parameter if it is available first.
+        if (null == userId)
         {
+            //If no id is specified, then use the session userId
             Object ses = session.get("userId");
-            userIdParam = (Integer) ses;
+            userId = (Integer) ses;
         }
-        userPosts = db.getPostsWritenByUser(userIdParam);
-        User_DB udb = new User_DB();
-        user = udb.getUserFromId(userIdParam);
+        
+        DBHandler db = new DBHandler();
+        userPosts = db.getPostsWritenByUser(userId);
+        user = db.getUserFromId(userId);
+        school = db.getSchoolFromId(user.getSchoolId());
+        role = db.getRoleFromId(user.getRoleId());
+     
         //classes = db.getClassesForUser(userIdParam);  Use this to link to the students' classes
         //favoriteNotes = db.getUserFavorites(userId);
         return "success";
     }
 
-    public Integer getUserIdParam() {
-        return userIdParam;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserIdParam(Integer userIdParam) {
-        this.userIdParam = userIdParam;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public ArrayList<Post> getUserPosts() {
@@ -67,12 +70,12 @@ public class FetchProfile {
         this.userPosts = userPosts;
     }
 
-    public User getProfile() {
-        return profile;
+    public User getUser() {
+        return user;
     }
 
-    public void setProfile(User profile) {
-        this.profile = profile;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public School getSchool() {
@@ -98,34 +101,4 @@ public class FetchProfile {
     public void setClasses(ArrayList<Class> classes) {
         this.classes = classes;
     }
-    
-
-    /**
-     * This allows access to the session so that the userId can be accessed
-     *
-     * @param session
-     */
-    public void setSession(Map<String, Object> session) {
-
-        this.session = session;
-    }
-
-    /**
-     * This stops the user from hacking the URL request parameters
-     *
-     * @param parameterName
-     * @return
-     */
-    public boolean acceptableParameterName(String parameterName) {
-
-        boolean allowedParameterName = true;
-
-        if (parameterName.contains("session") || parameterName.contains("request")) {
-
-            allowedParameterName = false;
-
-        }
-        return allowedParameterName;
-    }
-
 }
