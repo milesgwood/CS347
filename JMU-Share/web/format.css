@@ -223,5 +223,10 @@ h5 {
 }
 
 .edit_link {
-    margin-left: 70%;
+    margin-left: 60%;
+}
+
+.edit_form {
+    margin-left: 35%;
+    margin-right: 55%;
 }
