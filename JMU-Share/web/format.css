@@ -65,6 +65,15 @@ div#footer {
     background: #ddd;
 }
 
+.profile_image {
+    margin-left: 35%;
+    margin-top: 4%;
+}
+.profile_info {
+    margin-left: 35%;
+    font-size: 20px;
+}
+
 .login {
     padding-left: 36%;
 }
@@ -79,6 +88,11 @@ div#footer {
 
 .register {
     padding-left: 30%;
+}
+
+.profile {
+    margin-left: 20%;
+    margin-top: 5%;
 }
 
 .register_info {
