@@ -64,9 +64,11 @@
             <result name="success">profile.jsp</result>
             <result name="input">login.jsp</result>
         </action>
-        <action name="search" class="com.opensymphony.xwork2.ActionSupport">
+        <action name="Search" class="com.opensymphony.xwork2.ActionSupport">
             <result name="success">search.jsp</result>
         </action>
-        
+        <action name="SearchAction" class="action.SearchAction">
+            <result name="success">search.jsp</result>
+        </action>
     </package>
 </struts>
