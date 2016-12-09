@@ -67,6 +67,9 @@
         <action name="search" class="com.opensymphony.xwork2.ActionSupport">
             <result name="success">search.jsp</result>
         </action>
+        <action name="edit_profile" class="com.opensymphony.xwork2.ActionSupport">
+            <result name="success">edit.jsp</result>
+        </action>
         
     </package>
 </struts>
