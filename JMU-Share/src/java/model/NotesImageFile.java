@@ -5,11 +5,20 @@
  */
 package model;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 /**
  *
@@ -17,7 +26,7 @@ import org.apache.struts2.ServletActionContext;
  */
 public class NotesImageFile {
 
-    private String fileName, contentType, uniqueFileLocation;
+    private String fileName, contentType, uniqueFileLocation , base64Encoding;
     private Integer id, postId;
 
     /**
@@ -44,8 +53,35 @@ public class NotesImageFile {
         this.uniqueFileLocation = filePath + this.fileName;
         this.contentType = contentType;
     }
-
+    
     /**
+     * This constructor is used to turn the image into an base64 image buffer so that it can be shown in the jsp
+     * @param imgId
+     * @param imgFullFilePath
+     * @param contentType 
+     */
+    public NotesImageFile(int imgId, String imgFullFilePath, String contentType) 
+    {
+        this.id = imgId;
+        this.uniqueFileLocation = imgFullFilePath;
+        this.contentType = contentType;
+        this.fileName = splitTheFilePathOnLastSlashToGetTheName(imgFullFilePath);
+        try {
+            //this.base64Encoding = Base64.encodeBase64URLSafeString(FileUtils.readFileToByteArray(getImageFile(imgFullFilePath)));
+            this.base64Encoding = Base64.encodeBase64String(FileUtils.readFileToByteArray(getImageFile(imgFullFilePath)));
+        } catch (IOException ex) {
+            Logger.getLogger(NotesImageFile.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        
+    }
+    
+    
+    private File getImageFile(String imgFullFilePath) {
+        return new File(uniqueFileLocation);
+    }
+    
+        /**
      * Use this for the images already in the database as the fileLocation is
      * hashed and dated
      *
@@ -59,6 +95,22 @@ public class NotesImageFile {
         this.uniqueFileLocation = uniqueFileLocation;
         this.id = id;
         this.postId = postId;
+    }
+
+    
+    public static String splitTheFilePathOnLastSlashToGetTheName(String fullPath)
+    {
+        String[] s = fullPath.split("/");
+        String fileName = s[s.length - 1];
+        return fileName;
+    }
+
+    public String getBase64Encoding() {
+        return base64Encoding;
+    }
+
+    public void setBase64Encoding(String base64Encoding) {
+        this.base64Encoding = base64Encoding;
     }
 
     public String getUniqueFileLocation() {
@@ -100,4 +152,6 @@ public class NotesImageFile {
     public void setPostId(Integer postId) {
         this.postId = postId;
     }
+
+    
 }

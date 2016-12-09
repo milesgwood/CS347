@@ -398,21 +398,4 @@ public class DBHandler {
         }
         return user;
     }
-
-    public ArrayList<String> getAllImagesForPostId(Integer postId) throws SQLException {
-        ArrayList<String> imageFileLocations = new ArrayList<String>();
-        if (!isOpen) {
-            open();
-        }
-        String sql = "SELECT file_location FROM image WHERE post_id = ?;";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, postId);
-        String imgFileLoc;
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            imgFileLoc = rs.getString("file_location");
-            imageFileLocations.add(imgFileLoc);
-        }
-        return imageFileLocations;
-    }
 }
