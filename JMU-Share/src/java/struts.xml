@@ -78,5 +78,8 @@
         <action name="cancelEdit" class="com.opensymphony.xwork2.ActionSupport">
             <result name="success">profile.jsp</result>
         </action>
+        <action name="about" class="com.opensymphony.xwork2.ActionSupport">
+            <result name="success">about.jsp</result>
+        </action>
     </package>
 </struts>

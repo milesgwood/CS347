@@ -38,7 +38,6 @@
                         </div>
                     </div>
                 </div>
-                <br>
                 <div class="wrapper">
                     <div id='bottomContent'>
                         <div class="logo">

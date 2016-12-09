@@ -5,6 +5,6 @@
 --%>
 
 <ul class="topbar">
-  <li><a class="active" href="#login">Login</a></li>
+  <li><a class="active" href="sign_in">Login</a></li>
 </ul>
 <br>
