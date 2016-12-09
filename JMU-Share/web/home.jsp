@@ -24,45 +24,39 @@
             <div id="content">
                 <div class="wrapper">
                     <div id='topContent'>
-                        Include links to the users classes or favorite notes here<br>
-                        Include links to the users classes here<br>
-                        Include links to the users classes here<br>
-                        Include links to the users classes here<br>
-                        Include links to the users classes here<br>
-                        Include links to the users classes here<br>
-                        Include links to the users classes here<br>
-                    </div>
-                </div>
-                <br>
-                <div class="wrapper">
-                    <div id='bottomContent'>
-                        <h1>Your posts...</h2>
-                            Include links to the User's created notes here <br>
-                            <% //Set Default session attribute userId for testing
-                                if (session.getAttribute("userId") == null) {
-                                    session.setAttribute("userId", 1);
-                                }
-                            %>
-                            <p>Session User <s:property value="%{#session.userId}"/></p>
-                            <s:iterator value="userPosts">
+                        <h1>Your posts...</h1>
+                        <% //Set Default session attribute userId for testing
+                            if (session.getAttribute("userId") == null) {
+                                session.setAttribute("userId", 1);
+                            }
+                        %>
+                        <div class = "post_display"><s:iterator value="userPosts">
                                 <s:url var="url" action="viewpost">
                                     <s:param name="postId" value="%{id}"/>
                                 </s:url>
-                                <s:a href="%{url}"><s:property value="title"/></s:a>
-                                <div class="post" id="postId<s:property value='id'/>">
-                                    <div class="floating-box">
+                                <div class="floating-box">
+                                    <s:a href="%{url}"><s:property value="title"/></s:a>
+                                    <div class="post" id="postId<s:property value='id'/>">
                                         <s:property value="notes_desc"/>
                                         <br>Class: <s:property value='className'/>
                                         <br>Author: <s:property value="authorName"/></div>
                                 </div>
                                 <br>
                             </s:iterator>
-                            </div>
-                            </div>
-                            </div>
-                            <div id="footer">
-                                <jsp:include page='footer.jsp'/>
-                            </div>
+                        </div>
                     </div>
-                    </body>
-                    </html>
+                </div>
+                <div class="wrapper">
+                    <div id='bottomContent'>
+                        <div class="logo">
+                            <img src="image/James_MadisonU_seal.png" alt="James Madison University seal"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                <jsp:include page='footer.jsp'/>
+            </div>
+        </div>
+    </body>
+</html>

@@ -30,7 +30,7 @@
                         <div class="profile_info">
                         <br/><br/>
                         <p3 class="thick">Name: <s:property value='user.getName()'/></p3><br/>
-                        <p3 class="thick">Username:<s:property value='user.getUsername()'/></p3><br/>
+                        <p3 class="thick">Username: <s:property value='user.getUsername()'/></p3><br/>
                         <p3 class="thick">Email: <s:property value='user.getEmail()'/></p3><br/>
                         <p3 class="thick">School: <s:property value='school.getSchoolName()'/></p3><br/><br/>
                         </div>

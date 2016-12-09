@@ -45,7 +45,7 @@
                                         <div id="scoreOnCommentId_<s:property value='commentId'/>"><s:property value="score"/></div>
                                         <div class="arrow-down" onclick="downVote(this)" onmouseenter="brightenDown(this)" onmouseleave="darkenDown(this)"></div>
                                     </div>
-                                    <div class="floating-box"><s:property value="comment"/><br>By Author <s:property value="commentAuthorName"/></div>
+                                        <div class="floating-box"><s:property value="comment"/><br><div class="author">By Author: <s:property value="commentAuthorName"/></div></div>
                                 </div>
                                 <br>
                             </s:iterator>
