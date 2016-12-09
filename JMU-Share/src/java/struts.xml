@@ -63,6 +63,9 @@
         <action name="profile" class="action.FetchProfile">
             <result name="success">profile.jsp</result>
         </action>
+        <action name="search" class="com.opensymphony.xwork2.ActionSupport">
+            <result name="success">search.jsp</result>
+        </action>
         
     </package>
 </struts>

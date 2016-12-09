@@ -50,9 +50,8 @@ public class LoginAction extends FetchSessionAware {
     }
     
     public String execute() throws SQLException {
-        role = db.getRole(user);
+        role = db.getRole(user.getId());
         session.put("logged_in", true);
-        session.put("user", user);
         session.put("role", role);
         session.put("userId", user.getId());
         return SUCCESS;

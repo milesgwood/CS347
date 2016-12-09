@@ -12,7 +12,8 @@ INSERT INTO role VALUES (null, "USER");
 
 INSERT INTO school (school) VALUES ("James Madison University), ("Virginia Tech"), ("University of Virginia"), ("Virginia Commonwealth University"), ("William and Mary University"), ("Old Dominion University"), ("Radford University"), ("George Mason University");
 
-INSERT INTO user VALUES (null, "testPassword", "chrisrecinos38@gmail.com", "Christopher Recinos", "recinocs", 1, 0, 1);
+INSERT INTO user VALUES (null, "8cd036f2ee833c678c0753ff18ece234", "chrisrecinos38@gmail.com", "Christopher Recinos", "recinocs", 1, 0, 1);
+
 
 # Tells you running time
 SET
