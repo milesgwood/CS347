@@ -24,21 +24,18 @@
             <div id="content">
                 <div class="wrapper">
                     <div id='topContent'>
+                        <p5>Any fields left blank will not be changed.</p5>
                         <div class="edit_form">
-                        <s:bean name="bean.SchoolList">
                             <s:form action="editProfile">
                                 <p><s:textfield name="name" placeholder="Name"/></p>
                                 <p><s:textfield name="email" placeholder="Email"/></p>
                                 <p><s:textfield name="username" placeholder="Username"/></p>
                                 <p><s:password name="password" placeholder="New Password"/></p>
                                 <p><s:password name="confirm" placeholder="Confirm New Password"/></p>
-                                <p><s:select name="school" list="schoolList"/></p>
                                 <p><s:submit name="submit" value="Save"/></p>
                                 <p><s:submit name="cancel" action="cancelEdit" value="Cancel"/></p>
                             </s:form>
-                        </s:bean>
                         </div>
-                        <s
                     </div>
                 </div>
                 <br>

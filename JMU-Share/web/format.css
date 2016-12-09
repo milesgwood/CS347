@@ -227,6 +227,11 @@ h5 {
 }
 
 .edit_form {
-    margin-left: 35%;
-    margin-right: 55%;
+    padding-left: 35%;
+    padding-right: 55%;
+}
+p5 {
+    font-size: 15px;
+    font-style: italic;
+    padding-left: 30%;
 }

@@ -70,8 +70,10 @@
         <action name="edit_profile" class="com.opensymphony.xwork2.ActionSupport">
             <result name="success">edit.jsp</result>
         </action>
-        <action name="editProfile" class="com.opensymphony.xwork2.ActionSupport">
+        <action name="editProfile" class="action.EditProfile">
             <result name="success">profile.jsp</result>
+            <result name="input">edit.jsp</result>
+            <result name="failure">error.jsp</result>
         </action>
         <action name="cancelEdit" class="com.opensymphony.xwork2.ActionSupport">
             <result name="success">profile.jsp</result>
