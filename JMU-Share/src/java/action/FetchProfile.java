@@ -35,6 +35,8 @@ public class FetchProfile extends FetchSessionAware{
      */
     public String execute() throws SQLException {
         //Use the userId Parameter if it is available first.
+        if(session.get("userId") == null)
+            return INPUT;
         if (null == userId)
         {
             //If no id is specified, then use the session userId
@@ -46,11 +48,10 @@ public class FetchProfile extends FetchSessionAware{
         userPosts = db.getPostsWritenByUser(userId);
         user = db.getUserFromId(userId);
         school = db.getSchoolFromId(user.getSchoolId());
-        role = db.getRoleFromId(user.getRoleId());
      
         //classes = db.getClassesForUser(userIdParam);  Use this to link to the students' classes
         //favoriteNotes = db.getUserFavorites(userId);
-        return "success";
+        return SUCCESS;
     }
 
     public Integer getUserId() {

@@ -4,13 +4,15 @@
     Author     : greatwmc
 --%>
 
-<%@ taglib uri="/struts-tags" prefix="s" %> 
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%@ taglib uri="/WEB-INF/tlds/jstags.tld" prefix="mt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<mt:login_check/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>New Post</title>
         <link rel="stylesheet" type="text/css" href="format.css">
         <script type="text/javascript" language="javascript" src="ajax_req.js"></script>
         <script type="text/javascript" language="javascript" src="comment_voting.js"></script>
@@ -50,7 +52,7 @@
                                         <div id="scoreOnCommentId_<s:property value='commentId'/>"><s:property value="score"/></div>
                                         <div class="arrow-down" onclick="downVote(this)" onmouseenter="brightenDown(this)" onmouseleave="darkenDown(this)"></div>
                                     </div>
-                                    <div class="floating-box"><s:property value="comment"/><br>By Author <s:property value="commentAuthorName"/></div>
+                                        <div class="floating-box"><s:property value="comment"/><br><div class="author">By Author: <s:property value="commentAuthorName"/></div></div>
                                 </div>
                                 <br>
                             </s:iterator>

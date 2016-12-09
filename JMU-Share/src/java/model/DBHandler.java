@@ -327,20 +327,20 @@ public class DBHandler {
     }
 
     String getClassName(Integer classId) throws SQLException {
-        String sql;
-        PreparedStatement ps;
-        String className = "NO CLASS NAME";
-            if (!isOpen) {
-                open();
-            }
-            sql = "SELECT class_name FROM class WHERE class_num = ?;";
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, classId);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                className = rs.getString(1);
-            }
-        return className;
+       String sql;
+       PreparedStatement ps;
+       String className = "NO CLASS NAME";
+       if (!isOpen) {
+            open();
+       }
+       sql = "SELECT class_name FROM class WHERE id = ?;";
+       ps = con.prepareStatement(sql);
+       ps.setInt(1, classId);
+       ResultSet rs = ps.executeQuery();
+       if (rs.next()) {
+        className = rs.getString(1);
+       }
+       return className;
     }
 
     public Role getRoleFromId(int roleId) throws SQLException {
@@ -397,5 +397,12 @@ public class DBHandler {
             user = new User(userId, email, name, username, isProfessor, roleId, schoolId);
         }
         return user;
+    }
+    
+    public static void main(String[] args) throws SQLException {
+        DBHandler db = new DBHandler();
+        ArrayList<Post> results = db.getPostsWritenByUser(17);
+        for(Post p : results)
+            System.out.println(p);
     }
 }

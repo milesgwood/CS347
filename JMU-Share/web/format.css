@@ -48,7 +48,7 @@ div#topContent {
 }
 
 div#loginContent {
-    margin-right: 50%;
+    margin-right: 70%;
 }
 
 div#bottomContent {
@@ -63,6 +63,15 @@ div#footer {
     width: 100%;
     bottom: 0; /* stick to bottom */
     background: #ddd;
+}
+
+.profile_image {
+    margin-left: 35%;
+    margin-top: 4%;
+}
+.profile_info {
+    margin-left: 35%;
+    font-size: 20px;
 }
 
 .login {
@@ -81,8 +90,14 @@ div#footer {
     padding-left: 30%;
 }
 
+.profile {
+    margin-left: 20%;
+    margin-top: 5%;
+}
+
 .register_info {
     padding-left: 37%;
+    margin-right: 40%;
 }
 
 .arrow-up {
@@ -120,6 +135,19 @@ p.thick {
     padding-bottom: 1em;
 }
 
+.author {
+    font-size: 12px;
+    margin-left: 5%;
+    font-style: italic;
+}
+
+h1 {
+    font-style: italic;
+}
+
+.post_display {
+    margin-left: 5%;
+}
 .comment
 {
     padding-top: 2px;

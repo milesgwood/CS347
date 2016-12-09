@@ -158,11 +158,11 @@ public class User_DB {
             boolean isProfessor;
             int roleId, schoolId, id;
 
-            email = rs.getString(3);
-            name = rs.getString(4);
-            roleId = rs.getInt(6);
-            isProfessor = rs.getBoolean(7);
-            schoolId = rs.getInt(8);
+            email = rs.getString("email");
+            name = rs.getString("name");
+            roleId = rs.getInt("role_id");
+            isProfessor = rs.getBoolean("is_professor");
+            schoolId = rs.getInt("school_id");
             id = rs.getInt("id");
 
             retUser = new User(id, email, name, username, isProfessor, roleId, schoolId);
@@ -245,7 +245,7 @@ public class User_DB {
         return id;
     }
     
-    public String getRole(User user) throws SQLException {
+    public String getRole(int id) throws SQLException {
         String role = "";
         
         if(!(handler.isOpen)) {
@@ -255,7 +255,7 @@ public class User_DB {
         
         String sql = "SELECT * FROM role WHERE id = ?;";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, user.getRoleId());
+        ps.setInt(1, id);
         
         ResultSet rs = ps.executeQuery();
         

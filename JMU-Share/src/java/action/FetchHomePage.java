@@ -49,7 +49,8 @@ public class FetchHomePage extends FetchSessionAware{
         DBHandler db = new DBHandler();
         Object ses = session.get("userId");
         Integer is = (Integer) ses;
-        userPosts = db.getPostsWritenByUser(is);
+        if(is != null)
+            userPosts = db.getPostsWritenByUser(is);
         //classes = db.getClassesForUser(userId);
         //favoriteNotes = db.getUserFavorites(userId);
         return "success";

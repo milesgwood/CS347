@@ -16,7 +16,7 @@
     <body>
         <%
           session.setAttribute("logged_in", false);
-          session.setAttribute("user", null);
+          session.setAttribute("userId", null);
           session.setAttribute("role", null);
         %>
         <div id="container">
