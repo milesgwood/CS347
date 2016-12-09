@@ -116,10 +116,9 @@ public class RegisterAction extends ActionSupport implements SessionAware {
             school_id = sDB.getIdForSchool(school_ob);
             user = new User(hashPassword, email, name, username, 2, isProfessor, school_id);
             if(db.addUser(user)) {
-                role = db.getRole(user);
                 userSession.put("logged_in", true);
-                userSession.put("user", user);
-                userSession.put("role", role);
+                userSession.put("userId", db.getIdForUser(user));
+                userSession.put("role", "USER");
             }
             else {
                 return "FAILURE";
