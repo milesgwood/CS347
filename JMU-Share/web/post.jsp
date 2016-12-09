@@ -30,6 +30,9 @@
                         <h2>Class Id- <s:property value="post.getClassId()"/></h2>
                         <h2>Author Id- <s:property value="post.getAuthorName()"/></h2>
                         <p><s:property value="post.getContentBody()"/></p>
+                        <img src="image/default_profile.png" alt="Default Image" height="100%" width="100%">
+                        <img src="image/default_profile.png" alt="Default Image" height="100%" width="100%">
+                        <img src="image/default_profile.png" alt="Default Image" height="100%" width="100%">
                     </div>
                 </div>
                 <br>

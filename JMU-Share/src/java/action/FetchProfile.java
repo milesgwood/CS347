@@ -34,7 +34,6 @@ public class FetchProfile extends FetchSessionAware{
      * @return 
      */
     public String execute() throws SQLException {
-        
         //Use the userId Parameter if it is available first.
         if (null == userId)
         {

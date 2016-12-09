@@ -5,39 +5,54 @@
  */
 package model;
 
-import action.HashSlingSlasher;
-import com.opensymphony.xwork2.interceptor.ParameterNameAware;
-import java.util.Map;
-import org.apache.struts2.interceptor.SessionAware;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import javax.servlet.ServletContext;
+import org.apache.struts2.ServletActionContext;
+
 /**
  *
  * @author greatwmc
  */
-public class NotesImageFile implements SessionAware, ParameterNameAware{
-    
-    private String fileLocation, contentType, uniqueFileLocation;
+public class NotesImageFile {
+
+    private String fileName, contentType, uniqueFileLocation;
     private Integer id, postId;
-    private Map<String, Object> userSession;
 
     /**
-     * Use this for the images that aren't yet hashed by name and date. They have yet to be added to the database.
-     * @param fileLocation
-     * @param contentType
-     * @param id
-     * @param postId 
+     * Takes a regular filename and creates a unique filename with date values included
+     * @param fileName - the plain filename
+     * @return 
      */
-    public NotesImageFile(String fileLocation, String contentType) {
-        this.fileLocation = fileLocation;
-        this.uniqueFileLocation = HashSlingSlasher.getUniqueFileName(fileLocation);
+    public static String createUniqueFileName(String fileName) {
+        int hashcode = fileName.hashCode();
+        DateFormat df = new SimpleDateFormat("yyyy-mm-dd-HH-mm-ss");
+        Calendar calobj = Calendar.getInstance();
+        System.out.println(df.format(calobj.getTime()));
+        return (df.format(calobj.getTime()) + hashcode + fileName);
+    }
+
+    /**
+     * Use this for the images that aren't yet hashed by name and date. They
+     * have yet to be added to the database.
+     */
+    public NotesImageFile(String preHashFileName, String contentType) {
+        this.fileName = createUniqueFileName(preHashFileName);
+        ServletContext context = ServletActionContext.getServletContext();
+        String filePath = context.getInitParameter("file-upload");
+        this.uniqueFileLocation = filePath + this.fileName;
         this.contentType = contentType;
     }
 
     /**
-     * Use this for the images already in the database as the fileLocation is hashed and dated
+     * Use this for the images already in the database as the fileLocation is
+     * hashed and dated
+     *
      * @param contentType
      * @param uniqueFileLocation
      * @param id
-     * @param postId 
+     * @param postId
      */
     public NotesImageFile(String contentType, String uniqueFileLocation, Integer id, Integer postId) {
         this.contentType = contentType;
@@ -53,13 +68,13 @@ public class NotesImageFile implements SessionAware, ParameterNameAware{
     public void setUniqueFileLocation(String uniqueFileLocation) {
         this.uniqueFileLocation = uniqueFileLocation;
     }
-    
-    public String getFileLocation() {
-        return fileLocation;
+
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setFileLocation(String fileLocation) {
-        this.fileLocation = fileLocation;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getContentType() {
@@ -85,31 +100,4 @@ public class NotesImageFile implements SessionAware, ParameterNameAware{
     public void setPostId(Integer postId) {
         this.postId = postId;
     }
-/**
-     * This allows access to the session so that the userId can be accessed
-     * @param session 
-     */
-    public void setSession(Map<String, Object> session) {
-
-        userSession = session;
-
-    }
-
-    /**
-     * This stops the user from hacking the URL request parameters
-     * @param parameterName
-     * @return 
-     */
-    public boolean acceptableParameterName(String parameterName) {
-
-        boolean allowedParameterName = true;
-
-        if (parameterName.contains("session") || parameterName.contains("request")) {
-
-            allowedParameterName = false;
-
-        }
-        return allowedParameterName;
-    }
-    
 }

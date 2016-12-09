@@ -61,13 +61,14 @@ public class Upload extends ActionSupport implements SessionAware, ParameterName
             if (chosenFile == null || !chosenFile.isFile()) {
                 break;
             }
-            file = new File(filePath, uploadFileName[i]);
-            InputStream input = new FileInputStream(upload[i]);
-            Files.copy(input, file.toPath());
-
-            //Then you need to add the image
+            //Create the image first but don't add it to the database
             NotesImageFile img = new NotesImageFile(uploadFileName[i], uploadContentType[i]);
             img.setPostId(newPost.getId());
+
+            
+            file = new File(filePath, img.getFileName());
+            InputStream input = new FileInputStream(upload[i]);
+            Files.copy(input, file.toPath());
 
             //must upload the post before the image
             NotesImageFile_DB db = new NotesImageFile_DB();
