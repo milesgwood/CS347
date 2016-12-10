@@ -86,4 +86,24 @@ public class SearchAction extends ActionSupport {
         }
     }
     
+
+    public String execute() throws SQLException {
+        try {          
+            results = tester.searchSpecific(title, class_num, class_name, school);
+
+            //If the search does not find any results tries the partial search
+            if (results[0] == null){
+                results = tester.searchPartiallyGeneral(title, class_num, class_name, school);
+            }
+
+            //If the partial search did not find anything, then it tries to make a general search
+            if (results[0] == null){
+                results = tester.searchGeneral(title, class_num, class_name, school);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
 }
