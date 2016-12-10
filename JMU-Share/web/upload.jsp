@@ -65,22 +65,7 @@
                 <div class="wrapper">
                     <div id='bottomContent'>
                         Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
-                        Place All content Here <br>
+
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@
                                 session.setAttribute("userId", 1);
                             }
                         %>
-                        <div class = "post_display">
+                        <div id="post_display">
                             <s:iterator value="userPosts">
                                 <%-- This creates the url to the post --%>
                                 <s:url var="url" action="viewpost">
@@ -34,17 +34,24 @@
                                 </s:url>
 
                                 <%-- This creates the url to the author profile--%>
-                                <s:url var="authorProfileURL" action="profile">
+                                <s:url var="authorProfileLink" action="profile">
                                     <s:param name="userId" value="authorID"/>
                                 </s:url>
 
                                 <div class="floating-box">
-                                    <s:a href="%{url}"><s:property value="title"/></s:a>
-                                    <div class="post" id="postId<s:property value='id'/>">
-                                        <s:property value="notes_desc"/>
-                                        <br/>Class: <s:property value='className'/>
-                                        <br/>Author: <s:a href="%{  }"><s:property value="authorName"/></s:a>
-                                        </div>
+                                    <%-- This is the actual title of the notes and the link --%>
+                                    <div class="titleOfPost">
+                                        <s:a href="%{url}"><s:property value="title"/></s:a>
+                                    </div>
+                                    <ul>
+                                        <%-- Top of each comment includes the author username, linkm, and score. --%>
+                                        <li class="buttons"><s:a href="%{authorProfileLink}"><s:property value="authorName"/></s:a></li>
+                                        <li class="buttons"><s:property value='className'/></li>
+                                        <li class="buttons">Delete</li>
+                                    </ul>
+                                            <div class="post" id="postId<s:property value='id'/>">
+                                                <s:property value="notes_desc"/>
+                                            </div>
                                     </div>
                                     <br/>
                             </s:iterator>

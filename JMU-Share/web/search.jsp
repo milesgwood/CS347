@@ -38,18 +38,16 @@
                             <s:a href="%{url}"><s:property value="title"/></s:a>
                                 <div class="floating-box">
                                 <s:property value="notes_desc"/>
-                                <br>Title: <s:property value='title'/>
-                                <br>Class Name: <s:property value="class_name"/>
-                                <br>Class Number: <s:property value="class_num"/>
-                                <br>School: <s:property value="school"/>
+                                Title: <s:property value='title'/>
+                                Class Name: <s:property value="class_name"/>
+                                Class Number: <s:property value="class_num"/>
+                                School: <s:property value="school"/>
                             </div>
-                        </div>
-                        <br>
-                    </s:iterator>
+                        </s:iterator>
+                    </div>
                 </div>
             </div>
         </div>
         <div id="footer"><jsp:include page='footer.jsp'/></div>
-    </div>
-</body>
+    </body>
 </html>
