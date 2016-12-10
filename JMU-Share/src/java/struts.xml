@@ -23,10 +23,6 @@
         <action name="submitComment" class="action.SubmitComment">
             <result name="success">post.jsp?postId=%{postId}</result>
         </action>
-        <action name="textresult" class="action.TextResult">
-            <result name="success" type="stream"></result>
-            <result name="error">error.jsp</result>
-        </action>
         <action name="upvote" class="ajax.UpVoting">
             <result name="success" type="stream"></result>
             <result name="error">error.jsp</result>

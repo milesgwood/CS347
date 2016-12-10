@@ -6,7 +6,7 @@ package model;
  * @author recinocs
  * @version 2016-11-29
  */
-public class School {
+public class School implements Comparable<School>{
     private String schoolName;
     private int id;
     
@@ -37,5 +37,10 @@ public class School {
     
     public String toString() {
         return "School: " + schoolName;
+    }
+
+    @Override
+    public int compareTo(School other) {
+        return this.schoolName.compareTo(other.getSchoolName());
     }
 }

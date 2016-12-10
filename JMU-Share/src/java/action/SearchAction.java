@@ -86,6 +86,7 @@ public class SearchAction extends ActionSupport {
         }
     }
     
+
     public String execute() throws SQLException {
         try {          
             results = tester.searchSpecific(title, class_num, class_name, school);
@@ -100,7 +101,6 @@ public class SearchAction extends ActionSupport {
                 results = tester.searchGeneral(title, class_num, class_name, school);
             }
         }
-        
         catch (SQLException e) {
             e.printStackTrace();
         }

@@ -51,6 +51,8 @@ public class DBHandler {
             url = (String) envCtx.lookup("Url");
             userId = (String) envCtx.lookup("UserId");
             password = (String) envCtx.lookup("Password");
+            
+            //This catch is for Testing JUnit tests. Where no server context is setup.
         } catch (NoInitialContextException contextError) {
             driverName = "com.mysql.jdbc.Driver";
             url = "jdbc:mysql://grove.cs.jmu.edu:3306/team27_db";

@@ -26,7 +26,7 @@
     </env-entry>
     <env-entry>
         <env-entry-name>Url</env-entry-name>
-        <!--<env-entry-value>jdbc:mysql://localhost:3306/team27_db</env-entry-value> -->
+        <!--<env-entry-value>jdbc:mysql://localhost:3306/team27_db</env-entry-value> This was an attempt on using a local database-->
         <env-entry-value>jdbc:mysql://grove.cs.jmu.edu:3306/team27_db</env-entry-value>
         <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
@@ -44,7 +44,9 @@
         <description>Location to store uploaded file</description> 
         <param-name>file-upload</param-name> 
         <param-value>
+            <!-- This version is for storing locally -->
             /Users/greatwmc/NetBeansProjects/CS347/JMU-Share/uploads/
+            <!--/tmp/team27/uploads/ -->
         </param-value> 
     </context-param>
 </web-app>
