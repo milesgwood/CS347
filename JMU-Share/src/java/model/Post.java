@@ -9,56 +9,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
  * @author greatwmc
  */
 public class Post {
 
     Integer id;
-
-    public String getNotesDesc() {
-        return notesDesc;
-    }
-
-    public void setNotesDesc(String notesDesc) {
-        this.notesDesc = notesDesc;
-    }
     Integer authorId;
     Integer classId;
     String contentBody;
     Float rating;
     Integer endorse;
     String notesDesc;
-    String title = "def";
+    String title = "DEFAULT TITLE";
     
     //Here are the derived values
     String authorName;
     String className;
+
+
     
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
+    /**
+     * This constructor is for putting things INTO the database. That's why it lacks an "id" field.
+     * @param authorId
+     * @param classId
+     * @param contentBody
+     * @param rating
+     * @param endorse
+     * @param notes_desc
+     * @param title 
+     */
     public Post(Integer authorId, Integer classId, String contentBody, Float rating, Integer endorse, String notes_desc, String title) {
         this.authorId = authorId;
         this.classId = classId;
@@ -69,6 +48,18 @@ public class Post {
         this.title = title;
     }
 
+    /**
+     * this constructor is for getting Post objects OUT of the database including the ID.
+     * @param id
+     * @param authorId
+     * @param classId
+     * @param contentBody
+     * @param rating
+     * @param endorse
+     * @param notes_desc
+     * @param title
+     * @throws SQLException 
+     */
     public Post(Integer id, Integer authorId, Integer classId, String contentBody, Float rating, Integer endorse, String notes_desc, String title) throws SQLException {
         this.id = id;
         this.authorId = authorId;
@@ -119,6 +110,39 @@ public class Post {
         getDerivedValues();
     }
 
+    
+    public String getNotesDesc() {
+        return notesDesc;
+    }
+
+    public void setNotesDesc(String notesDesc) {
+        this.notesDesc = notesDesc;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+    
     public Integer getId() {
         return id;
     }

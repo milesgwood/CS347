@@ -12,7 +12,7 @@ import model.Post_DB;
  */
 public class SearchAction extends ActionSupport {
 
-    Post_DB tester = new Post_DB();
+    Post_DB postDBSearcher = new Post_DB();
     private Post[] results;
     private Integer class_num;
     private String title, class_name, school, confirm;
@@ -87,18 +87,23 @@ public class SearchAction extends ActionSupport {
     }
     
 
+    /**
+     * The tester object is a private POST_DB oject
+     * @return
+     * @throws SQLException 
+     */
     public String execute() throws SQLException {
         try {          
-            results = tester.searchSpecific(title, class_num, class_name, school);
+            results = postDBSearcher.searchSpecific(title, class_num, class_name, school);
 
             //If the search does not find any results tries the partial search
             if (results[0] == null){
-                results = tester.searchPartiallyGeneral(title, class_num, class_name, school);
+                results = postDBSearcher.searchPartiallyGeneral(title, class_num, class_name, school);
             }
 
             //If the partial search did not find anything, then it tries to make a general search
             if (results[0] == null){
-                results = tester.searchGeneral(title, class_num, class_name, school);
+                results = postDBSearcher.searchGeneral(title, class_num, class_name, school);
             }
         }
         catch (SQLException e) {

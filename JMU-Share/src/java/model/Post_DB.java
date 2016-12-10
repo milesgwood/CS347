@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
@@ -17,65 +16,58 @@ import java.sql.Statement;
  */
 public class Post_DB extends DBHandler {
 
-    private final DBHandler handler = new DBHandler();
-    private Connection con;
     /**
-     * Adds a post to the database
+     * Adds a post to the database and returns the postID
      *
      * @param post
      * @return the integer id of the posting in the database
      */
-    public int insertPost(Post post) {
+    public int insertPost(Post post) throws Exception {
         int newId = -1;
-        
-        try {
-            if (!isOpen) {
-                open();
-            }
-            String sql = "INSERT INTO posts (author_id, class_id, text, rating, endorse, notes_desc, title ) VALUES (?, ? , ? , ?, ?, ?, ?);";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, post.getAuthorId());
-            ps.setInt(2, post.getClassId());
-            ps.setString(3, post.getContentBody());
-            ps.setFloat(4, post.getRating());
-            ps.setInt(5, post.getEndorse());
-            ps.setString(6, post.getNotesDesc());
-            ps.setString(7, post.getTitle());
-            ps.execute();
-            ps.close();
-            
-            //Now let's return the new ID
-            sql = "SELECT MAX(id) FROM posts WHERE author_id = ?;";
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, post.getAuthorId());
-            ResultSet rs = ps.executeQuery();
-            while(rs.next())
-            {
-                newId = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (!isOpen) {
+            open();
+        }
+        String sql = "INSERT INTO posts (author_id, class_id, text, rating, endorse, notes_desc, title ) VALUES (?, ? , ? , ?, ?, ?, ?);";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, post.getAuthorId());
+        ps.setInt(2, post.getClassId());
+        ps.setString(3, post.getContentBody());
+        ps.setFloat(4, post.getRating());
+        ps.setInt(5, post.getEndorse());
+        ps.setString(6, post.getNotesDesc());
+        ps.setString(7, post.getTitle());
+        ps.execute();
+        ps.close();
+
+        //Now let's return the new ID
+        sql = "SELECT MAX(id) FROM posts WHERE author_id = ?;";
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, post.getAuthorId());
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            newId = rs.getInt(1);
+        }
+        if (newId < 0) {
+            throw new Exception("The new post Id could not be cound in the databsae");
         }
         return newId;
     }
-        
-    
+
     public Post[] searchSpecific(String title, int class_num, String class_name, String school) throws SQLException {
-       
-    PreparedStatement stmt;
-    String genericQuery = "SELECT p.id, p.author_id, p.class_id, p.text, p.rating, p.endorse, p.notes_desc, p.title FROM posts AS p JOIN class AS c ON p.class_id = c.id JOIN user AS u ON p.author_id = u.id JOIN school AS s ON u.school_id = s.id"
-            + " WHERE p.title LIKE ? AND c.class_num = ? AND c.class_name LIKE ? AND s.school LIKE ? ORDER BY p.rating ASC;";
-   Float rating = null;
-   Integer endorse = null;
-   String notes_desc = null, ret_title = null;
 
-    if (!(handler.isOpen)) {
-            handler.open();
-            con = handler.con;
-    }
-    
-    Post[] firstTen = new Post[10];
-    int i = 0;
+        PreparedStatement stmt;
+        String genericQuery = "SELECT p.id, p.author_id, p.class_id, p.text, p.rating, p.endorse, p.notes_desc, p.title FROM posts AS p JOIN class AS c ON p.class_id = c.id JOIN user AS u ON p.author_id = u.id JOIN school AS s ON u.school_id = s.id"
+                + " WHERE p.title LIKE ? AND c.class_num = ? AND c.class_name LIKE ? AND s.school LIKE ? ORDER BY p.rating ASC;";
+        Float rating = null;
+        Integer endorse = null;
+        String notes_desc = null, ret_title = null;
+
+        if (!isOpen) {
+            open();
+        }
+
+        Post[] firstTen = new Post[10];
+        int i = 0;
         try {
             stmt = con.prepareStatement(genericQuery);
             stmt.setString(1, title + "%");
@@ -95,28 +87,27 @@ public class Post_DB extends DBHandler {
                 firstTen[i] = new Post(id, author_id, class_id, text, rating, endorse, notes_desc, ret_title);
                 i++;
             }
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             System.out.println("Hi");
         }
         return firstTen;
     }
-    
-    public Post[] searchPartiallyGeneral (String title, int class_num, String class_name, String school) throws SQLException {
-       
-    PreparedStatement stmt;
-    String genericQuery = "SELECT p.id, p.author_id, p.class_id, p.text, p.rating, p.endorse, p.notes_desc, p.title FROM posts AS p JOIN class AS c ON p.class_id = c.id JOIN user AS u ON p.author_id = u.id JOIN school AS s ON u.school_id = s.id"
-            + " WHERE (p.title LIKE ? OR c.class_num = ? oR c.class_name LIKE ?) AnD s.school LIKE ? ORDER BY p.rating DESC;";
-   Float rating = null;
-   Integer endorse = null;
-   String notes_desc = null, ret_title = null;
 
-    if (!(handler.isOpen)) {
-            handler.open();
-            con = handler.con;
-    }
-    
-    Post[] firstTen = new Post[10];
-    int i = 0;
+    public Post[] searchPartiallyGeneral(String title, int class_num, String class_name, String school) throws SQLException {
+
+        PreparedStatement stmt;
+        String genericQuery = "SELECT p.id, p.author_id, p.class_id, p.text, p.rating, p.endorse, p.notes_desc, p.title FROM posts AS p JOIN class AS c ON p.class_id = c.id JOIN user AS u ON p.author_id = u.id JOIN school AS s ON u.school_id = s.id"
+                + " WHERE (p.title LIKE ? OR c.class_num = ? oR c.class_name LIKE ?) AnD s.school LIKE ? ORDER BY p.rating DESC;";
+        Float rating = null;
+        Integer endorse = null;
+        String notes_desc = null, ret_title = null;
+
+        if (!isOpen) {
+            open();
+        }
+
+        Post[] firstTen = new Post[10];
+        int i = 0;
         try {
             stmt = con.prepareStatement(genericQuery);
             stmt.setString(1, title + "%");
@@ -136,29 +127,27 @@ public class Post_DB extends DBHandler {
                 firstTen[i] = new Post(id, author_id, class_id, text, rating, endorse, notes_desc, ret_title);
                 i++;
             }
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             System.out.println("Hi");
         }
         return firstTen;
     }
-    
-    
-   public Post[] searchGeneral (String title, int class_num, String class_name, String school) throws SQLException {
-       
-    PreparedStatement stmt;
-    String genericQuery = "SELECT p.id, p.author_id, p.class_id, p.text, p.rating, p.endorse, p.notes_desc, p.title FROM posts AS p JOIN class AS c ON p.class_id = c.id JOIN user AS u ON p.author_id = u.id JOIN school AS s ON u.school_id = s.id"
-            + " WHERE p.title LIKE ? OR c.class_num = ? OR c.class_name LIKE ? OR s.school LIKE ? ORDER BY p.rating DESC;";
-   Float rating = null;
-   Integer endorse = null;
-   String notes_desc = null, ret_title = null;
 
-    if (!(handler.isOpen)) {
-            handler.open();
-            con = handler.con;
-    }
-    
-    Post[] firstTen = new Post[10];
-    int i = 0;
+    public Post[] searchGeneral(String title, int class_num, String class_name, String school) throws SQLException {
+
+        PreparedStatement stmt;
+        String genericQuery = "SELECT p.id, p.author_id, p.class_id, p.text, p.rating, p.endorse, p.notes_desc, p.title FROM posts AS p JOIN class AS c ON p.class_id = c.id JOIN user AS u ON p.author_id = u.id JOIN school AS s ON u.school_id = s.id"
+                + " WHERE p.title LIKE ? OR c.class_num = ? OR c.class_name LIKE ? OR s.school LIKE ? ORDER BY p.rating DESC;";
+        Float rating = null;
+        Integer endorse = null;
+        String notes_desc = null, ret_title = null;
+
+        if (!isOpen) {
+            open();
+        }
+
+        Post[] firstTen = new Post[10];
+        int i = 0;
         try {
             stmt = con.prepareStatement(genericQuery);
             stmt.setString(1, title + "%");
@@ -178,10 +167,9 @@ public class Post_DB extends DBHandler {
                 firstTen[i] = new Post(id, author_id, class_id, text, rating, endorse, notes_desc, ret_title);
                 i++;
             }
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             System.out.println("Hi");
         }
         return firstTen;
     }
 }
-

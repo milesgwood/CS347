@@ -25,7 +25,7 @@ public class Upload extends FetchSessionAware {
     private String notesDesc;
     private String title;
     private Integer classId;
-    private Integer postId;
+    private Integer upLoadedPostId;
     
     public String execute() throws Exception {
         File file;
@@ -45,8 +45,8 @@ public class Upload extends FetchSessionAware {
         //Create and add a new post to the database. The new post ID is returned
         Post newPost = new Post(authorId, classId, contentBody, rating, endorse, notesDesc, title);
         Post_DB dbPost = new Post_DB();
-        postId = dbPost.insertPost(newPost);
-        newPost.setId(postId);
+        upLoadedPostId = dbPost.insertPost(newPost);
+        newPost.setId(upLoadedPostId);
 
         //Loop through this uploading the files
         for (int i = 0; i < upload.length; i++) {
@@ -68,30 +68,14 @@ public class Upload extends FetchSessionAware {
             db.insertImage(img);
         }
         return SUCCESS;
-        
-        /**
-         * If the above version of the image uploader doesn't work use a different one
-         *  int maxFileSize = 5000 * 1024;
-            int maxMemSize = 5000 * 1024;
-         * // Verify the content type //We will accept pdf and images to start
-         * DiskFileItemFactory factory = new DiskFileItemFactory(); // maximum
-         * size that will be stored in memory
-         * factory.setSizeThreshold(maxMemSize); // Location to save data that
-         * is larger than maxMemSize. factory.setRepository(new
-         * File("/Users/greatwmc/NetBeansProjects/CS347/JMU-Share/uploads_temp"));
-         *
-         * // Create a new file upload handler ServletFileUpload uploader = new
-         * ServletFileUpload(factory); // maximum file size to be uploaded.
-         * uploader.setSizeMax(maxFileSize);
-         */
     }
 
-    public Integer getPostId() {
-        return postId;
+    public Integer getUpLoadedPostId() {
+        return upLoadedPostId;
     }
 
-    public void setPostId(Integer postId) {
-        this.postId = postId;
+    public void setUpLoadedPostId(Integer upLoadedPostId) {
+        this.upLoadedPostId = upLoadedPostId;
     }
 
     public String getNotesDesc() {

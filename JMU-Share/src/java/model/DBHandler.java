@@ -188,9 +188,7 @@ public class DBHandler {
      */
     public void insertComment(Comment c) {
         try {
-            if (!isOpen) {
-                open();
-            }
+            if (!isOpen) {open();}
             String sql = "INSERT INTO comments (post_id, comment, author_id) VALUES (?, ?, ?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(3, c.getAuthorId());

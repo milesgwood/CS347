@@ -37,17 +37,8 @@ public class FetchPost {
             testImageString = img.getBase64Encoding();
             String strImg = img.getBase64Encoding();
             base64URLSafeStrings.add(strImg);
-            try {
-                PrintWriter writer = new PrintWriter("base1.txt", "UTF-8");
-                writer.println(strImg);
-                writer.close();
-            } catch (IOException e) {
-   // do something
-            }
             System.out.println(strImg);
         }
-        
-        
         return "success";
     }
 

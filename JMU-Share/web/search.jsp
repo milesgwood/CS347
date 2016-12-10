@@ -3,7 +3,6 @@
     Created on : Dec 8, 2016, 6:21:30 PM
     Author     : recinocs
 --%>
-
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <%@ taglib uri="/WEB-INF/tlds/jstags.tld" prefix="mt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,13 +16,8 @@
     </head>
     <body>
         <div id="container">
-            <div id="header">
-                <jsp:include page='menubar.jsp'/>
-            </div>
-
-            <div id="content">
-                <div class="wrapper">
-                    <div id='topContent'>
+            <div id="header"><jsp:include page='menubar.jsp'/></div>
+            <div id="content"><div class="wrapper"><div id='topContent'>
                         <s:bean name="bean.SchoolList">
                             <s:form action="SearchAction">
                                 <p><s:textfield name="title" placeholder="Title"/></p>
@@ -37,31 +31,25 @@
                 </div>
                 <div class="wrapper">
                     <div id='bottomContent'>
-                        
-                        
                         <s:iterator value="results">
                             <s:url var="url" action="viewpost">
                                 <s:param name="postId" value="%{id}"/>
                             </s:url>
                             <s:a href="%{url}"><s:property value="title"/></s:a>
                                 <div class="floating-box">
-                                    <s:property value="notes_desc"/>
-                                    <br>Title: <s:property value='title'/>
-                                    <br>Class Name: <s:property value="class_name"/>
-                                    <br>Class Number: <s:property value="class_num"/>
-                                    <br>School: <s:property value="school"/>
-                                </div>
+                                <s:property value="notes_desc"/>
+                                <br>Title: <s:property value='title'/>
+                                <br>Class Name: <s:property value="class_name"/>
+                                <br>Class Number: <s:property value="class_num"/>
+                                <br>School: <s:property value="school"/>
                             </div>
-                            <br>
-                        </s:iterator>
-                            
-                            
-                    </div>
+                        </div>
+                        <br>
+                    </s:iterator>
                 </div>
             </div>
-            <div id="footer">
-                <jsp:include page='footer.jsp'/>
-            </div>
         </div>
-    </body>
+        <div id="footer"><jsp:include page='footer.jsp'/></div>
+    </div>
+</body>
 </html>
