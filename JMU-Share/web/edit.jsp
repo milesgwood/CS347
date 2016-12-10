@@ -1,44 +1,40 @@
 <%-- 
-    Document   : login
-    Created on : Dec 5, 2016, 2:52:32 PM
+    Document   : edit
+    Created on : Dec 9, 2016, 9:28:37 AM
     Author     : recinocs
 --%>
 
 <%@ taglib uri="/struts-tags" prefix="s" %>
+<%@ taglib uri="/WEB-INF/tlds/jstags.tld" prefix="mt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<mt:login_check/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
+        <title>Edit Profile</title>
         <link rel="stylesheet" type="text/css" href="format.css">
     </head>
     <body>
-        <%
-          session.setAttribute("logged_in", false);
-          session.setAttribute("userId", null);
-          session.setAttribute("role", null);
-        %>
         <div id="container">
             <div id="header">
-                <jsp:include page='menubar_login.jsp'/>
+                <jsp:include page='menubar.jsp'/>
             </div>
 
             <div id="content">
                 <div class="wrapper">
                     <div id='topContent'>
-                        <div class="login">
-                            <h4>
-                                Please login to JMU-Share
-                            </h4>
-                            <div id="loginContent">
-                            <s:form action="LoginAction" method="get">
+                        <p5>Any fields left blank will not be changed.</p5>
+                        <div class="edit_form">
+                            <s:form action="editProfile">
+                                <p><s:textfield name="name" placeholder="Name"/></p>
+                                <p><s:textfield name="email" placeholder="Email"/></p>
                                 <p><s:textfield name="username" placeholder="Username"/></p>
-                                <p><s:password name="password" placeholder="Password"/></p>
-                                <p><s:submit name="submit" value="Login"/></p>
-                            </s:form></div>
-                            <p><a href="register_user">Not registered? Sign up here!</a>
-                            <br/><br/><br/><br/><br/><br/>
+                                <p><s:password name="password" placeholder="New Password"/></p>
+                                <p><s:password name="confirm" placeholder="Confirm New Password"/></p>
+                                <p><s:submit name="submit" value="Save"/></p>
+                                <p><s:submit name="cancel" action="cancelEdit" value="Cancel"/></p>
+                            </s:form>
                         </div>
                     </div>
                 </div>
@@ -49,7 +45,6 @@
                         </div>
                     </div>
                 </div>
-                <br>
             </div>
             <div id="footer">
                 <jsp:include page='footer.jsp'/>

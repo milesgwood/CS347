@@ -21,7 +21,7 @@
         %>
         <div id="container">
             <div id="header">
-                <jsp:include page='menubar.jsp'/>
+                <jsp:include page='menubar_register.jsp'/>
             </div>
 
             <div id="content">

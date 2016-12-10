@@ -33,6 +33,7 @@
                         <p3 class="thick">Email: <s:property value='user.getEmail()'/></p3><br/>
                         <p3 class="thick">School: <s:property value='school.getSchoolName()'/></p3><br/><br/>
                         </div>
+                        <a class="edit_link" href="edit_profile">Edit Profile</a>
                         <div style="clear:both"></div>
                     </div>
                 </div>

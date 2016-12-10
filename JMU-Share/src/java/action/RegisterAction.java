@@ -1,14 +1,9 @@
 package action;
 
-import com.opensymphony.xwork2.ActionSupport;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.Map;
-
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 
 import model.User_DB;
 import model.School_DB;
@@ -18,14 +13,13 @@ import model.User;
  *
  * @author recinocs
  */
-public class RegisterAction extends ActionSupport implements SessionAware {
+public class RegisterAction extends FetchSessionAware {
    
-    private SessionMap<String, Object> userSession;
     private User_DB db = new User_DB();
     private School_DB sDB = new School_DB();
     private User user;
-    private School school_ob;
-    private int school_id;
+    private School schoolOb;
+    private int schoolId;
     
     private String name, email, username, password, confirm, school, hashPassword, role;
     private boolean isProfessor;
@@ -112,13 +106,13 @@ public class RegisterAction extends ActionSupport implements SessionAware {
     public String execute() {
         try {
             hashPassword = hashPassword(password);
-            school_ob = sDB.getSchool(school);
-            school_id = sDB.getIdForSchool(school_ob);
-            user = new User(hashPassword, email, name, username, 2, isProfessor, school_id);
+            schoolOb = sDB.getSchool(school);
+            schoolId = sDB.getIdForSchool(schoolOb);
+            user = new User(hashPassword, email, name, username, 2, isProfessor, schoolId);
             if(db.addUser(user)) {
-                userSession.put("logged_in", true);
-                userSession.put("userId", db.getIdForUser(user));
-                userSession.put("role", "USER");
+                session.put("logged_in", true);
+                session.put("userId", db.getIdForUser(user));
+                session.put("role", "USER");
             }
             else {
                 return "FAILURE";
@@ -129,11 +123,7 @@ public class RegisterAction extends ActionSupport implements SessionAware {
         }
         return SUCCESS;
     }
-    
-    public void setSession(Map<String, Object> map) {
-        userSession = (SessionMap)map;
-    }
-    
+
     private String hashPassword(String password) {
         String hashedPassword = null;
         
