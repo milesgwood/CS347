@@ -16,7 +16,7 @@
     <body>
         <div id="container">
             <div id="header">
-                <jsp:include page='menubar_login.jsp'/>
+                <jsp:include page='menubar_nologout.jsp'/>
             </div>
 
             <div id="content">

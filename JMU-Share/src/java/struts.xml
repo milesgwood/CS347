@@ -81,5 +81,8 @@
         <action name="about" class="com.opensymphony.xwork2.ActionSupport">
             <result name="success">about.jsp</result>
         </action>
+        <action name="Logout" class="com.opensymphony.xwork2.ActionSupport">
+            <result name="success">login.jsp</result>
+        </action>
     </package>
 </struts>
