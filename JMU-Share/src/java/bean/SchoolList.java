@@ -20,11 +20,17 @@ public class SchoolList {
         return schoolList;
     }
     private void populate() {
+        Collections.sort(schools);
         for(int i = 0; i < schools.size(); i++)
             schoolList[i] = schools.get(i).getSchoolName();
+        
     }
     
     public void setSchoolList(String[] schools) {
         this.schoolList = schools;
+    }
+    
+    private int compareTo(School other) {
+        return -1;
     }
 }
