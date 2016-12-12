@@ -26,7 +26,7 @@
                         <div class="about_info">
                         <p6><b>Christopher Recinos - </b><i>Chris is a senior Computer Science major pursuing a minor in Economics. He's a backend developer who prefers to work with databases, but isn't afraid to step into the front-end. He's an Oracle Certified Programmer in Java and will be working as a Software Engineer for BTI360 after graduation.</i></p6>
                         <br/><br/>
-                        <p6><b>Miles Greatwood - </b><i>put info here</i></p6>
+                        <p6><b>Miles Greatwood - </b><i>Miles is a Senior CS Major at JMU.</i></p6>
                         <br/><br/>
                         <p6><b>Jacob Wilson - </b><i>Jacob is a senior Computer Science major going after an Art minor.  He is a backend developer who enjoys working with java, and html.  He is a CIW certified web technician, and enjoys working as part of a team.</i></p6>
                         <br/><br/>
