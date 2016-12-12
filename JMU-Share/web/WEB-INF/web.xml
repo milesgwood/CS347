@@ -47,7 +47,7 @@
         <param-value>
             <!-- This version is for storing locally -->
             <!-- /Users/greatwmc/NetBeansProjects/CS347-2/JMU-Share/uploads/ -->
-            /tmp/team27/uploads/
+            /tmp/team27/
         </param-value> 
     </context-param>
 </web-app>
