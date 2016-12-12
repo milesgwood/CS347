@@ -24,6 +24,7 @@
             <div id="content">
                 <div class="wrapper">
                     <div id='topContent'>
+                        <br/><br/>
                         <p5>Any fields left blank will not be changed.</p5>
                         <div class="edit_form">
                             <s:form action="editProfile">
