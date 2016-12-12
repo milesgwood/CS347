@@ -276,10 +276,47 @@ div#footer .bottombar li{
     float:right;
     border-left: 1px solid #bbb;
 }
+.active {
+    background-color: #CBB677;
+}
 
-div#footer {
-    position: absolute;
-    width: 100%;
-    bottom: 0; /* stick to bottom */
-    background: #ddd;
+li:last-child {
+    border-right: none;
+}
+
+.usernameField {
+    margin-bottom: 10px;
+}
+
+h5 {
+    padding-left: 25%;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+}
+
+.edit_link {
+    margin-left: 60%;
+}
+
+.edit_form {
+    padding-left: 35%;
+    padding-right: 55%;
+}
+p4 {
+    font-size: 25px;
+    font-style: bold;
+    padding-left: 10%;
+}
+p5 {
+    font-size: 15px;
+    font-style: italic;
+    padding-left: 30%;
+}
+
+p6 {
+    
+}
+.about_info {
+    margin-left: 15%;
+    margin-right: 15%;
 }
