@@ -97,6 +97,16 @@ div#container {
     padding-bottom: 1em;
 }
 
+#topContent2 {
+    margin-right: 4em;
+    margin-left: 4em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+    display: block;
+}
+
+
 #loginContent {
     margin-right: 70%;
 }
@@ -111,7 +121,6 @@ div#container {
 .wrapper {
     background-color:#ffffff;
     width: 90%;
-    min-height: 50%;
 }
 
 .profile_image {
@@ -128,7 +137,8 @@ div#container {
 }
 
 .logo {
-    padding-left: 35%;
+    text-align: center;
+    display: block;
 }
 
 .welcome {

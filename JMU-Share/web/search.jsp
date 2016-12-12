@@ -11,13 +11,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Search Page</title>
         <link rel="stylesheet" type="text/css" href="format.css">
     </head>
     <body>
         <div id="container">
             <div id="header"><jsp:include page='menubar.jsp'/></div>
-            <div id="content"><div class="wrapper"><div id='topContent'>
+            <div id="content"><div class="wrapper"><div id='topContent2'>
+                        <h1>Search</h1>
                         <s:bean name="bean.SchoolList">
                             <s:form action="SearchAction">
                                 <p><s:textfield name="title" placeholder="Title"/></p>
