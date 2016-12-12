@@ -28,7 +28,7 @@
                         <br/><br/>
                         <p6><b>Miles Greatwood - </b><i>put info here</i></p6>
                         <br/><br/>
-                        <p6><b>Jacob Wilson - </b><i>put info here</i></p6>
+                        <p6><b>Jacob Wilson - </b><i>Jacob is a senior Computer Science major going after an Art minor.  He is a backend developer who enjoys working with java, and html.  He is a CIW certified web technician, and enjoys working as part of a team.</i></p6>
                         <br/><br/>
                         <p6><b>Kendrick Smith - </b><i>put info here</i></p6>
                         </div>
