@@ -8,61 +8,110 @@ and open the template in the editor.
     Author     : greatwmc
 */
 
-html,
-body {
+html, body {
     margin: 0;
     padding: 0;
-    padding-bottom: 20px;
     height: 100%; /* needed for container min-height */
 }
+
+#header .topbar li {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+
+#header li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#header li a:hover:not(.active) {
+    background-color: #111;
+}
+
+#header .active {
+    background-color: #CBB677;
+}
+
+#header li:last-child {
+    border-right: none;
+}
+
 div#container {
     position: relative; /* needed for footer positioning*/
     height: auto !important; /* real browsers */
     min-height: 100%; /* real browsers */
+    clear: both;
     max-width: 100%;
     background-color:#dddddd;
 }
 
-div#header {
-    margin-top: 2em;
+.topbar li a , .bottombar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
-div#content {
-    //margin-bottom: 3em;
+.topbar li a:hover:not(.active) , .bottombar li a:hover:not(.active){
+    background-color: #111;
+}
+
+.topbar .active , .bottombar .active{
+    background-color: #CBB677;
+}
+
+.topbar li:last-child {
+    border-right: none;
+}
+
+#content a:link {
+    text-decoration: none;
+}
+
+#content a:visited {
+    text-decoration: none;
+}
+
+#content a:hover {
+    text-decoration: cornsilk;
+}
+
+#content a:active {
+    text-decoration: black;
+}
+
+#content {
     margin-right: 10%;
     margin-left: 10%;
     width: 90%;
 }
 
-div.wrapper {
-    background-color:#ffffff;
-    width: 90%;
-    min-height: 50%;
-}
-
-div#topContent {
+#topContent {
     margin-right: 4em;
     margin-left: 4em;
     padding-top: 1em;
     padding-bottom: 1em;
 }
 
-div#loginContent {
+#loginContent {
     margin-right: 70%;
 }
 
-div#bottomContent {
+#bottomContent {
     margin-right: 4em;
     margin-left: 4em;
     padding-top: 1em;
     padding-bottom: 3.5em;
 }
 
-div#footer {
-    position: absolute;
-    width: 100%;
-    bottom: 0; /* stick to bottom */
-    background: #ddd;
+.wrapper {
+    background-color:#ffffff;
+    width: 90%;
+    min-height: 50%;
 }
 
 .profile_image {
@@ -125,6 +174,7 @@ p.thick {
 
 .floating-box {
     display: inline-block;
+    min-width: 100%;
     max-height: 60px;
     margin-bottom: 3px;
     border: 1px solid #dddddd;
@@ -145,14 +195,25 @@ h1 {
     font-style: italic;
 }
 
-.post_display {
+#post_display {
     margin-left: 5%;
 }
-.comment
+#post_display .buttons
 {
-    padding-top: 2px;
-    padding-bottom: 2px;
+    font-weight: bold;
+    font-size: 15px;
+    list-style-type: none;
+    list-style: none;
+    padding-top: 1px;
+    padding-right: 2px;
     display: inline-block;
+}
+
+.titleOfPost a
+{
+    font-size: large;
+    font-weight: bold;
+    font-size: 50px;
 }
 
 .wwFormTable
@@ -164,8 +225,7 @@ h1 {
     display: inline-block;
 }
 
-
-ul.topbar {
+#header ul.topbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -176,7 +236,24 @@ ul.topbar {
     width: 100%;
 }
 
-ul.bottombar {
+
+
+p .comment-top-line {
+    color: #888;
+    font-size: x-small;
+}
+
+.usernameField {
+    margin-bottom: 10px;
+}
+
+h5 {
+    padding-left: 25%;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+}
+
+div#footer ul.bottombar {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -187,12 +264,7 @@ ul.bottombar {
     width: 100%;
 }
 
-li {
-    float: left;
-    border-right: 1px solid #bbb;
-}
-
-li a {
+div#footer li a {
     display: block;
     color: white;
     text-align: center;
@@ -200,10 +272,10 @@ li a {
     text-decoration: none;
 }
 
-li a:hover:not(.active) {
-    background-color: #111;
+div#footer .bottombar li{
+    float:right;
+    border-left: 1px solid #bbb;
 }
-
 .active {
     background-color: #CBB677;
 }
@@ -244,7 +316,6 @@ p5 {
 p6 {
     
 }
-
 .about_info {
     margin-left: 15%;
     margin-right: 15%;

@@ -51,6 +51,8 @@ public class DBHandler {
             url = (String) envCtx.lookup("Url");
             userId = (String) envCtx.lookup("UserId");
             password = (String) envCtx.lookup("Password");
+            
+            //This catch is for Testing JUnit tests. Where no server context is setup.
         } catch (NoInitialContextException contextError) {
             driverName = "com.mysql.jdbc.Driver";
             url = "jdbc:mysql://grove.cs.jmu.edu:3306/team27_db";
@@ -186,9 +188,7 @@ public class DBHandler {
      */
     public void insertComment(Comment c) {
         try {
-            if (!isOpen) {
-                open();
-            }
+            if (!isOpen) {open();}
             String sql = "INSERT INTO comments (post_id, comment, author_id) VALUES (?, ?, ?);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(3, c.getAuthorId());

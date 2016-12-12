@@ -7,16 +7,14 @@ package action;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
 import model.DBHandler;
 import model.Post;
 
 /**
- *
+ * This gets all the needed pieces that make up the home page
  * @author greatwmc
  */
 public class FetchHomePage extends FetchSessionAware{
-
     ArrayList<Post> userPosts;
     ArrayList<Class> classes;
     ArrayList<Post> favoriteNotes;

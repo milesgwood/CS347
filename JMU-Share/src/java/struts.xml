@@ -23,10 +23,6 @@
         <action name="submitComment" class="action.SubmitComment">
             <result name="success">post.jsp?postId=%{postId}</result>
         </action>
-        <action name="textresult" class="action.TextResult">
-            <result name="success" type="stream"></result>
-            <result name="error">error.jsp</result>
-        </action>
         <action name="upvote" class="ajax.UpVoting">
             <result name="success" type="stream"></result>
             <result name="error">error.jsp</result>
@@ -58,17 +54,17 @@
             <result name="success">upload.jsp</result>
         </action>
         <action name="uploadToServer" class="action.Upload">
-            <result name="success">post.jsp?postId=%{postId}</result>
+            <result name="success" type="redirectAction">viewpost?postId=%{upLoadedPostId}</result>
         </action>
         <action name="profile" class="action.FetchProfile">
             <result name="success">profile.jsp</result>
             <result name="input">login.jsp</result>
         </action>
-        <action name="search" class="com.opensymphony.xwork2.ActionSupport">
+        <action name="Search" class="com.opensymphony.xwork2.ActionSupport">
             <result name="success">search.jsp</result>
         </action>
-        <action name="edit_profile" class="com.opensymphony.xwork2.ActionSupport">
-            <result name="success">edit.jsp</result>
+        <action name="SearchAction" class="action.SearchAction">
+            <result name="success">search.jsp</result>
         </action>
         <action name="editProfile" class="action.EditProfile">
             <result name="success">profile.jsp</result>

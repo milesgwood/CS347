@@ -71,6 +71,7 @@ public class NotesImageFile {
             this.base64Encoding = Base64.encodeBase64String(FileUtils.readFileToByteArray(getImageFile(imgFullFilePath)));
         } catch (IOException ex) {
             Logger.getLogger(NotesImageFile.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("File could not be found where specified");
             ex.printStackTrace();
         }
         
