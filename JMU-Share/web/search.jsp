@@ -7,7 +7,7 @@
 <%@ taglib uri="/WEB-INF/tlds/jstags.tld" prefix="mt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%--<mt:login_check/> --%>
+<mt:login_check/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
