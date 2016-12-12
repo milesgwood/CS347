@@ -21,13 +21,14 @@
                 <jsp:include page='menubar.jsp'/>
             </div>       
             <% //Set Default session attribute userId for testing
-                if(session.getAttribute("userId") == null) session.setAttribute("userId", 1);
+                if (session.getAttribute("userId") == null) {
+                    session.setAttribute("userId", 1);
+                }
             %>
             <div id="content">
                 <div class="wrapper">
-                    <div id='topContent'>
+                    <div id='topContent2'>
                         <h1>Upload your notes</h1>
-                        <p>Session User <s:property value="%{#session.userId}"/></p>
                         <s:form action="uploadToServer"  method="post"  enctype="multipart/form-data">
                             <s:file name="upload"/>
                             <s:file name="upload"/>
@@ -37,7 +38,6 @@
                             <s:textfield name="classId"   placeholder="number for class will be replaced with drop down of classes"/>
                             <s:submit/>
                         </s:form>
-
                         <s:iterator value="upload" var="u">
                             <s:property value="u"/><br/>
                         </s:iterator>
@@ -47,25 +47,6 @@
                         <s:iterator value="uploadFileName" var="fn">
                             <s:property value="fn"/><br/>
                         </s:iterator>
-                        Place TOP content Here <br>
-                        Place TOP content Here <br>
-                        Place TOP content Here <br>
-                        Place TOP content Here <br>
-                        Place TOP content Here <br>
-                        Place TOP content Here <br>
-                        Place TOP content Here <br>                    
-                        Place TOP content Here <br>
-                        Place TOP content Here <br>
-                        Place TOP content Here <br>
-                        Place TOP content Here <br>
-                        Place TOP content Here <br>
-                    </div>
-                </div>
-                <br>
-                <div class="wrapper">
-                    <div id='bottomContent'>
-                        Place All content Here <br>
-
                     </div>
                 </div>
             </div>
