@@ -28,8 +28,4 @@ public class SchoolList {
     public void setSchoolList(String[] schools) {
         this.schoolList = schools;
     }
-    
-    private int compareTo(School other) {
-        return -1;
-    }
 }
