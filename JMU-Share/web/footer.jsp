@@ -6,5 +6,4 @@
 
 <ul class="bottombar">
   <li style="float:right"><a href="about">About</a></li>
-  
 </ul>

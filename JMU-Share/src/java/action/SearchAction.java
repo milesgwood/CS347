@@ -2,6 +2,7 @@ package action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.Post;
 import model.Post_DB;
 
@@ -13,20 +14,21 @@ import model.Post_DB;
 public class SearchAction extends ActionSupport {
 
     Post_DB postDBSearcher = new Post_DB();
-    private Post[] results;
+    private ArrayList results;
+
     private Integer class_num;
     private String title, class_name, school, confirm;
 
-
     
     //things for the search results
-    public Post[] getResults() {
-        return results;
-    }
-
-    public void setResults(Post[] results) {
+    public void setResults(ArrayList results) {
         this.results = results;
     }
+
+    public ArrayList getResults() {
+        return results;
+    }
+    
     
     //Other things
     public String getTitle() {
@@ -97,12 +99,12 @@ public class SearchAction extends ActionSupport {
             results = postDBSearcher.searchSpecific(title, class_num, class_name, school);
 
             //If the search does not find any results tries the partial search
-            if (results[0] == null){
+            if (results.isEmpty()){
                 results = postDBSearcher.searchPartiallyGeneral(title, class_num, class_name, school);
             }
 
             //If the partial search did not find anything, then it tries to make a general search
-            if (results[0] == null){
+            if (results.isEmpty()){
                 results = postDBSearcher.searchGeneral(title, class_num, class_name, school);
             }
         }

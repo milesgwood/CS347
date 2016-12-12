@@ -136,7 +136,7 @@ div#container {
 }
 
 .register {
-    padding-left: 30%;
+    padding-left: 35%;
 }
 
 .profile {
@@ -319,4 +319,13 @@ p6 {
 .about_info {
     margin-left: 15%;
     margin-right: 15%;
+}
+
+#footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:45px;
+   width:100%;
+   background:#999;
 }
