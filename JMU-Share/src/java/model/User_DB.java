@@ -169,31 +169,6 @@ public class User_DB {
         }
         return retUser;
     }
-    
-    public User getUser(int id) throws SQLException {
-        User retUser = null;
-        
-        if (!(handler.isOpen)) {
-            handler.open();
-            con = handler.con;
-        }
-        
-        String getUser = "SELECT * FROM user WHERE id = ?;";
-        PreparedStatement ps = con.prepareStatement(getUser);
-        ps.setInt(1, id);
-        ResultSet rs = ps.executeQuery();
-
-        if (rs.next()) {
-            String email = rs.getString("email");
-            String name = rs.getString("name");
-            String username = rs.getString("username");
-            boolean isProfessor = rs.getBoolean("is_professor");
-            int roleId = rs.getInt("role_id");
-            int schoolId = rs.getInt("school_id");
-            retUser = new User(id, email, name, username, isProfessor, roleId, schoolId);
-        }
-        return retUser;
-    }
 
     /**
      * This method returns all users in the database
@@ -331,40 +306,5 @@ public class User_DB {
         
         return emailFound;
     }
-    
-    public boolean updateUser(int id, User user) throws SQLException {
-        boolean userUpdated = false;
-        
-        if(!(handler.isOpen)) {
-            handler.open();
-            con = handler.con;
-        }
-        String sql;
-        PreparedStatement ps;
-        int i = 1;
-        if(!(user.getPassword().equals("6c3e226b4d4795d518ab341b0824ec29"))) {
-            sql = "UPDATE user SET password = ?, email = ?, name = ?, username = ?, role_id = ?, is_professor = ?, school_id = ? WHERE id = ?;";
-        
-            ps = con.prepareStatement(sql);
-            ps.setString(i, user.getPassword());
-            i++;
-        }
-        
-        else {
-            sql = "UPDATE user SET email = ?, name = ?, username = ?, role_id = ?, is_professor = ?, school_id = ? WHERE id = ?;";
-            ps = con.prepareStatement(sql);
-        }
-        ps.setString(i++, user.getEmail());
-        ps.setString(i++, user.getName());
-        ps.setString(i++, user.getUsername());
-        ps.setInt(i++, user.getRoleId());
-        ps.setBoolean(i++, user.getIsProfessor());
-        ps.setInt(i++, user.getSchoolId());
-        ps.setInt(i++, id);
-        
-        ps.executeUpdate();
-        userUpdated = true;
-        
-        return userUpdated;
-    }
+
 }
