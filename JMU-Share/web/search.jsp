@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-        </div>
         <div id="footer"><jsp:include page='footer.jsp'/></div>
+        </div>
     </body>
 </html>
