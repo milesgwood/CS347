@@ -5,5 +5,5 @@
 --%>
 
 <ul class="bottombar">
-  <li><a href="about">About</a></li>
+  <li style="float:right"><a href="about">About</a></li>
 </ul>
