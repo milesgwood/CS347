@@ -44,10 +44,8 @@
     <context-param> 
         <description>Location to store uploaded file</description> 
         <param-name>file-upload</param-name> 
-        <param-value>
-            <!-- This version is for storing locally -->
-            <!-- /Users/greatwmc/NetBeansProjects/CS347-2/JMU-Share/ -->
-            /tmp/team27/
-        </param-value> 
+        <!-- This version is for storing locally -->
+        <!-- /Users/greatwmc/NetBeansProjects/CS347-2/JMU-Share/ -->
+        <param-value>/tmp/team27/</param-value> 
     </context-param>
 </web-app>

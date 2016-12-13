@@ -3,6 +3,8 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+    <!-- This sets where the Apache server stores the uploaded files. -->
+    <constant name="struts.multipart.saveDir" value="/tmp/team27/" />
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
         <!-- This interceptor stops a user from hacking the session object --> 
