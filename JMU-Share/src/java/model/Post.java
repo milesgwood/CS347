@@ -72,18 +72,6 @@ public class Post {
         getDerivedValues(); 
     }
     
-    public Post(Integer id, Integer authorId, Integer classId, String contentBody, Float rating, Integer endorse, String notes_desc) throws SQLException {
-        this.id = id;
-        this.authorId = authorId;
-        this.classId = classId;
-        this.contentBody = contentBody;
-        this.rating = rating;
-        this.endorse = endorse;
-        this.notesDesc = notes_desc;
-        this.title = "DEFAULT";
-        getDerivedValues(); 
-    }
-    
     public void getDerivedValues() throws SQLException
     {
         DBHandler db = new DBHandler();
@@ -109,7 +97,6 @@ public class Post {
         this.title = rs.getString(8);
         getDerivedValues();
     }
-
     
     public String getNotesDesc() {
         return notesDesc;

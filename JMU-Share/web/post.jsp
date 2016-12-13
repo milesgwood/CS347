@@ -55,8 +55,6 @@
                                 <br>
                             </s:iterator>
                         </div>
-                        <p>Parameter: <s:property value="%{#parameters.postId}"/></p>
-                        <p>Session User <s:property value="%{#session.userId}"/></p>
                         <s:form id="submitComment" action="submitComment" method="post">
                             <s:textarea style="width:100%" name="comment" id="comment" placeholder="Write your comment here..."/>
                             <s:hidden name="postId" value="%{#parameters.postId}"/>

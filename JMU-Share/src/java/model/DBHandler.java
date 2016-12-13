@@ -213,19 +213,21 @@ public class DBHandler {
 
             Integer author_id;
             Integer class_id;
+            String title;
             String contentBody;
             String notes_desc;
             Float rating;
             Integer endorse;
 
             while (rs.next()) {
+                title = rs.getString("title");
                 author_id = rs.getInt(2);
                 class_id = rs.getInt(3);
                 contentBody = rs.getString(4);
                 rating = rs.getFloat(5);
                 endorse = rs.getInt(6);
                 notes_desc = rs.getString(7);
-                post = new Post(post_id, author_id, class_id, contentBody, rating, endorse, notes_desc);
+                post = new Post(post_id, author_id, class_id, contentBody, rating, endorse, notes_desc, title);
             }
         } catch (SQLException e) {
             e.printStackTrace();
