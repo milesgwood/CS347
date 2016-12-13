@@ -8,7 +8,10 @@ package ajax;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import model.DBHandler;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 
 

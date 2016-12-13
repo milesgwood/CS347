@@ -15,7 +15,6 @@ function voteUpRequest(commentId)
         return;
     var url = "/JMU-Share/upvote?commentId=" + commentId;
     request.open("GET", url, true)
-    request.onreadystatechange = updatePage
     request.send()
 }
 
@@ -25,7 +24,6 @@ function voteDownRequest(commentId)
         return;
     var url = "/JMU-Share/downvote?commentId=" + commentId;
     request.open("GET", url, true)
-    request.onreadystatechange = updatePage
     request.send()
 }
 
