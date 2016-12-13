@@ -45,12 +45,15 @@
                         <div id="commentsSection">
                             <s:iterator  value="commentsList">
                                 <div class="comment" id="comment<s:property value='commentId'/>">
-                                    <div class="arrows">
-                                        <div class="arrow-up" onclick="upVote(this)" onmouseenter="brightenUp(this)" onmouseleave="darkenUp(this)"></div>
-                                        <div id="scoreOnCommentId_<s:property value='commentId'/>"><s:property value="score"/></div>
-                                        <div class="arrow-down" onclick="downVote(this)" onmouseenter="brightenDown(this)" onmouseleave="darkenDown(this)"></div>
+                                    <div class="floating-box">
+                                        <div class="arrows">
+                                            <div class="arrow-up" onclick="upVote(this)" onmouseenter="brightenUp(this)" onmouseleave="darkenUp(this)"></div>
+                                            <div id="scoreOnCommentId_<s:property value='commentId'/>"><s:property value="score"/></div>
+                                            <div class="arrow-down" onclick="downVote(this)" onmouseenter="brightenDown(this)" onmouseleave="darkenDown(this)"></div>
+                                        </div>
+                                            <s:property value="comment"/><br>
+                                            <div class="author">By Author: <s:property value="commentAuthorName"/></div>
                                     </div>
-                                        <div class="floating-box"><s:property value="comment"/><br><div class="author">By Author: <s:property value="commentAuthorName"/></div></div>
                                 </div>
                                 <br>
                             </s:iterator>
