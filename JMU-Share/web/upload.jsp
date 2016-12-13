@@ -37,6 +37,7 @@
                             <s:file name="upload"/>
                             <s:file name="upload"/>
                             <s:file name="upload"/>
+                            <s:textarea style="width:100%;height:150px" name="body" placeholder="Enter text here..."/>
                             <s:submit/>
                         </s:form>
                         </s:bean>
@@ -49,6 +50,13 @@
                         <s:iterator value="uploadFileName" var="fn">
                             <s:property value="fn"/><br/>
                         </s:iterator>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div id='bottomContent'>
+                        <div class="logo">
+                            <img src="image/James_MadisonU_seal.png" alt="James Madison University seal"/>
+                        </div>
                     </div>
                 </div>
             </div>

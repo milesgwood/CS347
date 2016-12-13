@@ -103,7 +103,15 @@ div#container {
     margin-left: 4em;
     padding-top: 1em;
     padding-bottom: 1em;
-    text-align: center;
+    text-align: left;
+    display: block;
+}
+
+#topContent3 {
+    margin-right: 37%;
+    margin-left: 40%;
+    padding-top: 1em;
+    padding-bottom: 1em; 
     display: block;
 }
 
@@ -134,7 +142,7 @@ div#container {
 }
 
 .login {
-    padding-left: 36%;
+    padding-left: 40%;
 }
 
 .logo {
@@ -338,6 +346,9 @@ p5 {
    background:#999;
 }
 
+p6 {
+    padding-left: 30px;
+}
 td > input{
     width: 300px;
     box-sizing: border-box;

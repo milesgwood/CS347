@@ -26,10 +26,7 @@
                 <div class="wrapper">
                     <div id='topContent'>
                         <h1><s:property value="post.getTitle()"/></h1>
-                        <h2>Endorse- <s:property value="post.getEndorse()"/></h2>
-                        <h2>Rating- <s:property value="post.getRating()"/></h2>
-                        <h2>Class Id- <s:property value="post.getClassId()"/></h2>
-                        <h2>Author Id- <s:property value="post.getAuthorName()"/></h2>
+                        <p6><i>Author- <s:property value="post.getAuthorName()"/></i></p6>
                         <p><s:property value="post.getContentBody()"/></p>
                         <s:iterator value="base64URLSafeStrings">
                             <img src="data:image/jpeg;charset=utf-8;base64,<s:property value="testImageString"/>" alt="Default Image 1" height="100%" width="100%"/> 
@@ -39,7 +36,6 @@
                         <!--<img src="image/default_profile.png" alt="Default Image 2" height="100%" width="100%"> -->
                     </div>
                 </div>
-                <br>
                 <div class="wrapper">
                     <div id='bottomContent'>
                         <div id="commentsSection">
@@ -63,6 +59,9 @@
                             <s:hidden name="postId" value="%{#parameters.postId}"/>
                             <s:submit type="submit" value="submitComment"/>
                         </s:form>
+                        <div class="logo">
+                            <img src="image/James_MadisonU_seal.png" alt="James Madison University seal"/>
+                        </div>
                     </div>
                 </div>
             </div>
