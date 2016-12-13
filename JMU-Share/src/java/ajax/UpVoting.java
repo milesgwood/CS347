@@ -9,6 +9,17 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import model.DBHandler;
+import org.apache.struts2.convention.annotation.Result;
+
+
+@Result(
+    name = "success", 
+    type = "stream", 
+    params = { 
+        "postId", "${commentId}", 
+        "inputName", "${inputStream}", 
+    }
+)
 
 /**
  * This class handles an upvote on a comment. It returns the new score in the
@@ -42,6 +53,7 @@ public class UpVoting extends ActionSupport {
         System.out.println("Upvote" + commentId);
         db.increaseScore(commentId);
         inputStream = new ByteArrayInputStream(commentId.toString().getBytes("UTF-8"));
+        inputStream.close();
         return SUCCESS;
     }
 }

@@ -26,7 +26,10 @@
             <result name="success">post.jsp?postId=%{postId}</result>
         </action>
         <action name="upvote" class="ajax.UpVoting">
-            <result name="success" type="stream"></result>
+            <result name="success" type="stream">
+                <param name="inputName">${inputStream}</param>
+                <param name="commentId">${commentId}</param>
+            </result>
             <result name="error">error.jsp</result>
         </action>
         <action name="downvote" class="ajax.DownVoting">
