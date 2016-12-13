@@ -29,16 +29,18 @@
                 <div class="wrapper">
                     <div id='topContent2'>
                         <h1>Upload your notes</h1>
+                        <s:bean name="bean.ClassList">
                         <s:form action="uploadToServer"  method="post"  enctype="multipart/form-data">
+                            <s:textfield name="title" placeholder="Title or Subject"/>
+                            <s:textfield name="notesDesc" placeholder="Description of your Notes"/>
+                            <s:select id="className" name="className" list="alphaOrderedClasses"/>
                             <s:file name="upload"/>
                             <s:file name="upload"/>
                             <s:file name="upload"/>
-                            <s:textfield name="notesDesc" placeholder="Description of the Notes"/>
-                            <s:textfield name="title"     placeholder="Title of the Notes"/>
-                            <s:textfield name="classId"   placeholder="Number for class will be replaced with drop down of classes"/>
                             <s:textarea style="width:100%;height:150px" name="body" placeholder="Enter text here..."/>
                             <s:submit/>
                         </s:form>
+                        </s:bean>
                         <s:iterator value="upload" var="u">
                             <s:property value="u"/><br/>
                         </s:iterator>

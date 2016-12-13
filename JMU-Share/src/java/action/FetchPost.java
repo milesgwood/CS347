@@ -18,7 +18,7 @@ import model.Post;
 /**
  * @author greatwmc
  */
-public class FetchPost {
+public class FetchPost extends FetchSessionAware{
 
     Integer postId;
     Post post;
@@ -28,6 +28,7 @@ public class FetchPost {
     String testImageString;
 
     public String execute() throws SQLException {
+        session.put("postId", postId);
         DBHandler db = new DBHandler();
         post = db.getPostFromId(postId);
         commentsList = db.getPostComments(postId);

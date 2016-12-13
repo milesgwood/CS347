@@ -8,7 +8,21 @@ package ajax;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import model.DBHandler;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Result;
+
+
+@Result(
+    name = "success", 
+    type = "stream", 
+    params = { 
+        "postId", "${commentId}", 
+        "inputName", "${inputStream}", 
+    }
+)
 
 /**
  * This class handles an upvote on a comment. It returns the new score in the
@@ -18,7 +32,7 @@ import model.DBHandler;
  */
 public class UpVoting extends ActionSupport {
 
-    private Integer commentIdParam;
+    private Integer commentId;
     private InputStream inputStream;
 
     public InputStream getInputStream() {
@@ -29,19 +43,20 @@ public class UpVoting extends ActionSupport {
         this.inputStream = inputStream;
     }
 
-    public Integer getCommentIdParam() {
-        return commentIdParam;
+    public Integer getCommentId() {
+        return commentId;
     }
 
-    public void setCommentIdParam(Integer commentIdParam) {
-        this.commentIdParam = commentIdParam;
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
     }
 
     public String execute() throws Exception {
         DBHandler db = new DBHandler();
-        System.out.println("Upvote" + commentIdParam);
-        db.increaseScore(commentIdParam);
-        inputStream = new ByteArrayInputStream(commentIdParam.toString().getBytes("UTF-8"));
+        System.out.println("Upvote" + commentId);
+        db.increaseScore(commentId);
+        inputStream = new ByteArrayInputStream(commentId.toString().getBytes("UTF-8"));
+        inputStream.close();
         return SUCCESS;
     }
 }

@@ -26,11 +26,11 @@
                         <div class="about_info">
                         <p6><b>Christopher Recinos - </b><i>Chris is a senior Computer Science major pursuing a minor in Economics. He's a backend developer who prefers to work with databases, but isn't afraid to step into the front-end. He's an Oracle Certified Programmer in Java and will be working as a Software Engineer for BTI360 after graduation.</i></p6>
                         <br/><br/>
-                        <p6><b>Miles Greatwood - </b><i>Miles is a Senior CS Major at JMU.</i></p6>
+                        <p6><b>Miles Greatwood - </b><i>Miles is a Senior CS Major at JMU. He enjoys long walks on the beach but doesn't live near a beach. Sucks for him.</i></p6>
                         <br/><br/>
                         <p6><b>Jacob Wilson - </b><i>Jacob is a senior Computer Science major going after an Art minor.  He is a backend developer who enjoys working with java, and html.  He is a CIW certified web technician, and enjoys working as part of a team.</i></p6>
                         <br/><br/>
-                        <p6><b>Kendrick Smith - </b><i>put info here</i></p6>
+                        <p6><b>Kendrick Smith - </b><i>Kendrick S. is a senior Computer Science Major who is working towards a Computer Information Systems Minor as well. He enjoys both front and back end programming and enjoys the Python and C++ programming languages the most.</i></p6>
                         </div>
                     </div>
                 </div>

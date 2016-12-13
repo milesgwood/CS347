@@ -16,7 +16,7 @@ import model.DBHandler;
  */
 public class DownVoting extends ActionSupport {
 
-    private Integer commentIdParam;
+    private Integer commentId;
     private InputStream inputStream;
 
     public InputStream getInputStream() {
@@ -27,19 +27,19 @@ public class DownVoting extends ActionSupport {
         this.inputStream = inputStream;
     }
 
-    public Integer getCommentIdParam() {
-        return commentIdParam;
+    public Integer getCommentId() {
+        return commentId;
     }
 
-    public void setCommentIdParam(Integer commentIdParam) {
-        this.commentIdParam = commentIdParam;
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
     }
 
     public String execute() throws Exception {
         DBHandler db = new DBHandler();
-        System.out.println("Downvote" + commentIdParam);
-        db.decreaseScore(commentIdParam);
-        inputStream = new ByteArrayInputStream(commentIdParam.toString().getBytes("UTF-8"));
+        System.out.println("Downvoted" + commentId);
+        db.decreaseScore(commentId);
+        inputStream = new ByteArrayInputStream(commentId.toString().getBytes("UTF-8"));
         return SUCCESS;
     }
 }

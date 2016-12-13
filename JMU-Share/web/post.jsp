@@ -8,7 +8,7 @@
 <%@ taglib uri="/WEB-INF/tlds/jstags.tld" prefix="mt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <!DOCTYPE html>
-<mt:login_check/>
+<%--<mt:login_check/> --%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -41,18 +41,19 @@
                         <div id="commentsSection">
                             <s:iterator  value="commentsList">
                                 <div class="comment" id="comment<s:property value='commentId'/>">
-                                    <div class="arrows">
-                                        <div class="arrow-up" onclick="upVote(this)" onmouseenter="brightenUp(this)" onmouseleave="darkenUp(this)"></div>
-                                        <div id="scoreOnCommentId_<s:property value='commentId'/>"><s:property value="score"/></div>
-                                        <div class="arrow-down" onclick="downVote(this)" onmouseenter="brightenDown(this)" onmouseleave="darkenDown(this)"></div>
+                                    <div class="floating-box">
+                                        <div class="arrows">
+                                            <div class="arrow-up" onclick="upVote(this)" onmouseenter="brightenUp(this)" onmouseleave="darkenUp(this)"></div>
+                                            <div id="scoreOnCommentId_<s:property value='commentId'/>"><s:property value="score"/></div>
+                                            <div class="arrow-down" onclick="downVote(this)" onmouseenter="brightenDown(this)" onmouseleave="darkenDown(this)"></div>
+                                        </div>
+                                            <s:property value="comment"/><br>
+                                            <div class="author">By Author: <s:property value="commentAuthorName"/></div>
                                     </div>
-                                        <div class="floating-box"><s:property value="comment"/><br><div class="author">By Author: <s:property value="commentAuthorName"/></div></div>
                                 </div>
                                 <br>
                             </s:iterator>
                         </div>
-                        <p>Parameter: <s:property value="%{#parameters.postId}"/></p>
-                        <p>Session User <s:property value="%{#session.userId}"/></p>
                         <s:form id="submitComment" action="submitComment" method="post">
                             <s:textarea style="width:100%" name="comment" id="comment" placeholder="Write your comment here..."/>
                             <s:hidden name="postId" value="%{#parameters.postId}"/>

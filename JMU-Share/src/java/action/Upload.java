@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
 import javax.servlet.ServletContext;
+import model.NoteClass;
+import model.NoteClass_DB;
 import model.NotesImageFile_DB;
 import model.NotesImageFile;
 import model.Post;
@@ -24,7 +26,8 @@ public class Upload extends FetchSessionAware {
     //I need these from the form along with the class ID
     private String notesDesc;
     private String title, body;
-    private Integer classId;
+    private String className;
+
     private Integer upLoadedPostId;
     
     public String execute() throws Exception {
@@ -48,8 +51,11 @@ public class Upload extends FetchSessionAware {
         Object ses = session.get("userId");
         authorId = (Integer) ses;
         
+        NoteClass_DB ndb = new NoteClass_DB();
+        NoteClass classroom = ndb.getClassFromName(className);
+        
         //Create and add a new post to the database. The new post ID is returned
-        Post newPost = new Post(authorId, classId, contentBody, rating, endorse, notesDesc, title);
+        Post newPost = new Post(authorId, classroom.getId(), contentBody, rating, endorse, notesDesc, title);
         Post_DB dbPost = new Post_DB();
         upLoadedPostId = dbPost.insertPost(newPost);
         newPost.setId(upLoadedPostId);
@@ -118,12 +124,12 @@ public class Upload extends FetchSessionAware {
         this.title = title;
     }
 
-    public Integer getClassId() {
-        return classId;
+    public String getClassName() {
+        return className;
     }
 
-    public void setClassId(Integer classId) {
-        this.classId = classId;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public File[] getUpload() {
