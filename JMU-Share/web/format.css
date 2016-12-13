@@ -89,6 +89,7 @@ div#container {
     margin-right: 10%;
     margin-left: 10%;
     width: 90%;
+    
 }
 
 #topContent {
@@ -115,9 +116,8 @@ div#container {
     display: block;
 }
 
-
-#loginContent {
-    margin-right: 70%;
+#LoginAction {
+    text-align: center;
 }
 
 #bottomContent {
@@ -141,8 +141,8 @@ div#container {
     font-size: 20px;
 }
 
-.login {
-    padding-left: 40%;
+.centeredForm {
+    text-align: center;
 }
 
 .logo {
@@ -150,22 +150,9 @@ div#container {
     display: block;
 }
 
-.welcome {
-    padding-left: 35%;
-}
-
-.register {
-    padding-left: 35%;
-}
-
 .profile {
     margin-left: 20%;
     margin-top: 5%;
-}
-
-.register_info {
-    padding-left: 37%;
-    margin-right: 40%;
 }
 
 .arrow-up {
@@ -378,9 +365,14 @@ input[type=text] {
 }
 
 input[type=text]:focus {
-    width: 100%;
+    width: 80%;
 }
 
 select{
     width: 300px;
+}
+
+input[type=submit]
+{
+    margin-right: 40%
 }

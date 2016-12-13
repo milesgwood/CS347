@@ -27,7 +27,7 @@
             <div id="content">
                 <div class="wrapper">
                     <div id='topContent'>
-                        <div class="login">
+                        <div class="centeredForm">
                             <h4>
                                 Please login to JMU-Share
                             </h4>
