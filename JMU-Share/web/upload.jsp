@@ -6,7 +6,7 @@
 
 <%@taglib uri="/struts-tags" prefix="s" %>
 <%@ taglib uri="/WEB-INF/tlds/jstags.tld" prefix="mt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <!DOCTYPE html>
 <mt:login_check/>
 <html>
