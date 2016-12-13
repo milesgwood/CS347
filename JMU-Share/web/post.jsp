@@ -62,6 +62,9 @@
                             <s:hidden name="postId" value="%{#parameters.postId}"/>
                             <s:submit type="submit" value="submitComment"/>
                         </s:form>
+                        <div class="logo">
+                            <img src="image/James_MadisonU_seal.png" alt="James Madison University seal"/>
+                        </div>
                     </div>
                 </div>
             </div>

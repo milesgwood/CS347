@@ -35,7 +35,8 @@
                             <s:file name="upload"/>
                             <s:textfield name="notesDesc" placeholder="Description of the Notes"/>
                             <s:textfield name="title"     placeholder="Title of the Notes"/>
-                            <s:textfield name="classId"   placeholder="number for class will be replaced with drop down of classes"/>
+                            <s:textfield name="classId"   placeholder="Number for class will be replaced with drop down of classes"/>
+                            <s:textarea style="width:100%;height:150px" name="body" placeholder="Enter text here..."/>
                             <s:submit/>
                         </s:form>
                         <s:iterator value="upload" var="u">
@@ -47,6 +48,13 @@
                         <s:iterator value="uploadFileName" var="fn">
                             <s:property value="fn"/><br/>
                         </s:iterator>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div id='bottomContent'>
+                        <div class="logo">
+                            <img src="image/James_MadisonU_seal.png" alt="James Madison University seal"/>
+                        </div>
                     </div>
                 </div>
             </div>
