@@ -38,8 +38,8 @@
                                     <p><s:password name="password" placeholder="Password"/></p>
                                     <p><s:password name="confirm" placeholder="Confirm Password"/></p>
                                     <p><s:select name="school" list="schoolList"/></p>
-                                    <p><s:checkbox name="isProfessor" label="I am a professor"/></p>
                                     <p><s:submit name="submit" value="Sign me up!"/></p>
+                                    <s:hidden name="isProfessor" value="0"/>
                                 </s:form>
                             </s:bean><br/><br/>
                             <p><a href="sign_in">Already got in account? Sign in!</a></p>

@@ -9,6 +9,7 @@ and open the template in the editor.
 */
 
 html, body {
+    font-size: 16px;
     margin: 0;
     padding: 0;
     height: 100%; /* needed for container min-height */
@@ -335,4 +336,40 @@ p5 {
    height:45px;
    width:100%;
    background:#999;
+}
+
+td > input{
+    width: 300px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    text-align: center;
+}
+
+
+input[type=text] {
+    width: 300px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    text-align: center;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+
+select{
+    width: 300px;
 }

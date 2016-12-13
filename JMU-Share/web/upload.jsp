@@ -31,9 +31,9 @@
                         <h1>Upload your notes</h1>
                         <s:bean name="bean.ClassList">
                         <s:form action="uploadToServer"  method="post"  enctype="multipart/form-data">
-                            <s:textfield label="Title" name="title" placeholder="Title or Subject"/>
-                            <s:textfield label="Description of Notes" name="notesDesc" placeholder="Description of your Notes"/>
-                            <s:select label="Class Name" id="className" name="className" list="alphaOrderedClasses"/>
+                            <s:textfield name="title" placeholder="Title or Subject"/>
+                            <s:textfield name="notesDesc" placeholder="Description of your Notes"/>
+                            <s:select id="className" name="className" list="alphaOrderedClasses"/>
                             <s:file name="upload"/>
                             <s:file name="upload"/>
                             <s:file name="upload"/>
