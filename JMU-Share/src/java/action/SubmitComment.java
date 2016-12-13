@@ -5,7 +5,6 @@
  */
 package action;
 
-import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import model.Comment;
 import model.DBHandler;
@@ -15,25 +14,26 @@ import model.Post;
  *
  * @author greatwmc
  */
-public class SubmitComment extends ActionSupport {
+public class SubmitComment extends FetchSessionAware {
 
     String comment;
     Integer postId;
-    Integer sesPostId;
     Post post;
     ArrayList<Comment> commentsList = new ArrayList<>();
 
     public String execute() {
         DBHandler db = new DBHandler();
+        Integer authorId = (Integer) session.get("userId");
         //Create the new comment and insert it into the database
-        int authorId = 1;
+        if(null == authorId)
+            authorId = 1;
         //If we don't have a postId from the URL params, go to the session
-        if (postId == null) {postId = sesPostId;}
+        if (postId == null) {postId = (Integer) session.get("postId");}
         Comment newComment = new Comment(authorId, postId, comment);
         db.insertComment(newComment);
         //Now load the post again with the updated data
         post = db.getPostFromId(postId);
-        commentsList = postId != null ? db.getPostComments(postId) : db.getPostComments(sesPostId);
+        commentsList = db.getPostComments(postId);
         return "success";
     }
 
@@ -44,15 +44,7 @@ public class SubmitComment extends ActionSupport {
     public void setPostId(Integer postId) {
         this.postId = postId;
     }
-
-    public Integer getSesPostId() {
-        return sesPostId;
-    }
-
-    public void setSesPostId(Integer sesPostId) {
-        this.sesPostId = sesPostId;
-    }
-
+    
     public Post getPost() {
         return post;
     }
