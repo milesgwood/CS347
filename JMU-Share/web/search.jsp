@@ -17,7 +17,7 @@
     <body>
         <div id="container">
             <div id="header"><jsp:include page='menubar.jsp'/></div>
-            <div id="content"><div class="wrapper"><div id='topContent2'>
+            <div id="content"><div class="wrapper"><div id='topContent3'>
                         <h1>Search</h1>
                         <s:bean name="bean.SchoolList">
                             <s:form action="SearchAction">
@@ -44,6 +44,9 @@
                                 School: <s:property value="school"/>
                             </div>
                         </s:iterator>
+                        <div class="logo">
+                            <img src="image/James_MadisonU_seal.png" alt="James Madison University seal"/>
+                        </div>
                     </div>
                 </div>
             </div>

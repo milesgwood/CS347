@@ -23,7 +23,7 @@ public class Upload extends FetchSessionAware {
 
     //I need these from the form along with the class ID
     private String notesDesc;
-    private String title;
+    private String title, body;
     private Integer classId;
     private Integer upLoadedPostId;
     
@@ -33,7 +33,13 @@ public class Upload extends FetchSessionAware {
         String filePath = context.getInitParameter("file-upload");
        
         Integer authorId;
-        String contentBody = "NO TEXT CONTENT";
+        String contentBody;
+        
+        if(body == null || body.equals(""))
+            contentBody = "NO TEXT CONTENT";
+        else
+            contentBody = body;
+        
         Float rating = (float) 0.0;
         Integer endorse = 0;
         File chosenFile;
@@ -49,23 +55,25 @@ public class Upload extends FetchSessionAware {
         newPost.setId(upLoadedPostId);
 
         //Loop through this uploading the files
-        for (int i = 0; i < upload.length; i++) {
-            chosenFile = upload[i];
-            if (chosenFile == null || !chosenFile.isFile()) {
-                break;
+        if(upload != null && upload.length > 0) {
+            for (int i = 0; i < upload.length; i++) {
+                chosenFile = upload[i];
+                if (chosenFile == null || !chosenFile.isFile()) {
+                    break;
+                }
+                //Create the image first but don't add it to the database
+                NotesImageFile img = new NotesImageFile(uploadFileName[i], uploadContentType[i]);
+                img.setPostId(newPost.getId());
+                
+                
+                file = new File(filePath, img.getFileName());
+                InputStream input = new FileInputStream(upload[i]);
+                Files.copy(input, file.toPath());
+                
+                //must upload the post before the image
+                NotesImageFile_DB db = new NotesImageFile_DB();
+                db.insertImage(img);
             }
-            //Create the image first but don't add it to the database
-            NotesImageFile img = new NotesImageFile(uploadFileName[i], uploadContentType[i]);
-            img.setPostId(newPost.getId());
-
-            
-            file = new File(filePath, img.getFileName());
-            InputStream input = new FileInputStream(upload[i]);
-            Files.copy(input, file.toPath());
-
-            //must upload the post before the image
-            NotesImageFile_DB db = new NotesImageFile_DB();
-            db.insertImage(img);
         }
         return SUCCESS;
     }
@@ -76,6 +84,14 @@ public class Upload extends FetchSessionAware {
 
     public void setUpLoadedPostId(Integer upLoadedPostId) {
         this.upLoadedPostId = upLoadedPostId;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public String getNotesDesc() {
