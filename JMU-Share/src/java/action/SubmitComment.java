@@ -21,6 +21,7 @@ public class SubmitComment extends FetchSessionAware {
     Post post;
     ArrayList<Comment> commentsList = new ArrayList<>();
 
+    @Override
     public String execute() {
         DBHandler db = new DBHandler();
         Integer authorId = (Integer) session.get("userId");
