@@ -8,8 +8,8 @@ package model;
  * @author recinocs
  * @version 2016-12-2
  */
-public class NoteClass {
-    private int classNum;
+public class NoteClass implements Comparable<NoteClass>{
+    private int classNum, id;
     private String className, classDesc;
     
     public NoteClass(int classNum, String className, String classDesc){
@@ -18,6 +18,21 @@ public class NoteClass {
         this.classDesc = classDesc;
     }
 
+    public NoteClass(int id, int classNum, String className, String classDesc) {
+        this.classNum = classNum;
+        this.className = className;
+        this.classDesc = classDesc;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getClassNum() {
         return classNum;
     }
@@ -48,5 +63,8 @@ public class NoteClass {
                 "Class Description: " + this.classDesc + "\n";
     }
     
-    
+    @Override
+    public int compareTo(NoteClass other) {
+        return this.className.compareTo(other.getClassName());
+    }
 }

@@ -37,7 +37,7 @@ public class DownVoting extends ActionSupport {
 
     public String execute() throws Exception {
         DBHandler db = new DBHandler();
-        System.out.println("Downvote" + commentId);
+        System.out.println("Downvoted" + commentId);
         db.decreaseScore(commentId);
         inputStream = new ByteArrayInputStream(commentId.toString().getBytes("UTF-8"));
         return SUCCESS;

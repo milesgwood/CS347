@@ -123,7 +123,7 @@ public class NoteClass_DB {
      * or null if no combination is found
      * @throws SQLException
      */
-    public NoteClass getClass(int classNum, String className) throws SQLException {
+    public NoteClass getClassFromName(String className) throws SQLException {
         NoteClass retClass = null;
 
         if (!(handler.isOpen)) {
@@ -131,17 +131,17 @@ public class NoteClass_DB {
             con = handler.con;
         }
 
-        String getUser = "SELECT * FROM class WHERE class_num = ? AND class_name = ?;";
+        String getUser = "SELECT * FROM class WHERE class_name = ?;";
         PreparedStatement ps = con.prepareStatement(getUser);
-        ps.setInt(1, classNum);
-        ps.setString(2, className);
+        ps.setString(1, className);
 
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
-            String classDesc = rs.getString(4);
-
-            retClass = new NoteClass(classNum, className, classDesc);
+            Integer id = rs.getInt("id");
+            Integer classNum = rs.getInt("class_num");
+            String classDesc = rs.getString("class_desc");
+            retClass = new NoteClass(id, classNum, className, classDesc);
         }
 
         return retClass;
@@ -154,12 +154,13 @@ public class NoteClass_DB {
      * @return An arraylist of all found classes, or null if none are found
      * @throws SQLException
      */
-    public ArrayList<NoteClass> getAllClasses() throws SQLException {
+    public ArrayList<NoteClass> getAllClasses() {
         ArrayList<NoteClass> retClasses = new ArrayList<>();
 
         String className, classDesc;
         int classNum;
 
+        try{
         if (!(handler.isOpen)) {
             handler.open();
             con = handler.con;
@@ -179,6 +180,10 @@ public class NoteClass_DB {
 
         if (retClasses.isEmpty()) {
             retClasses = null;
+        }
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
         }
         return retClasses;
     }
