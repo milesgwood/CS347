@@ -28,7 +28,7 @@ public class Upload extends FetchSessionAware {
     private String title, body;
     private String className;
 
-    private Integer upLoadedPostId;
+    private Integer postId;
     
     public String execute() throws Exception {
         File file;
@@ -57,8 +57,8 @@ public class Upload extends FetchSessionAware {
         //Create and add a new post to the database. The new post ID is returned
         Post newPost = new Post(authorId, classroom.getId(), contentBody, rating, endorse, notesDesc, title);
         Post_DB dbPost = new Post_DB();
-        upLoadedPostId = dbPost.insertPost(newPost);
-        newPost.setId(upLoadedPostId);
+        postId = dbPost.insertPost(newPost);
+        newPost.setId(postId);
 
         //Loop through this uploading the files
         if(upload != null && upload.length > 0) {
@@ -70,7 +70,6 @@ public class Upload extends FetchSessionAware {
                 //Create the image first but don't add it to the database
                 NotesImageFile img = new NotesImageFile(uploadFileName[i], uploadContentType[i]);
                 img.setPostId(newPost.getId());
-                
                 
                 file = new File(filePath, img.getFileName());
                 InputStream input = new FileInputStream(upload[i]);
@@ -84,13 +83,14 @@ public class Upload extends FetchSessionAware {
         return SUCCESS;
     }
 
-    public Integer getUpLoadedPostId() {
-        return upLoadedPostId;
+    public Integer getPostId() {
+        return postId;
     }
 
-    public void setUpLoadedPostId(Integer upLoadedPostId) {
-        this.upLoadedPostId = upLoadedPostId;
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
+    
 
     public String getBody() {
         return body;

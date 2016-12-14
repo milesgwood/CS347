@@ -13,7 +13,7 @@ function voteUpRequest(commentId)
 {
     if (!request)
         return;
-    var url = "/JMU-Share/upvote?commentId=" + commentId;
+    var url = "/team27-JMU-Share/upvote?commentId=" + commentId;
     request.open("GET", url, true)
     request.send()
 }
@@ -22,7 +22,7 @@ function voteDownRequest(commentId)
 {
     if (!request)
         return;
-    var url = "/JMU-Share/downvote?commentId=" + commentId;
+    var url = "/team27-JMU-Share/downvote?commentId=" + commentId;
     request.open("GET", url, true)
     request.send()
 }

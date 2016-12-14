@@ -60,7 +60,7 @@
             <result name="success">upload.jsp</result>
         </action>
         <action name="uploadToServer" class="action.Upload">
-            <result name="success" type="redirectAction">viewpost?postId=%{upLoadedPostId}</result>
+            <result name="success" type="redirectAction">viewpost?postId=%{postId}</result>
         </action>
         <action name="profile" class="action.FetchProfile">
             <result name="success">profile.jsp</result>
