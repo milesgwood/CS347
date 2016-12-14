@@ -27,22 +27,24 @@
             <div id="content">
                 <div class="wrapper">
                     <div id='topContent'>
+                        <div class="centeredForm">
                         <h3 class="welcome">Welcome to JMU-Share!</h3>
                         <p class="register">Please make sure you fill out every field.</p>
                         <div class="register_info">
                             <s:bean name="bean.SchoolList">
                                 <s:form action="RegisterAction">
-                                    <p><s:textfield name="name" placeholder="Name"/></p>
-                                    <p><s:textfield name="email" placeholder="Email"/></p>
-                                    <p><s:textfield name="username" placeholder="Username"/></p>
-                                    <p><s:password name="password" placeholder="Password"/></p>
-                                    <p><s:password name="confirm" placeholder="Confirm Password"/></p>
-                                    <p><s:select name="school" list="schoolList"/></p>
-                                    <p><s:submit name="submit" value="Sign me up!"/></p>
+                                    <s:textfield name="name" placeholder="Name"/>
+                                    <s:textfield name="email" placeholder="Email"/>
+                                    <s:textfield name="username" placeholder="Username"/>
+                                    <s:password name="password" placeholder="Password"/>
+                                    <s:password name="confirm" placeholder="Confirm Password"/>
+                                    <s:select name="school" list="schoolList"/>
+                                    <s:submit name="submit" value="Sign me up!"/>
                                     <s:hidden name="isProfessor" value="0"/>
                                 </s:form>
                             </s:bean><br/><br/>
-                            <p><a href="sign_in">Already got in account? Sign in!</a></p>
+                            <s:a href="sign_in">Already got in account? Sign in!</s:a>
+                        </div>
                         </div>
                     </div>
                 </div>

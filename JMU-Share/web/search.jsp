@@ -17,14 +17,14 @@
     <body>
         <div id="container">
             <div id="header"><jsp:include page='menubar.jsp'/></div>
-            <div id="content"><div class="wrapper"><div id='topContent3'>
+            <div id="content"><div class="wrapper"><div class="centeredForm">
                         <h1>Search</h1>
                         <s:bean name="bean.SchoolList">
                             <s:form action="SearchAction">
-                                <p><s:textfield name="title" placeholder="Title"/></p>
-                                <p><s:textfield name="class_num" placeholder="Class Number"/></p>
-                                <p><s:textfield name="class_name" placeholder="Class Name"/></p>
-                                <p><s:select name="school" list="schoolList"/><s:submit name="submit" value="Search Results"/></p>
+                                <s:textfield name="title" placeholder="Title"/>
+                                <s:textfield name="class_num" placeholder="Class Number"/>
+                                <s:textfield name="class_name" placeholder="Class Name"/>
+                                <s:select name="school" list="schoolList"/><s:submit name="submit" value="Search Results"/>
                             </s:form>
                         </s:bean>
                     </div>
